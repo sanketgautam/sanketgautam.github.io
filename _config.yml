@@ -2,9 +2,9 @@
 permalink:           pretty
 
 # Setup
-title:               Poole
-tagline:             The Jekyll Butler
-url:                 http://getpoole.com
+title:               Sanket Kumar Gautam
+tagline:             SKG
+url:                 https://sanketgautam.github.io
 paginate:            1
 baseurl:             ""
 
@@ -17,14 +17,14 @@ sass:
 
 # About/contact
 author:
-  name:              Mark Otto
-  url:               https://twitter.com/mdo
-  email:             markdotto@gmail.com
+  name:              Sanket Kumar Gautam
+  url:               https://twitter.com/sanketkgautam
+  email:             sk2gautam@gmail.com
 
 # Custom vars
 version:             2.0.0
 github:
-  repo:              https://github.com/poole/poole
+  repo:              https://github.com/sanketgautam/sanketgautam.github.io
 
 # Gems
 gems:
