@@ -1,6 +1,12 @@
 # Permalinks
 permalink:           pretty
 
+#Nav Pages List
+pages_list:       
+  About: '/about'
+  Archive: '/archive'
+  Feed: '/atom.xml'
+
 # Setup
 title:               Sanket Kumar Gautam
 tagline:             SKG
@@ -22,7 +28,7 @@ author:
   email:             sk2gautam@gmail.com
 
 # Custom vars
-version:             2.0.0
+version:             1.0.1
 github:
   repo:              https://github.com/sanketgautam/sanketgautam.github.io
 
