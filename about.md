@@ -1,4 +1,5 @@
 ---
+permalink: pretty
 layout: page
 title: About
 ---
