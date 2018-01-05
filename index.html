@@ -12,8 +12,11 @@ title: Home
       </a>
     </h1>
 
-    <time datetime="{{ post.date | date_to_xmlschema }}" class="post-date">{{ post.date | date_to_long_string }}</time>
-
+    <time datetime="{{ post.date | date_to_xmlschema }}" class="post-date">
+        <i class="fa fa-calendar" aria-hidden="true"></i>
+        {{ post.date | date: "%b %d, %Y" }}
+    </time>
+    <hr>
     {{ post.content }}
   </article>
   {% endfor %}
