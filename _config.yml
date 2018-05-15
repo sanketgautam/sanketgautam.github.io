@@ -32,7 +32,7 @@ version:             1.0.1
 github:
   repo:              https://github.com/sanketgautam/sanketgautam.github.io
 
-# Gems
-gems:
+# Plugins
+plugins:
   - jekyll-paginate
   - jekyll-gist
