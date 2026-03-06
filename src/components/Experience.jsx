@@ -62,15 +62,12 @@ export default function Experience() {
 
   return (
     <section id="experience" className="relative py-24 px-4 sm:px-6 overflow-hidden">
-      {/* Gradient mesh background */}
-      <div className="absolute inset-0 pointer-events-none">
-        <div className="absolute inset-0 bg-slate-800/20" />
-        <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-blue-500/[0.03] rounded-full blur-3xl animate-gradient-shift" />
-        <div className="absolute bottom-0 left-0 w-[400px] h-[400px] bg-emerald-500/[0.03] rounded-full blur-3xl animate-gradient-shift" style={{ animationDelay: '5s' }} />
-      </div>
-      
-      {/* Gradient divider at top */}
+      {/* Purple gradient background */}
+      <div className="absolute inset-0 bg-gradient-to-br from-[#F3EEFF] via-[#FAFBFF] to-[#FDF8F0]" />
       <div className="absolute top-0 left-0 right-0 section-gradient-line" />
+      
+      {/* Floating accent */}
+      <div className="absolute top-20 right-0 w-[400px] h-[400px] bg-[#4B2E83]/[0.03] rounded-full blur-3xl pointer-events-none" />
 
       <div ref={ref} className="relative max-w-4xl mx-auto">
         <motion.div
@@ -78,15 +75,15 @@ export default function Experience() {
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6 }}
         >
-          <h2 className="text-3xl sm:text-4xl font-bold text-white mb-2">
+          <h2 className="text-3xl sm:text-4xl font-bold text-[#4B2E83] mb-2">
             Experience
           </h2>
-          <div className="w-16 h-1 bg-gradient-to-r from-blue-500 to-emerald-500 rounded-full mb-12" />
+          <div className="w-16 h-1 bg-gradient-to-r from-[#4B2E83] to-[#B7A57A] rounded-full mb-12" />
         </motion.div>
 
         <div className="relative">
           {/* Timeline line with gradient */}
-          <div className="absolute left-4 sm:left-6 top-0 bottom-0 w-px bg-gradient-to-b from-blue-500/50 via-emerald-500/30 to-slate-700/20" />
+          <div className="absolute left-4 sm:left-6 top-0 bottom-0 w-px bg-gradient-to-b from-[#4B2E83] via-[#B7A57A] to-[#4B2E83]/10" />
 
           <div className="space-y-10">
             {experiences.map((exp, i) => (
@@ -97,29 +94,28 @@ export default function Experience() {
                 transition={{ duration: 0.6, delay: 0.2 + i * 0.15 }}
                 className="relative pl-12 sm:pl-16"
               >
-                {/* Timeline dot with glow */}
-                <div className="absolute left-2.5 sm:left-4.5 top-1 w-3 h-3 rounded-full bg-blue-500 border-2 border-slate-900 shadow-lg shadow-blue-500/40" />
-                <div className="absolute left-2 sm:left-4 top-0.5 w-4 h-4 rounded-full bg-blue-500/20 animate-ping" style={{ animationDuration: '3s', animationDelay: `${i * 0.5}s` }} />
+                {/* Timeline dot */}
+                <div className="absolute left-2.5 sm:left-4.5 top-1 w-3 h-3 rounded-full bg-[#4B2E83] border-2 border-white shadow-lg shadow-[#4B2E83]/30" />
 
                 <motion.div
                   whileHover={{ scale: 1.01, transition: { duration: 0.2 } }}
-                  className="p-6 bg-slate-800/40 border border-slate-700/40 rounded-xl hover:border-blue-500/20 transition-all duration-300 hover:shadow-lg hover:shadow-blue-500/5 backdrop-blur-sm"
+                  className="p-6 bg-white border border-[#4B2E83]/10 rounded-xl hover:border-[#4B2E83]/25 transition-all duration-300 hover:shadow-lg hover:shadow-[#4B2E83]/5"
                 >
                   <div className="flex flex-col sm:flex-row sm:items-center justify-between mb-3">
                     <div>
-                      <h3 className="text-lg font-semibold text-white">
+                      <h3 className="text-lg font-semibold text-[#4B2E83]">
                         {exp.title}
                       </h3>
-                      <div className="flex items-center gap-2 text-blue-400">
+                      <div className="flex items-center gap-2 text-[#6B4EAD]">
                         <Building2 className="w-4 h-4" />
                         <span className="text-sm font-medium">{exp.company}</span>
                       </div>
                     </div>
-                    <span className="text-sm text-slate-400 font-mono mt-1 sm:mt-0 px-3 py-1 bg-slate-700/30 rounded-full">
+                    <span className="text-sm text-[#B7A57A] font-mono mt-1 sm:mt-0 px-3 py-1 bg-[#B7A57A]/10 rounded-full font-medium">
                       {exp.period}
                     </span>
                   </div>
-                  <p className="text-slate-300 text-sm mb-3">{exp.description}</p>
+                  <p className="text-[#1E1B3A]/70 text-sm mb-3">{exp.description}</p>
                   <ul className="space-y-1.5">
                     {exp.highlights.map((item, j) => (
                       <motion.li
@@ -127,9 +123,9 @@ export default function Experience() {
                         initial={{ opacity: 0, x: -10 }}
                         animate={isInView ? { opacity: 1, x: 0 } : {}}
                         transition={{ duration: 0.4, delay: 0.4 + i * 0.15 + j * 0.05 }}
-                        className="flex items-start gap-2 text-sm text-slate-400"
+                        className="flex items-start gap-2 text-sm text-[#1E1B3A]/60"
                       >
-                        <ChevronRight className="w-4 h-4 text-emerald-400 flex-shrink-0 mt-0.5" />
+                        <ChevronRight className="w-4 h-4 text-[#B7A57A] flex-shrink-0 mt-0.5" />
                         {item}
                       </motion.li>
                     ))}

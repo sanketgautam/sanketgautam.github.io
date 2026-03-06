@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
-import { Menu, X, Code2 } from 'lucide-react'
+import { Menu, X } from 'lucide-react'
 
 const navLinks = [
   { name: 'About', href: '#about' },
@@ -28,15 +28,15 @@ export default function Navigation() {
       transition={{ duration: 0.6, ease: 'easeOut' }}
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
         scrolled
-          ? 'bg-slate-900/90 backdrop-blur-xl border-b border-slate-800/50 shadow-lg shadow-slate-900/50'
+          ? 'bg-white/90 backdrop-blur-xl border-b border-[#4B2E83]/10 shadow-lg shadow-[#4B2E83]/5'
           : 'bg-transparent'
       }`}
     >
       <div className="max-w-6xl mx-auto px-4 sm:px-6">
         <div className="flex items-center justify-between h-16">
           <a href="#" className="flex items-center gap-2 group">
-            <Code2 className="w-6 h-6 text-blue-500 group-hover:text-blue-400 transition-colors" />
-            <span className="text-lg font-bold text-white">SG</span>
+            <span className="text-2xl">🐺</span>
+            <span className="text-lg font-bold text-[#4B2E83]">SG</span>
           </a>
 
           {/* Desktop nav */}
@@ -45,7 +45,7 @@ export default function Navigation() {
               <a
                 key={link.name}
                 href={link.href}
-                className="px-3 py-2 text-sm text-slate-300 hover:text-white rounded-lg hover:bg-slate-800/50 transition-all duration-200"
+                className="px-3 py-2 text-sm text-[#4B2E83]/70 hover:text-[#4B2E83] rounded-lg hover:bg-[#4B2E83]/5 transition-all duration-200 font-medium"
               >
                 {link.name}
               </a>
@@ -54,7 +54,7 @@ export default function Navigation() {
               href="/Sanket_Gautam_Resume.pdf"
               target="_blank"
               rel="noopener noreferrer"
-              className="ml-2 px-4 py-2 text-sm font-medium text-blue-400 border border-blue-500/30 rounded-lg hover:bg-blue-500/10 transition-all duration-200"
+              className="ml-2 px-4 py-2 text-sm font-medium text-white bg-[#4B2E83] rounded-lg hover:bg-[#6B4EAD] transition-all duration-200 hover:shadow-lg hover:shadow-[#4B2E83]/25"
             >
               Resume
             </a>
@@ -63,7 +63,7 @@ export default function Navigation() {
           {/* Mobile menu button */}
           <button
             onClick={() => setIsOpen(!isOpen)}
-            className="md:hidden p-2 text-slate-300 hover:text-white rounded-lg hover:bg-slate-800/50 transition-colors"
+            className="md:hidden p-2 text-[#4B2E83] rounded-lg hover:bg-[#4B2E83]/5 transition-colors"
             aria-label="Toggle menu"
           >
             {isOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
@@ -79,7 +79,7 @@ export default function Navigation() {
             animate={{ opacity: 1, height: 'auto' }}
             exit={{ opacity: 0, height: 0 }}
             transition={{ duration: 0.3 }}
-            className="md:hidden bg-slate-900/95 backdrop-blur-xl border-b border-slate-800/50"
+            className="md:hidden bg-white/95 backdrop-blur-xl border-b border-[#4B2E83]/10"
           >
             <div className="px-4 py-3 space-y-1">
               {navLinks.map((link) => (
@@ -87,11 +87,20 @@ export default function Navigation() {
                   key={link.name}
                   href={link.href}
                   onClick={() => setIsOpen(false)}
-                  className="block px-3 py-2.5 text-slate-300 hover:text-white rounded-lg hover:bg-slate-800/50 transition-all"
+                  className="block px-3 py-2.5 text-[#4B2E83]/70 hover:text-[#4B2E83] rounded-lg hover:bg-[#4B2E83]/5 transition-all font-medium"
                 >
                   {link.name}
                 </a>
               ))}
+              <a
+                href="/Sanket_Gautam_Resume.pdf"
+                target="_blank"
+                rel="noopener noreferrer"
+                onClick={() => setIsOpen(false)}
+                className="block px-3 py-2.5 text-white bg-[#4B2E83] rounded-lg text-center font-medium"
+              >
+                Resume
+              </a>
             </div>
           </motion.div>
         )}

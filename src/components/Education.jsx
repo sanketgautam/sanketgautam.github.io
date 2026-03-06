@@ -1,6 +1,6 @@
 import { motion, useInView } from 'framer-motion'
 import { useRef } from 'react'
-import { GraduationCap, BookOpen, Trophy } from 'lucide-react'
+import { BookOpen } from 'lucide-react'
 
 const education = [
   {
@@ -16,7 +16,8 @@ const education = [
       'CSEP 510: Human-Computer Interaction',
       'CSEP 589: Software Entrepreneurship',
     ],
-    accent: 'blue',
+    emoji: '🎓',
+    color: 'purple',
   },
   {
     degree: 'Bachelor of Technology in Computer Science & Engineering',
@@ -26,7 +27,8 @@ const education = [
     gpa: '3.4 GPA',
     focus: ['Computer Science', 'Machine Learning', 'Software Engineering'],
     coursework: [],
-    accent: 'emerald',
+    emoji: '🏛️',
+    color: 'gold',
   },
 ]
 
@@ -43,13 +45,8 @@ export default function Education() {
 
   return (
     <section id="education" className="relative py-24 px-4 sm:px-6 overflow-hidden">
-      {/* Gradient divider */}
       <div className="absolute top-0 left-0 right-0 section-gradient-line" />
-
-      {/* Background accents */}
-      <div className="absolute inset-0 pointer-events-none">
-        <div className="absolute bottom-0 right-0 w-[400px] h-[400px] bg-purple-500/[0.03] rounded-full blur-3xl" />
-      </div>
+      <div className="absolute bottom-0 right-0 w-[400px] h-[400px] bg-[#4B2E83]/[0.03] rounded-full blur-3xl pointer-events-none" />
 
       <div ref={ref} className="relative max-w-4xl mx-auto">
         <motion.div
@@ -57,10 +54,10 @@ export default function Education() {
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6 }}
         >
-          <h2 className="text-3xl sm:text-4xl font-bold text-white mb-2">
+          <h2 className="text-3xl sm:text-4xl font-bold text-[#4B2E83] mb-2">
             Education
           </h2>
-          <div className="w-16 h-1 bg-gradient-to-r from-blue-500 to-emerald-500 rounded-full mb-12" />
+          <div className="w-16 h-1 bg-gradient-to-r from-[#4B2E83] to-[#B7A57A] rounded-full mb-12" />
         </motion.div>
 
         <div className="space-y-6">
@@ -71,29 +68,29 @@ export default function Education() {
               animate={isInView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.6, delay: 0.2 + i * 0.15 }}
               whileHover={{ scale: 1.01, transition: { duration: 0.2 } }}
-              className="p-6 sm:p-8 bg-slate-800/40 border border-slate-700/40 rounded-xl hover:border-slate-600/50 transition-all duration-300 backdrop-blur-sm hover:shadow-lg hover:shadow-blue-500/5"
+              className="p-6 sm:p-8 bg-white border border-[#4B2E83]/10 rounded-xl hover:border-[#4B2E83]/20 transition-all duration-300 hover:shadow-lg hover:shadow-[#4B2E83]/5"
             >
               <div className="flex items-start gap-4">
-                <motion.div
-                  className={`p-3 rounded-xl ${edu.accent === 'blue' ? 'bg-blue-500/10' : 'bg-emerald-500/10'} flex-shrink-0`}
+                <motion.span
+                  className="text-4xl flex-shrink-0"
                   whileHover={{ rotate: 360, transition: { duration: 0.6 } }}
                 >
-                  <GraduationCap className={`w-6 h-6 ${edu.accent === 'blue' ? 'text-blue-400' : 'text-emerald-400'}`} />
-                </motion.div>
+                  {edu.emoji}
+                </motion.span>
                 <div className="flex-1">
                   <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-2">
-                    <h3 className="text-lg font-semibold text-white">{edu.degree}</h3>
+                    <h3 className="text-lg font-semibold text-[#4B2E83]">{edu.degree}</h3>
                     <span className={`text-sm font-medium px-3 py-1 rounded-full w-fit ${
-                      edu.accent === 'blue'
-                        ? 'bg-blue-500/10 text-blue-400 border border-blue-500/20'
-                        : 'bg-emerald-500/10 text-emerald-400 border border-emerald-500/20'
+                      edu.color === 'purple'
+                        ? 'bg-[#4B2E83]/8 text-[#4B2E83] border border-[#4B2E83]/15'
+                        : 'bg-[#B7A57A]/10 text-[#85754D] border border-[#B7A57A]/20'
                     }`}>
                       {edu.status}
                     </span>
                   </div>
-                  <p className="text-slate-300 font-medium">{edu.institution}</p>
-                  <p className="text-slate-500 text-sm mb-1">{edu.location}</p>
-                  <p className="text-emerald-400 text-sm font-medium mb-4">{edu.gpa}</p>
+                  <p className="text-[#4B2E83]/80 font-medium">{edu.institution}</p>
+                  <p className="text-[#1E1B3A]/40 text-sm mb-1">{edu.location}</p>
+                  <p className="text-[#B7A57A] text-sm font-semibold mb-4">{edu.gpa}</p>
 
                   <div className="flex flex-wrap gap-2 mb-3">
                     {edu.focus.map((area, j) => (
@@ -102,7 +99,7 @@ export default function Education() {
                         initial={{ opacity: 0, scale: 0.8 }}
                         animate={isInView ? { opacity: 1, scale: 1 } : {}}
                         transition={{ duration: 0.3, delay: 0.5 + j * 0.05 }}
-                        className="px-3 py-1 text-sm bg-slate-700/50 text-slate-300 border border-slate-600/30 rounded-lg"
+                        className="px-3 py-1 text-sm bg-[#4B2E83]/5 text-[#4B2E83]/70 border border-[#4B2E83]/10 rounded-lg"
                       >
                         {area}
                       </motion.span>
@@ -110,14 +107,14 @@ export default function Education() {
                   </div>
 
                   {edu.coursework.length > 0 && (
-                    <div className="mt-4 pt-4 border-t border-slate-700/30">
+                    <div className="mt-4 pt-4 border-t border-[#4B2E83]/8">
                       <div className="flex items-center gap-2 mb-2">
-                        <BookOpen className="w-4 h-4 text-slate-400" />
-                        <span className="text-sm text-slate-400 font-medium">Key Coursework</span>
+                        <BookOpen className="w-4 h-4 text-[#B7A57A]" />
+                        <span className="text-sm text-[#4B2E83]/60 font-medium">Key Coursework</span>
                       </div>
                       <div className="grid sm:grid-cols-2 gap-1">
                         {edu.coursework.map((course) => (
-                          <p key={course} className="text-sm text-slate-300 font-mono">{course}</p>
+                          <p key={course} className="text-sm text-[#4B2E83]/70 font-mono">{course}</p>
                         ))}
                       </div>
                     </div>
@@ -133,16 +130,16 @@ export default function Education() {
           initial={{ opacity: 0, y: 30 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.5, delay: 0.5 }}
-          className="mt-8 p-6 sm:p-8 bg-slate-800/40 border border-slate-700/40 rounded-xl hover:border-amber-500/20 transition-all duration-300"
+          className="mt-8 p-6 sm:p-8 bg-white border border-[#B7A57A]/20 rounded-xl hover:border-[#B7A57A]/40 transition-all duration-300"
         >
           <div className="flex items-center gap-3 mb-4">
-            <motion.div
-              className="p-2 rounded-lg bg-amber-500/10"
+            <motion.span
+              className="text-2xl"
               whileHover={{ rotate: [0, -15, 15, 0], transition: { duration: 0.4 } }}
             >
-              <Trophy className="w-5 h-5 text-amber-400" />
-            </motion.div>
-            <h3 className="text-lg font-semibold text-white">Awards & Recognition</h3>
+              🏆
+            </motion.span>
+            <h3 className="text-lg font-semibold text-[#4B2E83]">Awards & Recognition</h3>
           </div>
           <ul className="space-y-2">
             {awards.map((award, i) => (
@@ -151,9 +148,9 @@ export default function Education() {
                 initial={{ opacity: 0, x: -15 }}
                 animate={isInView ? { opacity: 1, x: 0 } : {}}
                 transition={{ duration: 0.4, delay: 0.6 + i * 0.08 }}
-                className="flex items-start gap-2 text-sm text-slate-300"
+                className="flex items-start gap-2 text-sm text-[#1E1B3A]/65"
               >
-                <span className="text-amber-400 mt-1">★</span>
+                <span className="text-[#B7A57A] mt-0.5">★</span>
                 {award}
               </motion.li>
             ))}
