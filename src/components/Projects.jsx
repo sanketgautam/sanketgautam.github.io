@@ -45,14 +45,6 @@ const projects = [
     color: 'purple',
   },
   {
-    title: 'SDN & Network Systems',
-    description:
-      'Software-defined networking projects including SDN controllers, Mininet topologies, and network protocol implementations for CSEP 561 at UW.',
-    tags: ['SDN', 'Mininet', 'Python', 'OpenFlow', 'Networking'],
-    emoji: '🌐',
-    color: 'gold',
-  },
-  {
     title: 'elth.ai — Virtual Health Assistant',
     description:
       'Core chatbot for assessing health symptoms, finding doctors, and booking appointments. Built clinic fetch, appointment booking, and Dialogflow integration with Facebook Messenger.',
