@@ -22,6 +22,42 @@ body {
   overflow-x: hidden;
 }
 
+/* Animated gradient mesh background */
+@keyframes gradient-shift {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  33% { transform: translate(30px, -50px) scale(1.1); }
+  66% { transform: translate(-20px, 20px) scale(0.9); }
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-20px); }
+}
+
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+.animate-gradient-shift {
+  animation: gradient-shift 15s ease-in-out infinite;
+}
+
+.animate-float {
+  animation: float 6s ease-in-out infinite;
+}
+
+.animate-shimmer {
+  background-size: 200% 100%;
+  animation: shimmer 3s linear infinite;
+}
+
+/* Section divider gradient line */
+.section-gradient-line {
+  background: linear-gradient(90deg, transparent, #3b82f6, #10b981, transparent);
+  height: 1px;
+}
+
 /* Custom scrollbar */
 ::-webkit-scrollbar {
   width: 8px;

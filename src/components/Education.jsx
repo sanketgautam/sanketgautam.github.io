@@ -39,11 +39,19 @@ const awards = [
 
 export default function Education() {
   const ref = useRef(null)
-  const isInView = useInView(ref, { once: true, margin: '-100px' })
+  const isInView = useInView(ref, { once: true, margin: '-80px' })
 
   return (
-    <section id="education" className="py-24 px-4 sm:px-6">
-      <div ref={ref} className="max-w-4xl mx-auto">
+    <section id="education" className="relative py-24 px-4 sm:px-6 overflow-hidden">
+      {/* Gradient divider */}
+      <div className="absolute top-0 left-0 right-0 section-gradient-line" />
+
+      {/* Background accents */}
+      <div className="absolute inset-0 pointer-events-none">
+        <div className="absolute bottom-0 right-0 w-[400px] h-[400px] bg-purple-500/[0.03] rounded-full blur-3xl" />
+      </div>
+
+      <div ref={ref} className="relative max-w-4xl mx-auto">
         <motion.div
           initial={{ opacity: 0, y: 40 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
@@ -52,7 +60,7 @@ export default function Education() {
           <h2 className="text-3xl sm:text-4xl font-bold text-white mb-2">
             Education
           </h2>
-          <div className="w-16 h-1 bg-blue-500 rounded-full mb-12" />
+          <div className="w-16 h-1 bg-gradient-to-r from-blue-500 to-emerald-500 rounded-full mb-12" />
         </motion.div>
 
         <div className="space-y-6">
@@ -61,20 +69,24 @@ export default function Education() {
               key={edu.institution}
               initial={{ opacity: 0, y: 30 }}
               animate={isInView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.5, delay: 0.2 + i * 0.15 }}
-              className="p-6 sm:p-8 bg-slate-800/40 border border-slate-700/40 rounded-xl hover:border-slate-600/50 transition-all duration-300"
+              transition={{ duration: 0.6, delay: 0.2 + i * 0.15 }}
+              whileHover={{ scale: 1.01, transition: { duration: 0.2 } }}
+              className="p-6 sm:p-8 bg-slate-800/40 border border-slate-700/40 rounded-xl hover:border-slate-600/50 transition-all duration-300 backdrop-blur-sm hover:shadow-lg hover:shadow-blue-500/5"
             >
               <div className="flex items-start gap-4">
-                <div className={`p-3 rounded-xl ${edu.accent === 'blue' ? 'bg-blue-500/10' : 'bg-emerald-500/10'} flex-shrink-0`}>
+                <motion.div
+                  className={`p-3 rounded-xl ${edu.accent === 'blue' ? 'bg-blue-500/10' : 'bg-emerald-500/10'} flex-shrink-0`}
+                  whileHover={{ rotate: 360, transition: { duration: 0.6 } }}
+                >
                   <GraduationCap className={`w-6 h-6 ${edu.accent === 'blue' ? 'text-blue-400' : 'text-emerald-400'}`} />
-                </div>
+                </motion.div>
                 <div className="flex-1">
                   <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-2">
                     <h3 className="text-lg font-semibold text-white">{edu.degree}</h3>
                     <span className={`text-sm font-medium px-3 py-1 rounded-full w-fit ${
                       edu.accent === 'blue'
-                        ? 'bg-blue-500/10 text-blue-400'
-                        : 'bg-emerald-500/10 text-emerald-400'
+                        ? 'bg-blue-500/10 text-blue-400 border border-blue-500/20'
+                        : 'bg-emerald-500/10 text-emerald-400 border border-emerald-500/20'
                     }`}>
                       {edu.status}
                     </span>
@@ -84,13 +96,16 @@ export default function Education() {
                   <p className="text-emerald-400 text-sm font-medium mb-4">{edu.gpa}</p>
 
                   <div className="flex flex-wrap gap-2 mb-3">
-                    {edu.focus.map((area) => (
-                      <span
+                    {edu.focus.map((area, j) => (
+                      <motion.span
                         key={area}
+                        initial={{ opacity: 0, scale: 0.8 }}
+                        animate={isInView ? { opacity: 1, scale: 1 } : {}}
+                        transition={{ duration: 0.3, delay: 0.5 + j * 0.05 }}
                         className="px-3 py-1 text-sm bg-slate-700/50 text-slate-300 border border-slate-600/30 rounded-lg"
                       >
                         {area}
-                      </span>
+                      </motion.span>
                     ))}
                   </div>
 
@@ -118,20 +133,29 @@ export default function Education() {
           initial={{ opacity: 0, y: 30 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.5, delay: 0.5 }}
-          className="mt-8 p-6 sm:p-8 bg-slate-800/40 border border-slate-700/40 rounded-xl"
+          className="mt-8 p-6 sm:p-8 bg-slate-800/40 border border-slate-700/40 rounded-xl hover:border-amber-500/20 transition-all duration-300"
         >
           <div className="flex items-center gap-3 mb-4">
-            <div className="p-2 rounded-lg bg-amber-500/10">
+            <motion.div
+              className="p-2 rounded-lg bg-amber-500/10"
+              whileHover={{ rotate: [0, -15, 15, 0], transition: { duration: 0.4 } }}
+            >
               <Trophy className="w-5 h-5 text-amber-400" />
-            </div>
+            </motion.div>
             <h3 className="text-lg font-semibold text-white">Awards & Recognition</h3>
           </div>
           <ul className="space-y-2">
             {awards.map((award, i) => (
-              <li key={i} className="flex items-start gap-2 text-sm text-slate-300">
-                <span className="text-amber-400 mt-1">•</span>
+              <motion.li
+                key={i}
+                initial={{ opacity: 0, x: -15 }}
+                animate={isInView ? { opacity: 1, x: 0 } : {}}
+                transition={{ duration: 0.4, delay: 0.6 + i * 0.08 }}
+                className="flex items-start gap-2 text-sm text-slate-300"
+              >
+                <span className="text-amber-400 mt-1">★</span>
                 {award}
-              </li>
+              </motion.li>
             ))}
           </ul>
         </motion.div>

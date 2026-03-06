@@ -9,33 +9,47 @@ const highlights = [
     title: '7+ Years',
     subtitle: 'at Amazon',
     description: 'Alexa AI, AWS, Retail & Selling Partner Services',
+    color: 'blue',
   },
   {
     icon: GraduationCap,
     title: 'MS CS (3.9)',
     subtitle: 'UW Seattle',
     description: 'Paul G. Allen School of Computer Science',
+    color: 'emerald',
   },
   {
     icon: Cpu,
     title: 'Agentic AI',
     subtitle: 'Primary Focus',
     description: 'Multi-agent orchestration & intelligent systems',
+    color: 'purple',
   },
   {
     icon: Award,
     title: 'Mentor & Judge',
     subtitle: 'DubHacks, GEN1, UNESCO',
     description: 'Mentored 12+ engineers, hackathon judge',
+    color: 'amber',
   },
 ]
 
+const colorMap = {
+  blue: { bg: 'bg-blue-500/10', text: 'text-blue-400', border: 'hover:border-blue-500/30' },
+  emerald: { bg: 'bg-emerald-500/10', text: 'text-emerald-400', border: 'hover:border-emerald-500/30' },
+  purple: { bg: 'bg-purple-500/10', text: 'text-purple-400', border: 'hover:border-purple-500/30' },
+  amber: { bg: 'bg-amber-500/10', text: 'text-amber-400', border: 'hover:border-amber-500/30' },
+}
+
 export default function About() {
   const ref = useRef(null)
-  const isInView = useInView(ref, { once: true, margin: '-100px' })
+  const isInView = useInView(ref, { once: true, margin: '-80px' })
 
   return (
-    <section id="about" className="py-24 px-4 sm:px-6">
+    <section id="about" className="relative py-24 px-4 sm:px-6 overflow-hidden">
+      {/* Gradient divider at top */}
+      <div className="absolute top-0 left-0 right-0 section-gradient-line" />
+      
       <div ref={ref} className="max-w-6xl mx-auto">
         <motion.div
           initial={{ opacity: 0, y: 40 }}
@@ -45,14 +59,14 @@ export default function About() {
           <h2 className="text-3xl sm:text-4xl font-bold text-white mb-2">
             About Me
           </h2>
-          <div className="w-16 h-1 bg-blue-500 rounded-full mb-8" />
+          <div className="w-16 h-1 bg-gradient-to-r from-blue-500 to-emerald-500 rounded-full mb-8" />
         </motion.div>
 
         <div className="grid lg:grid-cols-2 gap-12 items-start">
           <motion.div
-            initial={{ opacity: 0, y: 40 }}
-            animate={isInView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.6, delay: 0.2 }}
+            initial={{ opacity: 0, x: -40 }}
+            animate={isInView ? { opacity: 1, x: 0 } : {}}
+            transition={{ duration: 0.7, delay: 0.2 }}
             className="space-y-5 text-slate-300 leading-relaxed"
           >
             <p>
@@ -80,25 +94,29 @@ export default function About() {
           </motion.div>
 
           <motion.div
-            initial={{ opacity: 0, y: 40 }}
-            animate={isInView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.6, delay: 0.4 }}
+            initial={{ opacity: 0, x: 40 }}
+            animate={isInView ? { opacity: 1, x: 0 } : {}}
+            transition={{ duration: 0.7, delay: 0.3 }}
             className="grid grid-cols-2 gap-4"
           >
-            {highlights.map(({ icon: Icon, title, subtitle, description }, i) => (
-              <motion.div
-                key={title}
-                initial={{ opacity: 0, scale: 0.9 }}
-                animate={isInView ? { opacity: 1, scale: 1 } : {}}
-                transition={{ duration: 0.5, delay: 0.3 + i * 0.1 }}
-                className="p-5 bg-slate-800/50 border border-slate-700/50 rounded-xl hover:border-slate-600/50 transition-all duration-300 group"
-              >
-                <Icon className="w-6 h-6 text-blue-400 mb-3 group-hover:text-blue-300 transition-colors" />
-                <h3 className="text-white font-semibold text-lg">{title}</h3>
-                <p className="text-blue-400 text-sm font-medium">{subtitle}</p>
-                <p className="text-slate-400 text-sm mt-1">{description}</p>
-              </motion.div>
-            ))}
+            {highlights.map(({ icon: Icon, title, subtitle, description, color }, i) => {
+              const colors = colorMap[color]
+              return (
+                <motion.div
+                  key={title}
+                  initial={{ opacity: 0, scale: 0.85 }}
+                  animate={isInView ? { opacity: 1, scale: 1 } : {}}
+                  transition={{ duration: 0.5, delay: 0.4 + i * 0.1 }}
+                  whileHover={{ scale: 1.04, transition: { duration: 0.2 } }}
+                  className={`p-5 bg-slate-800/50 border border-slate-700/50 rounded-xl transition-all duration-300 group ${colors.border}`}
+                >
+                  <Icon className={`w-6 h-6 ${colors.text} mb-3 group-hover:scale-110 transition-transform`} />
+                  <h3 className="text-white font-semibold text-lg">{title}</h3>
+                  <p className={`${colors.text} text-sm font-medium`}>{subtitle}</p>
+                  <p className="text-slate-400 text-sm mt-1">{description}</p>
+                </motion.div>
+              )
+            })}
           </motion.div>
         </div>
       </div>

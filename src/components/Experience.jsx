@@ -12,9 +12,11 @@ const experiences = [
     highlights: [
       'Led Operation Readiness Reviews for Buy with Prime Returns 1.0 launch with 12+ engineers across 3 teams, driving 120+ technical requirements for availability, security, and durability',
       'Designed asynchronous architecture for Buy with Prime Returns event processing, collaborating with Sr. Engineers across Amazon Returns platform',
+      'Presented organization-wide talks on Code Smells & Refactoring, Securing API Gateway Endpoints, and Exploring Scala for Integration Tests',
       'Built headless architectural layer for Alexa data labeling platform, reducing new customer onboarding from 60 days to under 10 days',
       'Eliminated ~2 hours of monthly downtime by performing heap memory analysis on distributed EC2 instances for legacy ML task routing system',
       'Mitigated PHI data privacy issues in Alexa data labeling per HIPAA guidelines with staged rollout strategy',
+      'Team scrum master for ~9 months — agile planning, estimations, and project tracking with stakeholders',
     ],
   },
   {
@@ -56,11 +58,21 @@ const experiences = [
 
 export default function Experience() {
   const ref = useRef(null)
-  const isInView = useInView(ref, { once: true, margin: '-100px' })
+  const isInView = useInView(ref, { once: true, margin: '-80px' })
 
   return (
-    <section id="experience" className="py-24 px-4 sm:px-6 bg-slate-800/20">
-      <div ref={ref} className="max-w-4xl mx-auto">
+    <section id="experience" className="relative py-24 px-4 sm:px-6 overflow-hidden">
+      {/* Gradient mesh background */}
+      <div className="absolute inset-0 pointer-events-none">
+        <div className="absolute inset-0 bg-slate-800/20" />
+        <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-blue-500/[0.03] rounded-full blur-3xl animate-gradient-shift" />
+        <div className="absolute bottom-0 left-0 w-[400px] h-[400px] bg-emerald-500/[0.03] rounded-full blur-3xl animate-gradient-shift" style={{ animationDelay: '5s' }} />
+      </div>
+      
+      {/* Gradient divider at top */}
+      <div className="absolute top-0 left-0 right-0 section-gradient-line" />
+
+      <div ref={ref} className="relative max-w-4xl mx-auto">
         <motion.div
           initial={{ opacity: 0, y: 40 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
@@ -69,26 +81,30 @@ export default function Experience() {
           <h2 className="text-3xl sm:text-4xl font-bold text-white mb-2">
             Experience
           </h2>
-          <div className="w-16 h-1 bg-blue-500 rounded-full mb-12" />
+          <div className="w-16 h-1 bg-gradient-to-r from-blue-500 to-emerald-500 rounded-full mb-12" />
         </motion.div>
 
         <div className="relative">
-          {/* Timeline line */}
-          <div className="absolute left-4 sm:left-6 top-0 bottom-0 w-px bg-slate-700/50" />
+          {/* Timeline line with gradient */}
+          <div className="absolute left-4 sm:left-6 top-0 bottom-0 w-px bg-gradient-to-b from-blue-500/50 via-emerald-500/30 to-slate-700/20" />
 
           <div className="space-y-10">
             {experiences.map((exp, i) => (
               <motion.div
                 key={i}
-                initial={{ opacity: 0, x: -20 }}
+                initial={{ opacity: 0, x: -30 }}
                 animate={isInView ? { opacity: 1, x: 0 } : {}}
-                transition={{ duration: 0.5, delay: 0.2 + i * 0.15 }}
+                transition={{ duration: 0.6, delay: 0.2 + i * 0.15 }}
                 className="relative pl-12 sm:pl-16"
               >
-                {/* Timeline dot */}
-                <div className="absolute left-2.5 sm:left-4.5 top-1 w-3 h-3 rounded-full bg-blue-500 border-2 border-slate-900 shadow-lg shadow-blue-500/30" />
+                {/* Timeline dot with glow */}
+                <div className="absolute left-2.5 sm:left-4.5 top-1 w-3 h-3 rounded-full bg-blue-500 border-2 border-slate-900 shadow-lg shadow-blue-500/40" />
+                <div className="absolute left-2 sm:left-4 top-0.5 w-4 h-4 rounded-full bg-blue-500/20 animate-ping" style={{ animationDuration: '3s', animationDelay: `${i * 0.5}s` }} />
 
-                <div className="p-6 bg-slate-800/40 border border-slate-700/40 rounded-xl hover:border-slate-600/50 transition-all duration-300">
+                <motion.div
+                  whileHover={{ scale: 1.01, transition: { duration: 0.2 } }}
+                  className="p-6 bg-slate-800/40 border border-slate-700/40 rounded-xl hover:border-blue-500/20 transition-all duration-300 hover:shadow-lg hover:shadow-blue-500/5 backdrop-blur-sm"
+                >
                   <div className="flex flex-col sm:flex-row sm:items-center justify-between mb-3">
                     <div>
                       <h3 className="text-lg font-semibold text-white">
@@ -99,20 +115,26 @@ export default function Experience() {
                         <span className="text-sm font-medium">{exp.company}</span>
                       </div>
                     </div>
-                    <span className="text-sm text-slate-400 font-mono mt-1 sm:mt-0">
+                    <span className="text-sm text-slate-400 font-mono mt-1 sm:mt-0 px-3 py-1 bg-slate-700/30 rounded-full">
                       {exp.period}
                     </span>
                   </div>
                   <p className="text-slate-300 text-sm mb-3">{exp.description}</p>
                   <ul className="space-y-1.5">
                     {exp.highlights.map((item, j) => (
-                      <li key={j} className="flex items-start gap-2 text-sm text-slate-400">
+                      <motion.li
+                        key={j}
+                        initial={{ opacity: 0, x: -10 }}
+                        animate={isInView ? { opacity: 1, x: 0 } : {}}
+                        transition={{ duration: 0.4, delay: 0.4 + i * 0.15 + j * 0.05 }}
+                        className="flex items-start gap-2 text-sm text-slate-400"
+                      >
                         <ChevronRight className="w-4 h-4 text-emerald-400 flex-shrink-0 mt-0.5" />
                         {item}
-                      </li>
+                      </motion.li>
                     ))}
                   </ul>
-                </div>
+                </motion.div>
               </motion.div>
             ))}
           </div>
