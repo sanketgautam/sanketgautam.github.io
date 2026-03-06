@@ -56,15 +56,15 @@ export default function Hero() {
       </div>
 
       <div className="relative z-10 max-w-4xl mx-auto px-4 sm:px-6 text-center">
-        {/* Husky mascot */}
+        {/* UW Husky W logo */}
         <motion.div
           initial={{ opacity: 0, scale: 0.5 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.8, delay: 0.1, type: 'spring' }}
           className="mb-6"
         >
-          <span className="text-6xl sm:text-7xl inline-block animate-wag" style={{ animationDuration: '2s' }}>
-            🐺
+          <span className="text-5xl sm:text-6xl font-extrabold inline-block bg-gradient-to-br from-[#4B2E83] to-[#6B4EAD] bg-clip-text text-transparent select-none">
+            W
           </span>
         </motion.div>
 

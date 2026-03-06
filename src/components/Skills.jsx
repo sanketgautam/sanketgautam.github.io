@@ -29,7 +29,7 @@ const skillCategories = [
   },
   {
     title: 'Leadership',
-    emoji: '🐺',
+    emoji: '🎓',
     skills: ['Mentoring (12+ engineers)', 'Cross-Team Coordination', 'ORR Leadership', 'Hackathon Judging', 'Scrum Master'],
   },
 ]

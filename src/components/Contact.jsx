@@ -32,7 +32,7 @@ export default function Contact() {
         animate={{ y: [0, -15, 0], rotate: [0, 5, 0] }}
         transition={{ repeat: Infinity, duration: 5, ease: 'easeInOut' }}
       >
-        🐺
+        🐾
       </motion.div>
 
       <div ref={ref} className="relative max-w-4xl mx-auto">

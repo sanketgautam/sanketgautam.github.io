@@ -6,7 +6,7 @@ export default function Footer() {
     <footer className="relative py-8 px-4 bg-[#4B2E83]">
       <div className="max-w-6xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4">
         <div className="flex items-center gap-2">
-          <span className="text-lg">🐺</span>
+          <span className="text-lg font-bold text-white/80">W</span>
           <p className="text-white/60 text-sm">
             &copy; {new Date().getFullYear()} Sanket Gautam. Built with React, Tailwind CSS & Framer Motion. Go Huskies!
           </p>
