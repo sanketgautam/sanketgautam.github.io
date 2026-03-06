@@ -15,30 +15,30 @@ export default function Hero() {
         {/* Paw print pattern overlay */}
         <div className="absolute inset-0 paw-pattern" />
 
-        {/* Floating husky emojis */}
+        {/* Floating husky emojis — hidden on mobile to prevent overlap */}
         <motion.div
-          className="absolute top-32 left-[10%] text-5xl select-none"
+          className="absolute top-32 left-[10%] text-5xl select-none hidden lg:block"
           animate={{ y: [0, -20, 0], rotate: [0, 5, 0] }}
           transition={{ repeat: Infinity, duration: 6, ease: 'easeInOut' }}
         >
           🐾
         </motion.div>
         <motion.div
-          className="absolute top-48 right-[15%] text-4xl select-none"
+          className="absolute top-48 right-[15%] text-4xl select-none hidden lg:block"
           animate={{ y: [0, -15, 0], rotate: [0, -8, 0] }}
           transition={{ repeat: Infinity, duration: 5, ease: 'easeInOut', delay: 1 }}
         >
           🐺
         </motion.div>
         <motion.div
-          className="absolute bottom-32 left-[15%] text-4xl select-none"
+          className="absolute bottom-32 left-[15%] text-4xl select-none hidden lg:block"
           animate={{ y: [0, -12, 0] }}
           transition={{ repeat: Infinity, duration: 4, ease: 'easeInOut', delay: 2 }}
         >
           🏔️
         </motion.div>
         <motion.div
-          className="absolute bottom-48 right-[10%] text-5xl select-none"
+          className="absolute bottom-48 right-[10%] text-5xl select-none hidden lg:block"
           animate={{ y: [0, -18, 0], rotate: [0, 10, 0] }}
           transition={{ repeat: Infinity, duration: 7, ease: 'easeInOut', delay: 0.5 }}
         >
