@@ -7,13 +7,13 @@ export default function Hero() {
       {/* Light purple gradient background */}
       <div className="absolute inset-0">
         <div className="absolute inset-0 bg-gradient-to-br from-[#F3EEFF] via-white to-[#FDF8F0]" />
-        {/* Floating purple orbs */}
-        <div className="absolute top-20 left-1/4 w-96 h-96 bg-[#4B2E83]/8 rounded-full blur-3xl animate-gradient-shift" />
-        <div className="absolute bottom-20 right-1/4 w-96 h-96 bg-[#B7A57A]/10 rounded-full blur-3xl animate-gradient-shift" style={{ animationDelay: '5s' }} />
-        <div className="absolute top-1/3 right-1/3 w-64 h-64 bg-[#8B6EC7]/6 rounded-full blur-2xl animate-gradient-shift" style={{ animationDelay: '10s' }} />
+        {/* Floating purple orbs — hidden on mobile (iOS Safari GPU bug: blur + animation = black rectangles) */}
+        <div className="absolute top-20 left-1/4 w-96 h-96 bg-[#4B2E83]/8 rounded-full blur-3xl animate-gradient-shift hidden md:block" />
+        <div className="absolute bottom-20 right-1/4 w-96 h-96 bg-[#B7A57A]/10 rounded-full blur-3xl animate-gradient-shift hidden md:block" style={{ animationDelay: '5s' }} />
+        <div className="absolute top-1/3 right-1/3 w-64 h-64 bg-[#8B6EC7]/6 rounded-full blur-2xl animate-gradient-shift hidden md:block" style={{ animationDelay: '10s' }} />
 
-        {/* Paw print pattern overlay */}
-        <div className="absolute inset-0 paw-pattern" />
+        {/* Paw print pattern — hidden on mobile (iOS Safari can't render emoji in SVG data URIs) */}
+        <div className="absolute inset-0 paw-pattern hidden md:block" />
 
         {/* Floating husky emojis — hidden on mobile to prevent overlap */}
         <motion.div
@@ -45,9 +45,9 @@ export default function Hero() {
           🐾
         </motion.div>
 
-        {/* Grid pattern overlay */}
+        {/* Grid pattern overlay — hidden on mobile for iOS compatibility */}
         <div
-          className="absolute inset-0 opacity-[0.03]"
+          className="absolute inset-0 opacity-[0.03] hidden md:block"
           style={{
             backgroundImage: `linear-gradient(rgba(75,46,131,0.3) 1px, transparent 1px), linear-gradient(90deg, rgba(75,46,131,0.3) 1px, transparent 1px)`,
             backgroundSize: '64px 64px',

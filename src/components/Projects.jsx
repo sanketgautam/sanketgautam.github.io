@@ -75,8 +75,8 @@ export default function Projects() {
     <section id="projects" className="relative py-24 px-4 sm:px-6 overflow-hidden">
       {/* Background accents */}
       <div className="absolute inset-0 pointer-events-none">
-        <div className="absolute top-1/4 -left-32 w-96 h-96 bg-[#4B2E83]/[0.04] rounded-full blur-3xl" />
-        <div className="absolute bottom-1/4 -right-32 w-96 h-96 bg-[#B7A57A]/[0.06] rounded-full blur-3xl" />
+        <div className="absolute top-1/4 -left-32 w-96 h-96 bg-[#4B2E83]/[0.04] rounded-full blur-3xl hidden md:block" />
+        <div className="absolute bottom-1/4 -right-32 w-96 h-96 bg-[#B7A57A]/[0.06] rounded-full blur-3xl hidden md:block" />
       </div>
       <div className="absolute top-0 left-0 right-0 section-gradient-line" />
 

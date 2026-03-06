@@ -46,7 +46,7 @@ export default function Education() {
   return (
     <section id="education" className="relative py-24 px-4 sm:px-6 overflow-hidden">
       <div className="absolute top-0 left-0 right-0 section-gradient-line" />
-      <div className="absolute bottom-0 right-0 w-[400px] h-[400px] bg-[#4B2E83]/[0.03] rounded-full blur-3xl pointer-events-none" />
+      <div className="absolute bottom-0 right-0 w-[400px] h-[400px] bg-[#4B2E83]/[0.03] rounded-full blur-3xl pointer-events-none hidden md:block" />
 
       <div ref={ref} className="relative max-w-4xl mx-auto">
         <motion.div

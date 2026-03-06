@@ -67,7 +67,7 @@ export default function Experience() {
       <div className="absolute top-0 left-0 right-0 section-gradient-line" />
       
       {/* Floating accent */}
-      <div className="absolute top-20 right-0 w-[400px] h-[400px] bg-[#4B2E83]/[0.03] rounded-full blur-3xl pointer-events-none" />
+      <div className="absolute top-20 right-0 w-[400px] h-[400px] bg-[#4B2E83]/[0.03] rounded-full blur-3xl pointer-events-none hidden md:block" />
 
       <div ref={ref} className="relative max-w-4xl mx-auto">
         <motion.div
