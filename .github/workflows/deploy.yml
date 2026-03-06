@@ -2,7 +2,7 @@ name: Deploy to GitHub Pages
 
 on:
   push:
-    branches: [react-rebuild]
+    branches: [master, react-rebuild]
   workflow_dispatch:
 
 permissions:
