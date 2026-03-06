@@ -1,56 +1,64 @@
 import { motion, useInView } from 'framer-motion'
 import { useRef } from 'react'
-import { ExternalLink, Github, Bot, Smartphone, Network, Server, Wifi, Cloud } from 'lucide-react'
+import { Github, Bot, Lightbulb, Sprout, Network, Server, Wifi, Brain } from 'lucide-react'
 
 const projects = [
   {
-    title: 'OpenClaw AI Assistant',
+    title: 'Lumora AI',
     description:
-      'Multi-agent personal AI system running on Mac Studio M4 Max. Features voice synthesis, browser automation, and proactive scheduling. Open source contributor.',
-    tags: ['Python', 'Multi-Agent', 'Voice AI', 'Automation'],
-    icon: Bot,
+      'Intelligent CRM platform for personal wealth managers, built during CSE P 589 (Software Entrepreneurship). Pitched to 16 venture capitalists at Pioneer Square Labs. Featured in GeekWire.',
+    tags: ['AI/ML', 'React', 'Python', 'CRM', 'Entrepreneurship'],
+    icon: Lightbulb,
     accent: 'blue',
+  },
+  {
+    title: 'Agentic AI Personal Assistant',
+    description:
+      'Multi-agent AI system running on Mac Studio M4 Max with 128GB RAM. Features voice synthesis (TTS/ASR), browser automation, proactive scheduling, and local LLM inference with zero cloud dependency.',
+    tags: ['Python', 'Multi-Agent', 'Voice AI', 'Local LLM', 'Automation'],
+    icon: Bot,
+    accent: 'emerald',
     link: 'https://github.com/sanketgautam',
   },
   {
-    title: 'Personal Automation Platform',
+    title: 'GrowSpace',
     description:
-      'WhatsApp, Slack, and Telegram integrated assistant with 10+ custom skills, phone call capability, and local LLM inference for private, intelligent automation.',
-    tags: ['Node.js', 'LLM', 'WhatsApp API', 'Slack', 'Telegram'],
-    icon: Smartphone,
-    accent: 'emerald',
-  },
-  {
-    title: 'Multi-Agent Orchestration',
-    description:
-      'Sub-agent spawning system with parallel task execution and cross-session communication. Enables complex workflows through coordinated AI agents.',
-    tags: ['Python', 'Orchestration', 'MCP', 'Async'],
-    icon: Network,
+      'Application connecting Seattle urban gardeners with neighbors who have unused growing spaces. Built in CSE P 510 (HCI) with human-centered design, prioritizing community connection over transactions.',
+    tags: ['React', 'HCI', 'User Research', 'Community Design'],
+    icon: Sprout,
     accent: 'blue',
   },
   {
-    title: 'Local AI Stack',
+    title: 'Multi-Agent Orchestration Framework',
     description:
-      'Full local AI inference stack running Qwen 72B, Qwen3-TTS/ASR, and vector embeddings — all on Apple Silicon. Zero cloud dependency for AI workloads.',
-    tags: ['Qwen 72B', 'TTS/ASR', 'Apple Silicon', 'Vector DB'],
-    icon: Server,
+      'Sub-agent spawning system with parallel task execution, cross-session communication, and intelligent routing across multiple AI models (Claude, GPT, Qwen, Gemini).',
+    tags: ['Python', 'Node.js', 'MCP', 'Orchestration', 'Async'],
+    icon: Network,
     accent: 'emerald',
   },
   {
-    title: 'UW Network Projects',
+    title: 'Local AI Inference Stack',
     description:
-      'Software-defined networking projects including SDN controllers, Mininet topologies, and network systems coursework at the University of Washington.',
-    tags: ['SDN', 'Mininet', 'Python', 'Networking'],
+      'Full local AI stack: Qwen 72B for reasoning, Qwen3-TTS for voice synthesis, Qwen3-ASR for transcription, and vector embeddings. All running on Apple Silicon M4 Max GPU at zero cloud cost.',
+    tags: ['Qwen 72B', 'TTS/ASR', 'Apple Silicon', 'MLX', 'Vector DB'],
+    icon: Server,
+    accent: 'blue',
+  },
+  {
+    title: 'NLP & Multilingual AI Research',
+    description:
+      'Explored LLMs and AI systems for bridging language barriers in CSE P 517 (NLP). Built on experience with Alexa\'s multilingual models to research democratizing access to information.',
+    tags: ['NLP', 'LLMs', 'Multilingual', 'Python', 'Research'],
+    icon: Brain,
+    accent: 'emerald',
+  },
+  {
+    title: 'SDN & Network Systems',
+    description:
+      'Software-defined networking projects including SDN controllers, Mininet topologies, and network protocol implementations for CSEP 561 at UW.',
+    tags: ['SDN', 'Mininet', 'Python', 'OpenFlow', 'Networking'],
     icon: Wifi,
     accent: 'blue',
-  },
-  {
-    title: 'Amazon Scale Systems',
-    description:
-      'Built and maintained services handling millions of daily requests across Alexa, AWS, Retail, and Selling Partner Services at Amazon.',
-    tags: ['Java', 'AWS', 'Distributed Systems', 'Microservices'],
-    icon: Cloud,
-    accent: 'emerald',
   },
 ]
 
@@ -86,8 +94,8 @@ export default function Projects() {
           </h2>
           <div className="w-16 h-1 bg-blue-500 rounded-full mb-4" />
           <p className="text-slate-400 mb-12 max-w-2xl">
-            A selection of projects I've built, from personal AI systems to
-            large-scale distributed services at Amazon.
+            From AI startups pitched to VCs, to local inference stacks on Apple Silicon,
+            to human-centered design at UW. Here's what I've been building.
           </p>
         </motion.div>
 

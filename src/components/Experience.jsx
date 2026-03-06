@@ -4,51 +4,52 @@ import { Building2, ChevronRight } from 'lucide-react'
 
 const experiences = [
   {
-    title: 'Software Development Engineer',
-    company: 'Amazon - Selling Partner Services',
-    period: 'Current',
+    title: 'Software Development Engineer II',
+    company: 'Amazon — Selling Partner Services & Buy with Prime',
+    period: '2020 – Present',
     description:
-      'Building and maintaining services that power Amazon\'s selling partner ecosystem, handling millions of daily requests at scale.',
+      'Leading cross-team technical initiatives for Amazon\'s seller ecosystem, driving architecture decisions for returns processing and data labeling platforms.',
     highlights: [
-      'Designed APIs and microservices for seller-facing platforms',
-      'Improved system reliability and reduced operational burden',
-      'Mentored junior engineers on best practices and architecture',
+      'Led Operation Readiness Reviews for Buy with Prime Returns 1.0 launch with 12+ engineers across 3 teams, driving 120+ technical requirements for availability, security, and durability',
+      'Designed asynchronous architecture for Buy with Prime Returns event processing, collaborating with Sr. Engineers across Amazon Returns platform',
+      'Built headless architectural layer for Alexa data labeling platform, reducing new customer onboarding from 60 days to under 10 days',
+      'Eliminated ~2 hours of monthly downtime by performing heap memory analysis on distributed EC2 instances for legacy ML task routing system',
+      'Mitigated PHI data privacy issues in Alexa data labeling per HIPAA guidelines with staged rollout strategy',
     ],
   },
   {
     title: 'Software Development Engineer',
-    company: 'Amazon - Retail',
-    period: 'Previous',
+    company: 'Amazon — Retail & Global Selling',
+    period: '2018 – 2020',
     description:
-      'Developed retail systems supporting Amazon\'s core shopping experience with high availability and low latency requirements.',
+      'Built search infrastructure and authentication systems serving thousands of global sellers on Amazon\'s marketplace platforms.',
     highlights: [
-      'Built distributed systems processing millions of transactions',
-      'Optimized data pipelines for inventory and pricing systems',
-      'Collaborated across teams to deliver customer-facing features',
+      'Designed and implemented search for Build International Listings Tool using Elasticsearch, handling 1M+ product offer results for thousands of global sellers',
+      'Developed SSO-like migration experience moving sellers from legacy SPN website to Seller Central, handling AuthN and AuthZ with marketplace authorization',
+      'Built claims submission system for Amazon SPN with end-to-end encryption for customer-critical data in transit',
+      'Created reusable currency conversion feature with configurable 2-level distributed caching and exponential back-off with jitter',
     ],
   },
   {
-    title: 'Software Development Engineer',
-    company: 'Amazon - AWS',
-    period: 'Previous',
+    title: 'SDE Intern',
+    company: 'Amazon — Service Provider Network',
+    period: 'Summer 2017',
     description:
-      'Contributed to cloud infrastructure services that power millions of businesses worldwide.',
+      'Built seller communication tooling and automated localization testing frameworks during internship.',
     highlights: [
-      'Worked on core AWS services used by enterprise customers',
-      'Implemented scalable cloud-native solutions',
-      'Drove operational excellence and reliability improvements',
+      'Developed prototype for Seller-Provider Communication Tool with custom rollout toggle',
+      'Automated post-launch localization testing and report generation for Global Selling using Selenium',
     ],
   },
   {
-    title: 'Software Development Engineer',
-    company: 'Amazon - Alexa',
-    period: 'Previous',
+    title: 'Technical Trainee',
+    company: 'DRDO — Nuclear Radiation Management',
+    period: '2016 – 2017',
     description:
-      'Developed features for Alexa, Amazon\'s voice-first AI assistant serving hundreds of millions of users.',
+      'Researched and implemented FFT solutions for Computed Tomography image reconstruction at India\'s Defence Research and Development Organisation.',
     highlights: [
-      'Built voice experience features and backend services',
-      'Worked with NLP and conversational AI systems',
-      'Delivered features to millions of Alexa-enabled devices',
+      'Implemented efficient Fast Fourier Transform solutions for CT image reconstruction under Dr. D.K. Tripathi (Scientist \'F\')',
+      'Solutions designed for use in military equipment applications',
     ],
   },
 ]

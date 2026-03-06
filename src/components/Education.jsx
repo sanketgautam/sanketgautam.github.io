@@ -1,26 +1,40 @@
 import { motion, useInView } from 'framer-motion'
 import { useRef } from 'react'
-import { GraduationCap, BookOpen } from 'lucide-react'
+import { GraduationCap, BookOpen, Trophy } from 'lucide-react'
 
 const education = [
   {
     degree: 'Master of Science in Computer Science',
-    institution: 'University of Washington',
+    institution: 'University of Washington — Paul G. Allen School',
     location: 'Seattle, WA',
     status: 'In Progress (2026)',
-    focus: ['Artificial Intelligence', 'Computer Vision', 'Entrepreneurship'],
-    coursework: ['CSEP 561: Computer Networks / Network Systems'],
+    gpa: '3.9 GPA',
+    focus: ['Artificial Intelligence', 'NLP', 'Computer Vision', 'HCI', 'Entrepreneurship'],
+    coursework: [
+      'CSEP 561: Network Systems',
+      'CSEP 517: Natural Language Processing',
+      'CSEP 510: Human-Computer Interaction',
+      'CSEP 589: Software Entrepreneurship',
+    ],
     accent: 'blue',
   },
   {
-    degree: 'Bachelor of Technology in Computer Science',
-    institution: 'MANIT Bhopal',
+    degree: 'Bachelor of Technology in Computer Science & Engineering',
+    institution: 'NIT Bhopal (MANIT)',
     location: 'India',
-    status: 'Completed',
-    focus: ['Computer Science'],
+    status: 'Completed (2018)',
+    gpa: '3.4 GPA',
+    focus: ['Computer Science', 'Machine Learning', 'Software Engineering'],
     coursework: [],
     accent: 'emerald',
   },
+]
+
+const awards = [
+  'Won "People\'s Choice Award" at Amazon Selling Partner Services Hackathon 2025',
+  'Received "Awesome Amazonian" award for contributions at work',
+  'Among top 20 selected teams for startup incubation at Hack In the North 2.0',
+  'Lumora AI pitch featured in GeekWire coverage of UW entrepreneurship program',
 ]
 
 export default function Education() {
@@ -66,7 +80,8 @@ export default function Education() {
                     </span>
                   </div>
                   <p className="text-slate-300 font-medium">{edu.institution}</p>
-                  <p className="text-slate-500 text-sm mb-4">{edu.location}</p>
+                  <p className="text-slate-500 text-sm mb-1">{edu.location}</p>
+                  <p className="text-emerald-400 text-sm font-medium mb-4">{edu.gpa}</p>
 
                   <div className="flex flex-wrap gap-2 mb-3">
                     {edu.focus.map((area) => (
@@ -83,11 +98,13 @@ export default function Education() {
                     <div className="mt-4 pt-4 border-t border-slate-700/30">
                       <div className="flex items-center gap-2 mb-2">
                         <BookOpen className="w-4 h-4 text-slate-400" />
-                        <span className="text-sm text-slate-400 font-medium">Current Coursework</span>
+                        <span className="text-sm text-slate-400 font-medium">Key Coursework</span>
                       </div>
-                      {edu.coursework.map((course) => (
-                        <p key={course} className="text-sm text-slate-300 font-mono">{course}</p>
-                      ))}
+                      <div className="grid sm:grid-cols-2 gap-1">
+                        {edu.coursework.map((course) => (
+                          <p key={course} className="text-sm text-slate-300 font-mono">{course}</p>
+                        ))}
+                      </div>
                     </div>
                   )}
                 </div>
@@ -95,6 +112,29 @@ export default function Education() {
             </motion.div>
           ))}
         </div>
+
+        {/* Awards Section */}
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          animate={isInView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.5, delay: 0.5 }}
+          className="mt-8 p-6 sm:p-8 bg-slate-800/40 border border-slate-700/40 rounded-xl"
+        >
+          <div className="flex items-center gap-3 mb-4">
+            <div className="p-2 rounded-lg bg-amber-500/10">
+              <Trophy className="w-5 h-5 text-amber-400" />
+            </div>
+            <h3 className="text-lg font-semibold text-white">Awards & Recognition</h3>
+          </div>
+          <ul className="space-y-2">
+            {awards.map((award, i) => (
+              <li key={i} className="flex items-start gap-2 text-sm text-slate-300">
+                <span className="text-amber-400 mt-1">•</span>
+                {award}
+              </li>
+            ))}
+          </ul>
+        </motion.div>
       </div>
     </section>
   )

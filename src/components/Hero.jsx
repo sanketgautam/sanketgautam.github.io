@@ -60,11 +60,11 @@ export default function Hero() {
         >
           Software Engineer at{' '}
           <span className="text-slate-200 font-medium">Amazon</span> with 7+ years
-          of experience. MS CS student at the{' '}
-          <span className="text-slate-200 font-medium">University of Washington</span>.
+          building large-scale distributed systems. MS CS at the{' '}
+          <span className="text-slate-200 font-medium">University of Washington</span> (3.9 GPA).
           Passionate about{' '}
-          <span className="text-emerald-400 font-medium">Agentic AI</span> and
-          multi-agent systems.
+          <span className="text-emerald-400 font-medium">Agentic AI</span>,
+          multi-agent orchestration, and entrepreneurship.
         </motion.p>
 
         <motion.div

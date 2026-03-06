@@ -1,32 +1,32 @@
 import { motion } from 'framer-motion'
 import { useInView } from 'framer-motion'
 import { useRef } from 'react'
-import { Briefcase, GraduationCap, Cpu, MapPin } from 'lucide-react'
+import { Briefcase, GraduationCap, Cpu, Award } from 'lucide-react'
 
 const highlights = [
   {
     icon: Briefcase,
     title: '7+ Years',
     subtitle: 'at Amazon',
-    description: 'Alexa, AWS, Retail & Selling Partner Services',
+    description: 'Alexa AI, AWS, Retail & Selling Partner Services',
   },
   {
     icon: GraduationCap,
-    title: 'MS CS',
+    title: 'MS CS (3.9)',
     subtitle: 'UW Seattle',
-    description: 'AI, Computer Vision & Entrepreneurship',
+    description: 'Paul G. Allen School of Computer Science',
   },
   {
     icon: Cpu,
     title: 'Agentic AI',
     subtitle: 'Primary Focus',
-    description: 'Multi-agent systems & orchestration',
+    description: 'Multi-agent orchestration & intelligent systems',
   },
   {
-    icon: MapPin,
-    title: 'Seattle',
-    subtitle: 'Washington',
-    description: 'Building the future of intelligent systems',
+    icon: Award,
+    title: 'Mentor & Judge',
+    subtitle: 'DubHacks, GEN1, UNESCO',
+    description: 'Mentored 12+ engineers, hackathon judge',
   },
 ]
 
@@ -57,24 +57,25 @@ export default function About() {
           >
             <p>
               I'm a Software Engineer at <span className="text-white font-medium">Amazon</span> in
-              Seattle, where I've spent over seven years building large-scale
-              systems across Alexa, AWS, Retail, and Selling Partner Services.
-              Currently, I'm also pursuing my{' '}
+              Seattle, where I've spent over seven years building large-scale distributed systems
+              across Alexa AI, AWS, Retail, and Selling Partner Services. I'm also pursuing my{' '}
               <span className="text-white font-medium">Master's in Computer Science</span> at
-              the University of Washington.
+              the University of Washington's Paul G. Allen School (3.9 GPA), focusing on AI,
+              NLP, and entrepreneurship.
             </p>
             <p>
               My primary passion lies in{' '}
-              <span className="text-emerald-400 font-medium">Agentic AI</span> — designing
-              multi-agent systems that can reason, plan, and act autonomously.
-              I build orchestration frameworks, MCP servers, and multi-step
-              automation workflows that push the boundaries of what personal
-              AI systems can achieve.
+              <span className="text-emerald-400 font-medium">Agentic AI</span> and building
+              intelligent systems that create meaningful value. At UW, I co-built{' '}
+              <span className="text-white font-medium">Lumora AI</span>, a CRM platform for
+              wealth managers, which we pitched to 16 VCs at Pioneer Square Labs. The experience
+              was featured in GeekWire.
             </p>
             <p>
-              When I'm not coding, you'll find me managing my investment
-              portfolio, hiking the Pacific Northwest trails, tracking fitness
-              metrics, or spending time with family.
+              Growing up as a first-generation college graduate from a small town in India, I
+              believe deeply in using technology to expand access and strengthen communities.
+              I mentor first-gen CS students through UW's GEN1 program, judged at DubHacks '25,
+              and guided young women in tech through UNESCO Technovation.
             </p>
           </motion.div>
 
