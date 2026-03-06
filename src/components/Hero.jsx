@@ -3,71 +3,9 @@ import { ArrowDown, Github, Linkedin, Mail } from 'lucide-react'
 
 export default function Hero() {
   return (
-    <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
-      {/* Light purple gradient background */}
-      <div className="absolute inset-0">
-        <div className="absolute inset-0 bg-gradient-to-br from-[#F3EEFF] via-white to-[#FDF8F0]" />
-        {/* Floating purple orbs — hidden on mobile (iOS Safari GPU bug: blur + animation = black rectangles) */}
-        <div className="absolute top-20 left-1/4 w-96 h-96 bg-[#4B2E83]/8 rounded-full blur-3xl animate-gradient-shift hidden md:block" />
-        <div className="absolute bottom-20 right-1/4 w-96 h-96 bg-[#B7A57A]/10 rounded-full blur-3xl animate-gradient-shift hidden md:block" style={{ animationDelay: '5s' }} />
-        <div className="absolute top-1/3 right-1/3 w-64 h-64 bg-[#8B6EC7]/6 rounded-full blur-2xl animate-gradient-shift hidden md:block" style={{ animationDelay: '10s' }} />
-
-        {/* Paw print pattern — hidden on mobile (iOS Safari can't render emoji in SVG data URIs) */}
-        <div className="absolute inset-0 paw-pattern hidden md:block" />
-
-        {/* Floating husky emojis — hidden on mobile to prevent overlap */}
-        <motion.div
-          className="absolute top-32 left-[10%] text-5xl select-none hidden lg:block"
-          animate={{ y: [0, -20, 0], rotate: [0, 5, 0] }}
-          transition={{ repeat: Infinity, duration: 6, ease: 'easeInOut' }}
-        >
-          🐾
-        </motion.div>
-        <motion.div
-          className="absolute top-48 right-[15%] text-4xl select-none hidden lg:block"
-          animate={{ y: [0, -15, 0], rotate: [0, -8, 0] }}
-          transition={{ repeat: Infinity, duration: 5, ease: 'easeInOut', delay: 1 }}
-        >
-          🐺
-        </motion.div>
-        <motion.div
-          className="absolute bottom-32 left-[15%] text-4xl select-none hidden lg:block"
-          animate={{ y: [0, -12, 0] }}
-          transition={{ repeat: Infinity, duration: 4, ease: 'easeInOut', delay: 2 }}
-        >
-          🏔️
-        </motion.div>
-        <motion.div
-          className="absolute bottom-48 right-[10%] text-5xl select-none hidden lg:block"
-          animate={{ y: [0, -18, 0], rotate: [0, 10, 0] }}
-          transition={{ repeat: Infinity, duration: 7, ease: 'easeInOut', delay: 0.5 }}
-        >
-          🐾
-        </motion.div>
-
-        {/* Grid pattern overlay — hidden on mobile for iOS compatibility */}
-        <div
-          className="absolute inset-0 opacity-[0.03] hidden md:block"
-          style={{
-            backgroundImage: `linear-gradient(rgba(75,46,131,0.3) 1px, transparent 1px), linear-gradient(90deg, rgba(75,46,131,0.3) 1px, transparent 1px)`,
-            backgroundSize: '64px 64px',
-          }}
-        />
-      </div>
+    <section className="relative min-h-screen flex items-center justify-center bg-gradient-to-br from-[#F3EEFF] via-white to-[#FDF8F0]">
 
       <div className="relative z-10 max-w-4xl mx-auto px-4 sm:px-6 text-center">
-        {/* UW Husky W logo */}
-        <motion.div
-          initial={{ opacity: 0, scale: 0.5 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 0.8, delay: 0.1, type: 'spring' }}
-          className="mb-6"
-        >
-          <span className="text-5xl sm:text-6xl font-extrabold inline-block bg-gradient-to-br from-[#4B2E83] to-[#6B4EAD] bg-clip-text text-transparent select-none">
-            W
-          </span>
-        </motion.div>
-
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
@@ -125,7 +63,7 @@ export default function Hero() {
             href="#projects"
             className="px-8 py-3.5 bg-gradient-to-r from-[#4B2E83] to-[#6B4EAD] hover:from-[#6B4EAD] hover:to-[#8B6EC7] text-white font-medium rounded-lg transition-all duration-200 hover:shadow-lg hover:shadow-[#4B2E83]/25 hover:-translate-y-0.5"
           >
-            View My Work 🐾
+            View My Work
           </a>
           <a
             href="#contact"

@@ -35,7 +35,6 @@ export default function Navigation() {
       <div className="max-w-6xl mx-auto px-4 sm:px-6">
         <div className="flex items-center justify-between h-16">
           <a href="#" className="flex items-center gap-2 group">
-            <span className="text-xl font-extrabold bg-gradient-to-br from-[#4B2E83] to-[#6B4EAD] bg-clip-text text-transparent">W</span>
             <span className="text-lg font-bold text-[#4B2E83]">SG</span>
           </a>
 
