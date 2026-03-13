@@ -3,7 +3,7 @@ import { useRef, useState } from 'react'
 import { Mail, Linkedin, Github, MapPin, Send, ArrowUpRight } from 'lucide-react'
 
 const contactLinks = [
-  { icon: Mail, label: 'Email', value: 'sk2gautam@gmail.com', href: 'mailto:sk2gautam@gmail.com', emoji: '📧' },
+  { icon: Mail, label: 'Email', value: 'sanketg@uw.edu', href: 'mailto:sanketg@uw.edu', emoji: '📧' },
   { icon: Linkedin, label: 'LinkedIn', value: 'linkedin.com/in/sanketgautam', href: 'https://linkedin.com/in/sanketgautam', emoji: '💼' },
   { icon: Github, label: 'GitHub', value: 'github.com/sanketgautam', href: 'https://github.com/sanketgautam', emoji: '🐙' },
   { icon: MapPin, label: 'Location', value: 'Seattle, WA', href: null, emoji: '📍' },
@@ -18,7 +18,7 @@ export default function Contact() {
     e.preventDefault()
     const subject = encodeURIComponent(`Message from ${formData.name}`)
     const body = encodeURIComponent(`From: ${formData.name} (${formData.email})\n\n${formData.message}`)
-    window.location.href = `mailto:sergey.g@u.washington.edu?subject=${subject}&body=${body}`
+    window.location.href = `mailto:sanketg@uw.edu?subject=${subject}&body=${body}`
   }
 
   return (
