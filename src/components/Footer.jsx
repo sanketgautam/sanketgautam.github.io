@@ -15,7 +15,7 @@ export default function Footer() {
           {[
             { icon: Github, href: 'https://github.com/sanketgautam', label: 'GitHub' },
             { icon: Linkedin, href: 'https://linkedin.com/in/sanketgautam', label: 'LinkedIn' },
-            { icon: Mail, href: 'mailto:sk2gautam@gmail.com', label: 'Email' },
+            { icon: Mail, href: 'mailto:sanketg@uw.edu', label: 'Email' },
           ].map(({ icon: Icon, href, label }) => (
             <motion.a
               key={label}
