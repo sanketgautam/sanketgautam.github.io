@@ -18,7 +18,7 @@ export default function Contact() {
     e.preventDefault()
     const subject = encodeURIComponent(`Message from ${formData.name}`)
     const body = encodeURIComponent(`From: ${formData.name} (${formData.email})\n\n${formData.message}`)
-    window.location.href = `mailto:sk2gautam@gmail.com?subject=${subject}&body=${body}`
+    window.location.href = `mailto:sergey.g@u.washington.edu?subject=${subject}&body=${body}`
   }
 
   return (
