@@ -18,8 +18,8 @@ export default function Footer() {
         </div>
 
         {/* Center text */}
-        <p className="text-white/50 text-sm text-center hidden md:block">
-          Built with React, Tailwind CSS & Framer Motion
+        <p className="text-white/60 text-sm text-center hidden md:block">
+          Built with React, Tailwind & ☕
         </p>
 
         {/* Social links */}

@@ -103,7 +103,7 @@ export default function Hero() {
           </a>
           <a
             href="#contact"
-            className="px-8 py-3.5 border-[2.5px] border-[#4B2E83] text-[#4B2E83] hover:bg-[#4B2E83] hover:text-white font-semibold rounded-full transition-all duration-200 hover:-translate-y-0.5"
+            className="px-8 py-3.5 border-2 border-[#4B2E83] text-[#4B2E83] hover:bg-[#4B2E83] hover:text-white font-semibold rounded-full transition-all duration-300 hover:-translate-y-0.5 hover:shadow-md"
           >
             Get In Touch
           </a>
