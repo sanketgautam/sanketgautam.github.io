@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+  <!-- UW Husky Favicon with Seattle Colors -->
+  <defs>
+    <linearGradient id="uwBlue" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#00205B"/>
+      <stop offset="100%" style="stop-color:#154772"/>
+    </linearGradient>
+    <linearGradient id="seattleSky" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#4B2E83"/>
+      <stop offset="100%" style="stop-color:#B7A57A"/>
+    </linearGradient>
+  </defs>
+  
+  <!-- Background Seattle Sky -->
+  <rect width="100" height="100" fill="url(#seattleSky)"/>
+  
+  <!-- UW Husky Logo - Stylized Paw Print -->
+  <g transform="translate(50, 50) scale(0.8)">
+    <!-- Paw pads -->
+    <circle cx="-12" cy="15" r="5" fill="#FFFFFF" opacity="0.9"/>
+    <circle cx="0" cy="18" r="6" fill="#FFFFFF" opacity="0.95"/>
+    <circle cx="12" cy="15" r="5" fill="#FFFFFF" opacity="0.9"/>
+    <!-- Main pad -->
+    <ellipse cx="0" cy="5" rx="12" ry="8" fill="#FFFFFF" opacity="0.95"/>
+    <!-- Husky head outline (simplified) -->
+    <path d="M -20 -10 Q -15 -20 0 -20 Q 15 -20 20 -10 L 20 10 Q 15 15 10 12 L 5 8 L 0 12 L -5 8 L -10 12 Q -15 15 -20 10 Z" 
+          fill="url(#uwBlue)" opacity="0.9"/>
+    <!-- Husky eyes -->
+    <circle cx="-8" cy="2" r="1.5" fill="#FFFFFF"/>
+    <circle cx="8" cy="2" r="1.5" fill="#FFFFFF"/>
+    <!-- Husky snout -->
+    <ellipse cx="0" cy="12" rx="6" ry="4" fill="#FFFFFF" opacity="0.9"/>
+    <!-- Husky nose -->
+    <circle cx="0" cy="10" r="2" fill="#00205B"/>
+    <!-- UW letters "UW" in background -->
+    <text x="0" y="35" font-family="Arial, sans-serif" font-size="30" font-weight="bold" 
+          fill="#00205B" text-anchor="middle" opacity="0.6">UW</text>
+  </g>
+  
+  <!-- "Go Huskies!" text at bottom -->
+  <text x="50" y="92" font-family="Arial, sans-serif" font-size="8" fill="#FFFFFF" 
+        text-anchor="middle" font-style="italic">Go Huskies!</text>
+</svg>
