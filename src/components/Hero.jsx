@@ -11,20 +11,20 @@ const MountainBackground = () => (
     {/* Far mountains - lightest */}
     <path 
       d="M0 400 L0 280 L120 200 L240 260 L360 160 L480 220 L600 120 L720 200 L840 100 L960 180 L1080 80 L1200 160 L1320 120 L1440 180 L1440 400 Z" 
-      fill="#4B2E83" opacity="0.06"
+      fill="#4B2E83" opacity="0.12"
     />
     {/* Mid mountains */}
     <path 
       d="M0 400 L0 320 L100 260 L200 300 L320 220 L440 280 L560 180 L680 260 L800 160 L920 240 L1040 140 L1160 220 L1280 180 L1400 240 L1440 220 L1440 400 Z" 
-      fill="#4B2E83" opacity="0.10"
+      fill="#4B2E83" opacity="0.18"
     />
     {/* Near mountains - darker */}
     <path 
       d="M0 400 L0 340 L80 300 L160 340 L260 280 L360 330 L480 260 L580 320 L700 240 L820 300 L940 220 L1060 290 L1180 240 L1300 300 L1440 260 L1440 400 Z" 
-      fill="#4B2E83" opacity="0.15"
+      fill="#4B2E83" opacity="0.25"
     />
     {/* Trees on left */}
-    <g fill="#4B2E83" opacity="0.20">
+    <g fill="#4B2E83" opacity="0.30">
       <path d="M0 400 L20 340 L30 400 L50 330 L60 400 L85 310 L100 400 L130 320 L150 400 L180 300 L200 400 L235 310 L260 400 Z"/>
       <path d="M1200 400 L1220 350 L1240 400 L1270 330 L1300 400 L1340 340 L1380 400 L1420 320 L1440 360 L1440 400 Z"/>
     </g>
@@ -33,35 +33,12 @@ const MountainBackground = () => (
 
 export default function Hero() {
   return (
-    <section className="relative min-h-screen flex items-center justify-center bg-gradient-to-br from-[#F3EEFF] via-white to-[#FDF8F0] overflow-hidden">
+    <section className="relative min-h-screen flex items-center justify-center bg-gradient-to-br from-[#E8E0F0] via-[#F5F2F8] to-[#EDE8F5] overflow-hidden">
       
       {/* Full-width mountain background at bottom */}
       <MountainBackground />
 
-      {/* Wolf silhouette background - left side */}
-      <div className="absolute -left-10 top-1/4 w-96 h-[500px] opacity-[0.06] pointer-events-none hidden md:block">
-        <svg viewBox="0 0 300 400" className="w-full h-full" fill="#4B2E83">
-          {/* Realistic wolf/husky howling silhouette */}
-          {/* Body */}
-          <ellipse cx="150" cy="320" rx="80" ry="50"/>
-          {/* Neck */}
-          <path d="M120 280 Q100 240 110 200 L160 200 Q170 240 150 280 Z"/>
-          {/* Head */}
-          <ellipse cx="135" cy="180" rx="40" ry="35"/>
-          {/* Snout pointing up (howling) */}
-          <path d="M110 160 Q95 130 100 100 L115 95 Q125 125 130 155 Z"/>
-          {/* Ears - pointed */}
-          <path d="M100 175 L85 130 L105 155 Z"/>
-          <path d="M160 170 L180 125 L165 155 Z"/>
-          {/* Front legs */}
-          <rect x="100" y="340" width="20" height="55" rx="8"/>
-          <rect x="140" y="340" width="20" height="55" rx="8"/>
-          {/* Back legs */}
-          <rect x="180" y="335" width="18" height="50" rx="8"/>
-          {/* Tail */}
-          <path d="M220 310 Q260 280 250 240 Q240 260 230 290 Q225 305 220 310"/>
-        </svg>
-      </div>
+      
 
       {/* Seattle/PNW indicator - top right */}
       <motion.div
