@@ -2,6 +2,19 @@ import { useState, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { Menu, X } from 'lucide-react'
 
+// Wolf/Husky SVG silhouette - crisp and clean
+const WolfIcon = ({ className }) => (
+  <svg viewBox="0 0 100 100" className={className} fill="currentColor">
+    {/* Howling wolf silhouette */}
+    <path d="M50 5 L35 25 L25 15 L20 35 L30 45 L25 60 L35 75 L45 80 L50 95 L55 80 L65 75 L75 60 L70 45 L80 35 L75 15 L65 25 L50 5 Z"/>
+    {/* Inner ear details */}
+    <path d="M35 25 L25 15 L20 35 L30 30 Z" opacity="0.7"/>
+    <path d="M65 25 L75 15 L80 35 L70 30 Z" opacity="0.7"/>
+    {/* Snout detail */}
+    <ellipse cx="50" cy="55" rx="8" ry="6" opacity="0.3"/>
+  </svg>
+)
+
 const navLinks = [
   { name: 'About', href: '#about' },
   { name: 'Experience', href: '#experience' },
@@ -28,23 +41,23 @@ export default function Navigation() {
       transition={{ duration: 0.6, ease: 'easeOut' }}
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
         scrolled
-          ? 'bg-white/90 backdrop-blur-xl border-b border-[#4B2E83]/10 shadow-lg shadow-[#4B2E83]/5'
+          ? 'bg-white/80 backdrop-blur-md border-b border-[#4B2E83]/10 shadow-lg shadow-[#4B2E83]/5'
           : 'bg-transparent'
       }`}
     >
       <div className="max-w-6xl mx-auto px-4 sm:px-6">
         <div className="flex items-center justify-between h-16">
           <a href="#" className="flex items-center gap-2 group">
-            <span className="text-2xl hover:scale-110 transition-transform">🐺</span>
+            <WolfIcon className="w-10 h-10 text-[#4C1D95] hover:scale-110 transition-transform" />
           </a>
 
           {/* Desktop nav */}
-          <div className="hidden md:flex items-center gap-1">
+          <div className="hidden md:flex items-center gap-2">
             {navLinks.map((link) => (
               <a
                 key={link.name}
                 href={link.href}
-                className="px-3 py-2 text-sm text-[#4B2E83]/70 hover:text-[#4B2E83] rounded-lg hover:bg-[#4B2E83]/5 transition-all duration-200 font-medium"
+                className="px-4 py-2 text-sm text-[#3B1F6E] hover:text-[#4C1D95] rounded-lg hover:bg-[#4C1D95]/5 transition-all duration-200 font-medium tracking-wide"
               >
                 {link.name}
               </a>
@@ -53,7 +66,7 @@ export default function Navigation() {
               href="/Sanket_Gautam_Resume.pdf"
               target="_blank"
               rel="noopener noreferrer"
-              className="ml-2 px-4 py-2 text-sm font-medium text-white bg-[#4B2E83] rounded-lg hover:bg-[#6B4EAD] transition-all duration-200 hover:shadow-lg hover:shadow-[#4B2E83]/25"
+              className="ml-3 px-5 py-2 text-sm font-medium text-white bg-[#4C1D95] rounded-full hover:bg-[#6B4EAD] transition-all duration-200 hover:shadow-lg hover:shadow-[#4C1D95]/25 tracking-wide"
             >
               Resume
             </a>
@@ -62,10 +75,10 @@ export default function Navigation() {
           {/* Mobile menu button */}
           <button
             onClick={() => setIsOpen(!isOpen)}
-            className="md:hidden p-2 text-[#4B2E83] rounded-lg hover:bg-[#4B2E83]/5 transition-colors"
+            className="md:hidden p-2 text-[#3B1F6E] rounded-lg hover:bg-[#4C1D95]/5 transition-colors"
             aria-label="Toggle menu"
           >
-            {isOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
+            {isOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
           </button>
         </div>
       </div>
@@ -78,7 +91,7 @@ export default function Navigation() {
             animate={{ opacity: 1, height: 'auto' }}
             exit={{ opacity: 0, height: 0 }}
             transition={{ duration: 0.3 }}
-            className="md:hidden bg-white/95 backdrop-blur-xl border-b border-[#4B2E83]/10"
+            className="md:hidden bg-white/95 backdrop-blur-md border-b border-[#4B2E83]/10"
           >
             <div className="px-4 py-3 space-y-1">
               {navLinks.map((link) => (
@@ -86,7 +99,7 @@ export default function Navigation() {
                   key={link.name}
                   href={link.href}
                   onClick={() => setIsOpen(false)}
-                  className="block px-3 py-2.5 text-[#4B2E83]/70 hover:text-[#4B2E83] rounded-lg hover:bg-[#4B2E83]/5 transition-all font-medium"
+                  className="block px-3 py-2.5 text-[#3B1F6E] hover:text-[#4C1D95] rounded-lg hover:bg-[#4C1D95]/5 transition-all font-medium tracking-wide"
                 >
                   {link.name}
                 </a>
@@ -96,7 +109,7 @@ export default function Navigation() {
                 target="_blank"
                 rel="noopener noreferrer"
                 onClick={() => setIsOpen(false)}
-                className="block px-3 py-2.5 text-white bg-[#4B2E83] rounded-lg text-center font-medium"
+                className="block px-3 py-2.5 text-white bg-[#4C1D95] rounded-full text-center font-medium mt-2"
               >
                 Resume
               </a>
