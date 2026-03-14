@@ -53,19 +53,6 @@ export default function Hero() {
           multi-agent orchestration, and entrepreneurship.
         </motion.p>
 
-        {/* Husky badge */}
-        <motion.div
-          initial={{ opacity: 0, scale: 0.8 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 0.5, delay: 1.0 }}
-          className="flex items-center justify-center gap-2 mb-4"
-        >
-          <span className="text-2xl">🐕</span>
-          <span className="text-[#00205B] font-semibold text-sm tracking-wide">
-            Go Huskies!
-          </span>
-        </motion.div>
-
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
