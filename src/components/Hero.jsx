@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion'
-import { ArrowDown, Github, Linkedin, Mail, MapPin } from 'lucide-react'
+import { ArrowDown, Github, Linkedin, Mail, MapPin, Mountain } from 'lucide-react'
 
 // Full-width PNW Mountain silhouette SVG - spans entire bottom
 const MountainBackground = () => (
@@ -44,7 +44,7 @@ export default function Hero() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.2 }}
         >
-          <p className="text-[#3B1F6E] font-mono text-sm sm:text-base mb-4 tracking-wider font-medium">
+          <p className="text-[#2D1B69] font-mono text-sm sm:text-base mb-4 tracking-wider font-medium">
             Hi, my name is
           </p>
         </motion.div>
@@ -60,17 +60,18 @@ export default function Hero() {
           </span>
         </motion.h1>
 
-        {/* Location badge - moved from navbar */}
+        {/* Location badge - with SVG icons instead of emoji */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.5 }}
-          className="flex items-center justify-center gap-2 text-[#3B1F6E]/70 text-sm mb-5"
+          className="flex items-center justify-center gap-2 text-[#2D1B69]/80 text-sm mb-5"
         >
           <MapPin className="w-4 h-4" />
           <span className="font-medium">Seattle, WA</span>
-          <span className="text-[#3B1F6E]/30">•</span>
-          <span>🌲 Pacific Northwest</span>
+          <span className="text-[#2D1B69]/30">•</span>
+          <Mountain className="w-4 h-4" />
+          <span>Pacific Northwest</span>
         </motion.div>
 
         <motion.h2
@@ -79,8 +80,11 @@ export default function Hero() {
           transition={{ duration: 0.8, delay: 0.6 }}
           className="text-2xl sm:text-4xl lg:text-5xl font-bold mb-6"
         >
-          <span className="bg-gradient-to-r from-[#4B2E83] via-[#8B6EC7] to-[#B7A57A] bg-clip-text text-transparent">
-            I build intelligent systems.
+          <span className="text-[#2D1B69]">
+            I build intelligent{' '}
+          </span>
+          <span className="text-[#4C1D95]">
+            systems.
           </span>
         </motion.h2>
 
@@ -88,12 +92,12 @@ export default function Hero() {
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.8 }}
-          className="text-[#3B1F6E]/80 text-lg sm:text-xl max-w-2xl mx-auto mb-10 leading-relaxed"
+          className="text-[#2D1B69]/90 text-lg sm:text-xl max-w-2xl mx-auto mb-10 leading-relaxed"
         >
           Software Engineer at{' '}
-          <span className="text-[#3B1F6E] font-medium">Amazon</span> with 7+ years
+          <span className="text-[#2D1B69] font-medium">Amazon</span> with 7+ years
           building large-scale distributed systems. MS CS at the{' '}
-          <span className="text-[#3B1F6E] font-medium">University of Washington</span> (3.9 GPA).
+          <span className="text-[#2D1B69] font-medium">University of Washington</span> (3.9 GPA).
           Passionate about{' '}
           <span className="text-[#4C1D95] font-semibold">Agentic AI</span>,
           multi-agent orchestration, and entrepreneurship.
@@ -107,13 +111,13 @@ export default function Hero() {
         >
           <a
             href="#projects"
-            className="px-8 py-3.5 bg-gradient-to-r from-[#4B2E83] to-[#6B4EAD] hover:from-[#6B4EAD] hover:to-[#8B6EC7] text-white font-medium rounded-full transition-all duration-200 hover:shadow-lg hover:shadow-[#4B2E83]/25 hover:-translate-y-0.5"
+            className="px-8 py-3.5 bg-gradient-to-r from-[#4B2E83] to-[#6B4EAD] hover:from-[#6B4EAD] hover:to-[#8B6EC7] text-white font-semibold rounded-full transition-all duration-200 hover:shadow-lg hover:shadow-[#4B2E83]/25 hover:-translate-y-0.5"
           >
             View My Work
           </a>
           <a
             href="#contact"
-            className="px-8 py-3.5 border-2 border-[#4B2E83] text-[#4B2E83] hover:bg-[#4B2E83] hover:text-white font-medium rounded-full transition-all duration-200 hover:-translate-y-0.5"
+            className="px-8 py-3.5 border-[2.5px] border-[#4B2E83] text-[#4B2E83] hover:bg-[#4B2E83] hover:text-white font-semibold rounded-full transition-all duration-200 hover:-translate-y-0.5"
           >
             Get In Touch
           </a>
@@ -137,7 +141,7 @@ export default function Hero() {
               rel={href.startsWith('http') ? 'noopener noreferrer' : undefined}
               aria-label={label}
               whileHover={{ y: -3, scale: 1.1 }}
-              className="p-3 text-[#3B1F6E]/60 hover:text-[#4C1D95] hover:bg-[#4C1D95]/10 rounded-xl transition-all duration-200"
+              className="p-3 text-[#2D1B69] bg-white/60 hover:bg-[#4C1D95] hover:text-white rounded-xl shadow-sm hover:shadow-md transition-all duration-200"
             >
               <Icon className="w-7 h-7" />
             </motion.a>
@@ -151,7 +155,7 @@ export default function Hero() {
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 1.5 }}
-        className="absolute bottom-8 left-1/2 -translate-x-1/2 z-20 text-[#3B1F6E]/40 hover:text-[#3B1F6E] transition-colors"
+        className="absolute bottom-8 left-1/2 -translate-x-1/2 z-20 text-[#2D1B69]/50 hover:text-[#2D1B69] transition-colors"
         aria-label="Scroll to about section"
       >
         <motion.div
