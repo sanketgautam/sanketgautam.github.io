@@ -38,25 +38,16 @@ export default function Hero() {
       {/* Full-width mountain background at bottom */}
       <MountainBackground />
 
-      {/* Large Husky/Wolf on the left */}
-      <motion.div
-        initial={{ opacity: 0, x: -50, scale: 0.8 }}
-        animate={{ opacity: 1, x: 0, scale: 1 }}
-        transition={{ duration: 1, delay: 0.3 }}
-        className="absolute left-4 md:left-12 lg:left-20 top-1/3 -translate-y-1/2 hidden md:block"
-      >
-        <div className="relative">
-          <span className="text-8xl lg:text-9xl filter drop-shadow-lg">🐺</span>
-          <motion.div
-            initial={{ opacity: 0, y: 10 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 1 }}
-            className="absolute -bottom-4 left-1/2 -translate-x-1/2 bg-[#4B2E83] text-white text-xs font-bold px-3 py-1 rounded-full whitespace-nowrap"
-          >
-            Go Huskies!
-          </motion.div>
-        </div>
-      </motion.div>
+      {/* Husky silhouette background - left side */}
+      <div className="absolute left-0 top-1/4 w-80 h-96 opacity-[0.04] pointer-events-none hidden md:block">
+        <svg viewBox="0 0 200 250" className="w-full h-full" fill="#4B2E83">
+          {/* Wolf/Husky head silhouette */}
+          <path d="M100 20 L60 60 L40 40 L30 80 L50 100 L40 130 L60 160 L80 170 L100 220 L120 170 L140 160 L160 130 L150 100 L170 80 L160 40 L140 60 L100 20 Z"/>
+          {/* Ears detail */}
+          <path d="M60 60 L40 40 L30 80 L50 70 Z"/>
+          <path d="M140 60 L160 40 L170 80 L150 70 Z"/>
+        </svg>
+      </div>
 
       {/* Seattle/PNW indicator - top right */}
       <motion.div
