@@ -35,10 +35,7 @@ export default function Navigation() {
       <div className="max-w-6xl mx-auto px-4 sm:px-6">
         <div className="flex items-center justify-between h-16">
           <a href="#" className="flex items-center gap-2 group">
-            <div className="flex items-center gap-2 bg-gradient-to-r from-[#4B2E83] to-[#6B4EAD] px-3 py-1.5 rounded-lg shadow-md hover:shadow-lg hover:from-[#6B4EAD] hover:to-[#8B6EC7] transition-all duration-300">
-              <span className="text-xl">🐺</span>
-              <span className="text-white font-bold text-sm hidden sm:inline">Sanket G.</span>
-            </div>
+            <span className="text-2xl hover:scale-110 transition-transform">🐺</span>
           </a>
 
           {/* Desktop nav */}

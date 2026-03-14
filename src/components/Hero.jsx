@@ -38,14 +38,28 @@ export default function Hero() {
       {/* Full-width mountain background at bottom */}
       <MountainBackground />
 
-      {/* Husky silhouette background - left side */}
-      <div className="absolute left-0 top-1/4 w-80 h-96 opacity-[0.04] pointer-events-none hidden md:block">
-        <svg viewBox="0 0 200 250" className="w-full h-full" fill="#4B2E83">
-          {/* Wolf/Husky head silhouette */}
-          <path d="M100 20 L60 60 L40 40 L30 80 L50 100 L40 130 L60 160 L80 170 L100 220 L120 170 L140 160 L160 130 L150 100 L170 80 L160 40 L140 60 L100 20 Z"/>
-          {/* Ears detail */}
-          <path d="M60 60 L40 40 L30 80 L50 70 Z"/>
-          <path d="M140 60 L160 40 L170 80 L150 70 Z"/>
+      {/* Wolf silhouette background - left side */}
+      <div className="absolute -left-10 top-1/4 w-96 h-[500px] opacity-[0.06] pointer-events-none hidden md:block">
+        <svg viewBox="0 0 300 400" className="w-full h-full" fill="#4B2E83">
+          {/* Realistic wolf/husky howling silhouette */}
+          {/* Body */}
+          <ellipse cx="150" cy="320" rx="80" ry="50"/>
+          {/* Neck */}
+          <path d="M120 280 Q100 240 110 200 L160 200 Q170 240 150 280 Z"/>
+          {/* Head */}
+          <ellipse cx="135" cy="180" rx="40" ry="35"/>
+          {/* Snout pointing up (howling) */}
+          <path d="M110 160 Q95 130 100 100 L115 95 Q125 125 130 155 Z"/>
+          {/* Ears - pointed */}
+          <path d="M100 175 L85 130 L105 155 Z"/>
+          <path d="M160 170 L180 125 L165 155 Z"/>
+          {/* Front legs */}
+          <rect x="100" y="340" width="20" height="55" rx="8"/>
+          <rect x="140" y="340" width="20" height="55" rx="8"/>
+          {/* Back legs */}
+          <rect x="180" y="335" width="18" height="50" rx="8"/>
+          {/* Tail */}
+          <path d="M220 310 Q260 280 250 240 Q240 260 230 290 Q225 305 220 310"/>
         </svg>
       </div>
 
