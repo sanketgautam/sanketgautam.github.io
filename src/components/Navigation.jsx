@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { Menu, X } from 'lucide-react'
+import HuskyIcon from './HuskyIcon'
 
 const navLinks = [
   { name: 'About', href: '#about' },
@@ -35,7 +36,7 @@ export default function Navigation() {
       <div className="max-w-6xl mx-auto px-4 sm:px-6">
         <div className="flex items-center justify-between h-16">
           <a href="#" className="flex items-center gap-2 group">
-            <span className="text-lg font-bold text-[#4B2E83]">SG</span>
+            <HuskyIcon className="w-8 h-8 text-[#4B2E83]" />
           </a>
 
           {/* Desktop nav */}
