@@ -1,35 +1,37 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
-  <!-- Background with UW purple gradient -->
-  <defs>
-    <linearGradient id="uwGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" style="stop-color:#4B2E83"/>
-      <stop offset="100%" style="stop-color:#6B4EAD"/>
-    </linearGradient>
-  </defs>
+  <!-- Simple, clean wolf/husky face favicon in UW purple -->
   
-  <!-- Circular background -->
-  <circle cx="50" cy="50" r="48" fill="url(#uwGradient)"/>
+  <!-- Background circle -->
+  <circle cx="50" cy="50" r="48" fill="#4B2E83"/>
   
-  <!-- Husky head silhouette - white -->
-  <g transform="translate(50, 48) scale(0.42)">
-    <!-- Head outline -->
-    <path d="M0 -70 L-45 -30 L-55 -45 L-65 -10 L-45 15 L-50 40 L-35 60 L0 85 L35 60 L50 40 L45 15 L65 -10 L55 -45 L45 -30 Z" 
-          fill="white"/>
-    <!-- Left ear inner -->
-    <path d="M-45 -30 L-55 -45 L-65 -10 L-50 -5 Z" fill="#B7A57A" opacity="0.6"/>
-    <!-- Right ear inner -->
-    <path d="M45 -30 L55 -45 L65 -10 L50 -5 Z" fill="#B7A57A" opacity="0.6"/>
-    <!-- Face marking -->
-    <path d="M0 -25 L-15 10 L-10 45 L0 60 L10 45 L15 10 Z" fill="#4B2E83" opacity="0.15"/>
-    <!-- Left eye -->
-    <ellipse cx="-22" cy="5" rx="8" ry="10" fill="#4B2E83"/>
-    <circle cx="-22" cy="5" r="4" fill="white"/>
-    <!-- Right eye -->
-    <ellipse cx="22" cy="5" rx="8" ry="10" fill="#4B2E83"/>
-    <circle cx="22" cy="5" r="4" fill="white"/>
+  <!-- Wolf face - white -->
+  <g transform="translate(50, 52)">
+    <!-- Ears -->
+    <polygon points="-28,-30 -35,-48 -18,-35" fill="white"/>
+    <polygon points="28,-30 35,-48 18,-35" fill="white"/>
+    
+    <!-- Head -->
+    <ellipse cx="0" cy="-10" rx="28" ry="32" fill="white"/>
+    
+    <!-- Inner ears -->
+    <polygon points="-26,-28 -30,-40 -20,-32" fill="#B7A57A" opacity="0.5"/>
+    <polygon points="26,-28 30,-40 20,-32" fill="#B7A57A" opacity="0.5"/>
+    
+    <!-- Snout -->
+    <ellipse cx="0" cy="10" rx="16" ry="12" fill="#f0f0f0"/>
+    
+    <!-- Eyes -->
+    <ellipse cx="-12" cy="-15" rx="6" ry="7" fill="#4B2E83"/>
+    <circle cx="-10" cy="-16" r="2" fill="white"/>
+    <ellipse cx="12" cy="-15" rx="6" ry="7" fill="#4B2E83"/>
+    <circle cx="14" cy="-16" r="2" fill="white"/>
+    
     <!-- Nose -->
-    <ellipse cx="0" cy="40" rx="12" ry="8" fill="#1a1a2e"/>
-    <ellipse cx="-3" cy="37" rx="3" ry="2" fill="white" opacity="0.3"/>
+    <ellipse cx="0" cy="8" rx="7" ry="5" fill="#2a2a3a"/>
+    <ellipse cx="-2" cy="6" rx="2" ry="1.5" fill="white" opacity="0.3"/>
+    
+    <!-- Mouth line -->
+    <path d="M-5 16 Q0 20 5 16" stroke="#4B2E83" stroke-width="1.5" fill="none" opacity="0.5"/>
   </g>
 </svg>

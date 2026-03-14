@@ -1,20 +1,33 @@
 import { motion } from 'framer-motion'
 import { ArrowDown, Github, Linkedin, Mail } from 'lucide-react'
 
-// PNW Mountain silhouette SVG
-const MountainSilhouette = () => (
-  <svg viewBox="0 0 400 200" className="w-full h-full" preserveAspectRatio="xMinYMax slice">
-    {/* Far mountains */}
-    <path d="M0 200 L50 120 L100 160 L150 80 L200 140 L250 60 L300 130 L350 90 L400 150 L400 200 Z" 
-          fill="#4B2E83" opacity="0.08"/>
+// Full-width PNW Mountain silhouette SVG - spans entire bottom
+const MountainBackground = () => (
+  <svg 
+    viewBox="0 0 1440 400" 
+    className="absolute bottom-0 left-0 w-full h-64 md:h-80 lg:h-96" 
+    preserveAspectRatio="xMidYMax slice"
+  >
+    {/* Far mountains - lightest */}
+    <path 
+      d="M0 400 L0 280 L120 200 L240 260 L360 160 L480 220 L600 120 L720 200 L840 100 L960 180 L1080 80 L1200 160 L1320 120 L1440 180 L1440 400 Z" 
+      fill="#4B2E83" opacity="0.06"
+    />
     {/* Mid mountains */}
-    <path d="M0 200 L30 150 L80 180 L120 130 L180 170 L220 110 L280 160 L320 120 L380 170 L400 140 L400 200 Z" 
-          fill="#4B2E83" opacity="0.12"/>
-    {/* Trees silhouette */}
-    <path d="M0 200 L10 180 L15 200 L25 170 L30 200 L45 165 L50 200 L60 175 L70 200 L85 160 L95 200 L110 170 L120 200 Z" 
-          fill="#4B2E83" opacity="0.15"/>
-    <path d="M380 200 L385 175 L390 200 L395 180 L400 200 Z" 
-          fill="#4B2E83" opacity="0.15"/>
+    <path 
+      d="M0 400 L0 320 L100 260 L200 300 L320 220 L440 280 L560 180 L680 260 L800 160 L920 240 L1040 140 L1160 220 L1280 180 L1400 240 L1440 220 L1440 400 Z" 
+      fill="#4B2E83" opacity="0.10"
+    />
+    {/* Near mountains - darker */}
+    <path 
+      d="M0 400 L0 340 L80 300 L160 340 L260 280 L360 330 L480 260 L580 320 L700 240 L820 300 L940 220 L1060 290 L1180 240 L1300 300 L1440 260 L1440 400 Z" 
+      fill="#4B2E83" opacity="0.15"
+    />
+    {/* Trees on left */}
+    <g fill="#4B2E83" opacity="0.20">
+      <path d="M0 400 L20 340 L30 400 L50 330 L60 400 L85 310 L100 400 L130 320 L150 400 L180 300 L200 400 L235 310 L260 400 Z"/>
+      <path d="M1200 400 L1220 350 L1240 400 L1270 330 L1300 400 L1340 340 L1380 400 L1420 320 L1440 360 L1440 400 Z"/>
+    </g>
   </svg>
 )
 
@@ -22,22 +35,26 @@ export default function Hero() {
   return (
     <section className="relative min-h-screen flex items-center justify-center bg-gradient-to-br from-[#F3EEFF] via-white to-[#FDF8F0] overflow-hidden">
       
-      {/* PNW Mountain decoration - top left */}
-      <div className="absolute top-0 left-0 w-80 h-48 opacity-60 pointer-events-none">
-        <MountainSilhouette />
-      </div>
+      {/* Full-width mountain background at bottom */}
+      <MountainBackground />
 
-      {/* UW Husky Badge - top left corner */}
+      {/* Large Husky/Wolf on the left */}
       <motion.div
-        initial={{ opacity: 0, x: -20 }}
-        animate={{ opacity: 1, x: 0 }}
-        transition={{ duration: 0.8, delay: 0.5 }}
-        className="absolute top-20 left-6 hidden md:flex items-center gap-3 bg-white/80 backdrop-blur-sm border border-[#4B2E83]/20 rounded-xl px-4 py-3 shadow-lg"
+        initial={{ opacity: 0, x: -50, scale: 0.8 }}
+        animate={{ opacity: 1, x: 0, scale: 1 }}
+        transition={{ duration: 1, delay: 0.3 }}
+        className="absolute left-4 md:left-12 lg:left-20 top-1/3 -translate-y-1/2 hidden md:block"
       >
-        <span className="text-3xl">🐺</span>
-        <div className="flex flex-col">
-          <span className="text-[#4B2E83] font-bold text-sm">Go Huskies!</span>
-          <span className="text-[#B7A57A] text-xs font-medium">UW Seattle</span>
+        <div className="relative">
+          <span className="text-8xl lg:text-9xl filter drop-shadow-lg">🐺</span>
+          <motion.div
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 1 }}
+            className="absolute -bottom-4 left-1/2 -translate-x-1/2 bg-[#4B2E83] text-white text-xs font-bold px-3 py-1 rounded-full whitespace-nowrap"
+          >
+            Go Huskies!
+          </motion.div>
         </div>
       </motion.div>
 
@@ -58,7 +75,6 @@ export default function Hero() {
       {/* Decorative elements */}
       <div className="absolute top-32 right-20 w-2 h-2 bg-[#B7A57A] rounded-full opacity-40 hidden lg:block" />
       <div className="absolute top-48 right-32 w-3 h-3 bg-[#4B2E83] rounded-full opacity-20 hidden lg:block" />
-      <div className="absolute top-40 left-40 w-2 h-2 bg-[#4B2E83] rounded-full opacity-30 hidden lg:block" />
 
       <div className="relative z-10 max-w-4xl mx-auto px-4 sm:px-6 text-center">
         <motion.div
@@ -160,7 +176,7 @@ export default function Hero() {
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 1.5 }}
-        className="absolute bottom-8 left-1/2 -translate-x-1/2 text-[#4B2E83]/40 hover:text-[#4B2E83] transition-colors"
+        className="absolute bottom-8 left-1/2 -translate-x-1/2 z-20 text-[#4B2E83]/40 hover:text-[#4B2E83] transition-colors"
         aria-label="Scroll to about section"
       >
         <motion.div
