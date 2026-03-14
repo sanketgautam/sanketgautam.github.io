@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion'
-import { ArrowDown, Github, Linkedin, Mail, MapPin, Mountain } from 'lucide-react'
+import { ArrowDown } from 'lucide-react'
 
 // Full-width PNW Mountain silhouette SVG - spans entire bottom
 const MountainBackground = () => (
@@ -37,43 +37,6 @@ export default function Hero() {
       
       {/* Full-width mountain background at bottom */}
       <MountainBackground />
-
-      {/* Top left: Location + Social icons */}
-      <motion.div
-        initial={{ opacity: 0, x: -20 }}
-        animate={{ opacity: 1, x: 0 }}
-        transition={{ duration: 0.8, delay: 0.5 }}
-        className="absolute top-20 left-6 hidden md:flex flex-col gap-4"
-      >
-        {/* Location badge */}
-        <div className="flex items-center gap-2 text-[#2D1B69]/80 text-sm">
-          <MapPin className="w-4 h-4" />
-          <span className="font-medium">Seattle, WA</span>
-          <span className="text-[#2D1B69]/30">•</span>
-          <Mountain className="w-4 h-4" />
-          <span>PNW</span>
-        </div>
-
-        {/* Social icons */}
-        <div className="flex items-center gap-3">
-          {[
-            { icon: Github, href: 'https://github.com/sanketgautam', label: 'GitHub' },
-            { icon: Linkedin, href: 'https://linkedin.com/in/sanketgautam', label: 'LinkedIn' },
-            { icon: Mail, href: 'mailto:sanketg@uw.edu', label: 'Email' },
-          ].map(({ icon: Icon, href, label }) => (
-            <a
-              key={label}
-              href={href}
-              target={href.startsWith('http') ? '_blank' : undefined}
-              rel={href.startsWith('http') ? 'noopener noreferrer' : undefined}
-              aria-label={label}
-              className="p-2 text-[#2D1B69] bg-white/60 hover:bg-[#4C1D95] hover:text-white rounded-lg shadow-sm hover:shadow-md transition-all duration-200 hover:-translate-y-0.5"
-            >
-              <Icon className="w-5 h-5" />
-            </a>
-          ))}
-        </div>
-      </motion.div>
 
       <div className="relative z-10 max-w-4xl mx-auto px-4 sm:px-6 text-center">
         <motion.div
@@ -144,31 +107,6 @@ export default function Hero() {
           >
             Get In Touch
           </a>
-        </motion.div>
-
-        {/* Mobile-only social icons (below buttons) */}
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 0.8, delay: 1.2 }}
-          className="flex md:hidden items-center justify-center gap-4 mt-8"
-        >
-          {[
-            { icon: Github, href: 'https://github.com/sanketgautam', label: 'GitHub' },
-            { icon: Linkedin, href: 'https://linkedin.com/in/sanketgautam', label: 'LinkedIn' },
-            { icon: Mail, href: 'mailto:sanketg@uw.edu', label: 'Email' },
-          ].map(({ icon: Icon, href, label }) => (
-            <a
-              key={label}
-              href={href}
-              target={href.startsWith('http') ? '_blank' : undefined}
-              rel={href.startsWith('http') ? 'noopener noreferrer' : undefined}
-              aria-label={label}
-              className="p-3 text-[#2D1B69] bg-white/60 hover:bg-[#4C1D95] hover:text-white rounded-xl shadow-sm transition-all duration-200"
-            >
-              <Icon className="w-6 h-6" />
-            </a>
-          ))}
         </motion.div>
       </div>
 

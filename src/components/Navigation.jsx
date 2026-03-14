@@ -1,19 +1,6 @@
 import { useState, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
-import { Menu, X } from 'lucide-react'
-
-// Wolf/Husky SVG silhouette - crisp and clean
-const WolfIcon = ({ className }) => (
-  <svg viewBox="0 0 100 100" className={className} fill="currentColor">
-    {/* Howling wolf silhouette */}
-    <path d="M50 5 L35 25 L25 15 L20 35 L30 45 L25 60 L35 75 L45 80 L50 95 L55 80 L65 75 L75 60 L70 45 L80 35 L75 15 L65 25 L50 5 Z"/>
-    {/* Inner ear details */}
-    <path d="M35 25 L25 15 L20 35 L30 30 Z" opacity="0.7"/>
-    <path d="M65 25 L75 15 L80 35 L70 30 Z" opacity="0.7"/>
-    {/* Snout detail */}
-    <ellipse cx="50" cy="55" rx="8" ry="6" opacity="0.3"/>
-  </svg>
-)
+import { Menu, X, Github, Linkedin, Mail, MapPin } from 'lucide-react'
 
 const navLinks = [
   { name: 'About', href: '#about' },
@@ -22,6 +9,12 @@ const navLinks = [
   { name: 'Skills', href: '#skills' },
   { name: 'Education', href: '#education' },
   { name: 'Contact', href: '#contact' },
+]
+
+const socialLinks = [
+  { icon: Github, href: 'https://github.com/sanketgautam', label: 'GitHub' },
+  { icon: Linkedin, href: 'https://linkedin.com/in/sanketgautam', label: 'LinkedIn' },
+  { icon: Mail, href: 'mailto:sanketg@uw.edu', label: 'Email' },
 ]
 
 export default function Navigation() {
@@ -47,11 +40,36 @@ export default function Navigation() {
     >
       <div className="max-w-6xl mx-auto px-4 sm:px-6">
         <div className="flex items-center justify-between h-16">
-          <a href="#" className="flex items-center gap-2 group">
-            <WolfIcon className="w-11 h-11 text-[#4C1D95] hover:scale-110 transition-transform" />
-          </a>
+          
+          {/* Left: Social icons + Location */}
+          <div className="flex items-center gap-4">
+            {/* Social icons */}
+            <div className="hidden sm:flex items-center gap-2">
+              {socialLinks.map(({ icon: Icon, href, label }) => (
+                <a
+                  key={label}
+                  href={href}
+                  target={href.startsWith('http') ? '_blank' : undefined}
+                  rel={href.startsWith('http') ? 'noopener noreferrer' : undefined}
+                  aria-label={label}
+                  className="p-2 text-[#2D1B69] hover:text-[#4C1D95] hover:bg-[#4C1D95]/10 rounded-lg transition-all duration-200"
+                >
+                  <Icon className="w-5 h-5" />
+                </a>
+              ))}
+            </div>
 
-          {/* Desktop nav */}
+            {/* Divider */}
+            <div className="hidden sm:block w-px h-6 bg-[#2D1B69]/20" />
+
+            {/* Location */}
+            <div className="hidden sm:flex items-center gap-1.5 text-[#2D1B69]/70 text-sm">
+              <MapPin className="w-4 h-4" />
+              <span className="font-medium">Seattle, WA</span>
+            </div>
+          </div>
+
+          {/* Right: Desktop nav */}
           <div className="hidden md:flex items-center gap-2">
             {navLinks.map((link) => (
               <a
@@ -75,7 +93,7 @@ export default function Navigation() {
           {/* Mobile menu button */}
           <button
             onClick={() => setIsOpen(!isOpen)}
-            className="md:hidden p-2 text-[#3B1F6E] rounded-lg hover:bg-[#4C1D95]/5 transition-colors"
+            className="md:hidden p-2 text-[#2D1B69] rounded-lg hover:bg-[#4C1D95]/5 transition-colors"
             aria-label="Toggle menu"
           >
             {isOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
@@ -113,6 +131,22 @@ export default function Navigation() {
               >
                 Resume
               </a>
+
+              {/* Mobile social links */}
+              <div className="flex items-center justify-center gap-4 pt-4 border-t border-[#2D1B69]/10 mt-4">
+                {socialLinks.map(({ icon: Icon, href, label }) => (
+                  <a
+                    key={label}
+                    href={href}
+                    target={href.startsWith('http') ? '_blank' : undefined}
+                    rel={href.startsWith('http') ? 'noopener noreferrer' : undefined}
+                    aria-label={label}
+                    className="p-2 text-[#2D1B69] hover:text-[#4C1D95] rounded-lg transition-all"
+                  >
+                    <Icon className="w-5 h-5" />
+                  </a>
+                ))}
+              </div>
             </div>
           </motion.div>
         )}
