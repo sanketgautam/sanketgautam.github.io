@@ -11,15 +11,14 @@ const projects = [
     emoji: '💡',
     color: 'purple',
   },
-  /* 
-  title: 'Agentic AI Personal Assistant',
-  description:
-    'Multi-agent AI system running on Mac Studio M4 Max (128GB). Features voice synthesis (TTS/ASR), browser automation, proactive scheduling, and local LLM inference with zero cloud dependency.',
-  tags: ['Python', 'Multi-Agent', 'Voice AI', 'Local LLM', 'Automation'],
-  emoji: '🤖',
-  color: 'gold',
-  link: 'https://github.com/sanketgautam',
-  */
+  {
+    title: 'Agentic AI Personal Assistant',
+    description:
+      'Built a fleet of personal staff agents on Mac Studio M4 Max (128GB). Orchestrates voice synthesis (TTS/ASR), browser automation, proactive scheduling, and local LLM inference with zero cloud dependency.',
+    tags: ['Python', 'Multi-Agent', 'Voice AI', 'Local LLM', 'Automation'],
+    emoji: '🤖',
+    color: 'gold',
+  },
   {
     title: 'GrowSpace',
     description:
