@@ -4,63 +4,47 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Operating an 11-Agent Personal AI Staff · ACM Data Conclave 2026</title>
+<meta name="description" content="Poster selected among the top 10 for the ACM Data Conclave at Seattle Tech Week 2026. Orchestration patterns, local LLMs, and hard-won lessons from operating an 11-agent personal AI staff. By Sanket Gautam.">
 <style>
   :root { --paper:#FBFAF6; --ink:#1A2433; --dim:#4C5568; --hair:#E0DCD0; --brass:#A07E2E; }
   * { margin:0; padding:0; box-sizing:border-box; }
   body { background:var(--paper); color:var(--ink); font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif; padding:28px 20px 60px; }
-  .wrap { max-width:1200px; margin:0 auto; }
+  .wrap { max-width:860px; margin:0 auto; }
   .eyebrow { font-family:ui-monospace,Menlo,monospace; color:var(--brass); font-size:12px; letter-spacing:.2em; font-weight:700; }
-  h1 { font-size:clamp(26px,4vw,40px); margin-top:10px; }
-  p.sub { color:var(--dim); margin-top:8px; max-width:70ch; line-height:1.5; }
-  .grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(280px,1fr)); gap:20px; margin-top:28px; }
-  .card { background:#fff; border:1px solid var(--hair); border-radius:12px; overflow:hidden; }
-  .card img { width:100%; display:block; border-bottom:1px solid var(--hair); }
-  .card .body { padding:16px 18px 18px; }
-  .card h2 { font-size:19px; }
-  .card p { color:var(--dim); font-size:14.5px; line-height:1.5; margin-top:6px; }
-  .card a.dl { display:inline-block; margin-top:12px; font-weight:700; color:var(--ink); background:var(--paper); border:1.5px solid var(--ink); border-radius:8px; padding:8px 14px; text-decoration:none; font-size:14.5px; }
-  .card a.dl:hover { background:var(--ink); color:var(--paper); }
-  .tag { display:inline-block; font-family:ui-monospace,Menlo,monospace; font-size:11px; letter-spacing:.08em; font-weight:700; color:var(--brass); margin-bottom:6px; }
-  .tag.final { background:var(--ink); color:var(--paper); border-radius:5px; padding:3px 8px; }
-  .card.final { border:2px solid var(--ink); }
-  footer { margin-top:34px; color:#8A91A0; font-size:13px; font-family:ui-monospace,Menlo,monospace; }
+  h1 { font-size:clamp(26px,4vw,40px); margin-top:10px; line-height:1.15; }
+  p.sub { color:var(--dim); margin-top:10px; max-width:70ch; line-height:1.55; }
+  p.sub b { color:var(--ink); }
+  p.sub a { color:var(--ink); }
+  .poster { margin-top:28px; background:#fff; border:1px solid var(--hair); border-radius:12px; overflow:hidden; }
+  .poster img { width:100%; display:block; }
+  .actions { display:flex; flex-wrap:wrap; gap:12px; align-items:center; margin-top:18px; }
+  a.dl { display:inline-block; font-weight:700; color:var(--paper); background:var(--ink); border:1.5px solid var(--ink); border-radius:8px; padding:11px 18px; text-decoration:none; font-size:15px; }
+  a.dl:hover { background:var(--paper); color:var(--ink); }
+  .meta { font-family:ui-monospace,Menlo,monospace; font-size:12.5px; color:var(--dim); }
+  .variants { margin-top:30px; padding-top:18px; border-top:1px solid var(--hair); color:var(--dim); font-size:14px; line-height:1.6; }
+  .variants a { color:var(--ink); }
+  footer { margin-top:34px; color:#8A91A0; font-size:13px; font-family:ui-monospace,Menlo,monospace; line-height:1.7; }
+  footer a { color:#8A91A0; }
 </style>
 </head>
 <body>
 <div class="wrap">
   <div class="eyebrow">ACM DATA CONCLAVE · SEATTLE TECH WEEK · POSTER EXHIBITION · JUL 30 2026</div>
   <h1>Operating an 11-Agent Personal AI Staff</h1>
-  <p class="sub">Orchestration Patterns, Local LLMs, and Hard-Won Lessons. Selected among the top 10 posters for in-person exhibition at the ACM Data Conclave, Seattle Tech Week 2026. By Sanket Gautam. The exhibited version is Style A; two alternate visual treatments of the same verified content are shown alongside. All are 20×30 in vector PDFs.</p>
-  <div class="grid">
-    <div class="card final">
-      <a href="preview-a.png"><img src="preview-a.png" alt="Style A preview"></a>
-      <div class="body">
-        <span class="tag final">FINAL · EXHIBITED VERSION</span>
-        <h2>Editorial</h2>
-        <p>Modern grotesque with a stats strip and three dense-but-calm columns. The most information-forward of the three; reads like a well-designed engineering annual report.</p>
-        <a class="dl" href="Gautam-Poster-A-Editorial-20x30.pdf">Download PDF</a>
-      </div>
-    </div>
-    <div class="card">
-      <a href="preview-b.png"><img src="preview-b.png" alt="Style B preview"></a>
-      <div class="body">
-        <span class="tag">ALTERNATE · STYLE B</span>
-        <h2>Billboard</h2>
-        <p>The "better poster" school: one giant plain-language takeaway on a navy band, minimal text, big QR. Strongest from across the room; invites conversation rather than reading.</p>
-        <a class="dl" href="Gautam-Poster-B-Billboard-20x30.pdf">Download PDF</a>
-      </div>
-    </div>
-    <div class="card">
-      <a href="preview-c.png"><img src="preview-c.png" alt="Style C preview"></a>
-      <div class="body">
-        <span class="tag">ALTERNATE · STYLE C</span>
-        <h2>Classic</h2>
-        <p>Scholarly serif with a centered title, Figure 1 caption, and roman-numeral sections. The most conventional for an ACM wall and the safest if reviewers are traditional.</p>
-        <a class="dl" href="Gautam-Poster-C-Classic-20x30.pdf">Download PDF</a>
-      </div>
-    </div>
+  <p class="sub"><b>Orchestration Patterns, Local LLMs, and Hard-Won Lessons.</b> Selected among the top 10 posters for in-person exhibition at the ACM Data Conclave, Seattle Tech Week 2026. A personal project by <a href="https://sanketgautam.dev">Sanket Gautam</a>: eleven persona agents running in production on a single Mac Studio since February 2026, with a structurally enforced coordinator, public delegation, freshness contracts, and human approval gates.</p>
+  <div class="actions">
+    <a class="dl" href="Gautam-Poster-A-Editorial-20x30.pdf">Download poster (PDF, 20×30 in)</a>
+    <span class="meta">vector · print-ready · all figures from the july 2026 system audit</span>
   </div>
-  <footer>all versions: identical verified facts · vector text · qr links to sanketgautam.dev/ensemble · sk2gautam@gmail.com</footer>
+  <div class="poster">
+    <a href="preview-a.png"><img src="preview-a.png" alt="Poster: Operating an 11-Agent Personal AI Staff. Orchestration Patterns, Local LLMs, and Hard-Won Lessons. By Sanket Gautam."></a>
+  </div>
+  <div class="variants">
+    Two alternate visual treatments of the same verified content were explored during production:
+    <a href="Gautam-Poster-B-Billboard-20x30.pdf">Billboard (PDF)</a> ·
+    <a href="Gautam-Poster-C-Classic-20x30.pdf">Classic (PDF)</a>
+  </div>
+  <footer>built on openclaw (open source) · apple mlx · whatsapp + slack · qr links to <a href="https://sanketgautam.dev/ensemble/">sanketgautam.dev/ensemble</a> · contact: sk2gautam@gmail.com</footer>
 </div>
 </body>
 </html>
