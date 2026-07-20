@@ -1,0 +1,489 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ensemble · your favorite cast, working for you</title>
+<meta name="description" content="Pick a show. Get a working staff of AI agents on WhatsApp and Slack in under five minutes. Open source, proven in production since February 2026.">
+<meta property="og:title" content="Ensemble · your favorite cast, working for you">
+<meta property="og:description" content="Spin up a personal AI staff themed on the cast you love. Draft-first approvals, freshness contracts, and watchdog supervision built in.">
+<meta property="og:type" content="website">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@400;600;700;800&family=Instrument+Sans:ital,wght@0,400;0,500;0,700;1,400&family=Instrument+Serif:ital@0;1&family=IBM+Plex+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --night: #0D1120;          /* stage */
+    --night-2: #141A2E;
+    --ivory: #FAF7F0;          /* house lights */
+    --card: #FFFFFF;
+    --ink: #171E2E;
+    --ink-2: #4C5568;
+    --ink-3: #8A91A0;
+    --hair: #E6E1D3;
+    --gold: #E3A93C;           /* marquee */
+    --gold-deep: #A07E2E;
+    --chalk: #F5EFE2;
+    /* theme hues */
+    --pitch: #2F8F5B;  --pitch-2: #1E6B41;
+    --valley: #E8702A; --valley-2: #C24E12;
+    --firmc: #2C5A8C;  --firmc-2: #1C3E66;
+    --crimson: #B93A45; --crimson-2: #8E2733;
+    --press: #14808F;  --press-2: #0C5E6B;
+    --brigade: #C99A2E; --brigade-2: #9A7118;
+    --bridge: #5B5FC7; --bridge-2: #3E42A0;
+    --heist: #D14A78;  --heist-2: #A62E58;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } * { transition: none !important; } }
+  body {
+    background: var(--ivory); color: var(--ink);
+    font-family: 'Instrument Sans', -apple-system, sans-serif;
+    line-height: 1.6; -webkit-font-smoothing: antialiased;
+  }
+  .disp { font-family: 'Bricolage Grotesque', sans-serif; }
+  .serif-i { font-family: 'Instrument Serif', serif; font-style: italic; font-weight: 400; }
+  .mono { font-family: 'IBM Plex Mono', monospace; }
+  .wrap { max-width: 1120px; margin: 0 auto; padding: 0 22px; }
+  a:focus-visible, .btn:focus-visible { outline: 2px solid var(--gold); outline-offset: 3px; }
+
+  /* ================= STAGE (hero) ================= */
+  .stage {
+    background:
+      radial-gradient(ellipse 90% 60% at 50% -12%, rgba(227,169,60,.32), transparent 60%),
+      radial-gradient(ellipse 50% 40% at 88% 8%, rgba(91,95,199,.18), transparent 70%),
+      var(--night);
+    color: var(--chalk);
+    overflow: hidden;
+  }
+  .topline { display: flex; justify-content: space-between; align-items: baseline; gap: 16px; flex-wrap: wrap; padding-top: 26px; }
+  .brand { font-family: 'Bricolage Grotesque'; font-weight: 800; font-size: 19px; letter-spacing: .02em; color: var(--chalk); }
+  .brand .dot { color: var(--gold); }
+  .topline .by { font-family: 'IBM Plex Mono'; font-size: 12px; color: #7A8296; }
+  .topline .by a { color: #A8B0C4; }
+
+  .hero { display: grid; grid-template-columns: 1.05fr 0.95fr; gap: 40px; align-items: center; padding: 72px 0 88px; }
+  @media (max-width: 900px) { .hero { grid-template-columns: 1fr; padding: 56px 0 72px; gap: 56px; } }
+  .kicker { font-family: 'IBM Plex Mono'; font-size: 12.5px; letter-spacing: .24em; color: var(--gold); font-weight: 700; }
+  h1.headline {
+    font-family: 'Bricolage Grotesque'; font-weight: 800;
+    font-size: clamp(44px, 6.6vw, 76px); line-height: 1.02; letter-spacing: -0.015em;
+    margin-top: 18px; color: #FDFAF2;
+  }
+  h1 .fancy { font-family: 'Instrument Serif', serif; font-style: italic; font-weight: 400; color: var(--gold); letter-spacing: 0; }
+  .herosub { color: #B7BFCF; font-size: 19px; margin-top: 22px; max-width: 46ch; }
+  .herosub b { color: #E9E4D6; font-weight: 700; }
+  .cta-row { display: flex; gap: 14px; margin-top: 34px; flex-wrap: wrap; align-items: center; }
+  .btn {
+    display: inline-block; text-decoration: none; font-weight: 700; font-size: 16.5px;
+    padding: 15px 28px; border-radius: 999px; border: 2px solid transparent;
+    transition: transform .15s ease, background .15s ease;
+  }
+  .btn:hover { transform: translateY(-1px); }
+  .btn.gold { background: var(--gold); color: #211803; }
+  .btn.gold:hover { background: #F0BC55; }
+  .btn.line { border-color: #3A4258; color: var(--chalk); }
+  .btn.line:hover { border-color: var(--gold); color: var(--gold); }
+  .cta-note { font-family: 'IBM Plex Mono'; font-size: 12.5px; color: #6E7689; width: 100%; }
+
+  /* card fan */
+  .fan { position: relative; height: 480px; }
+  @media (max-width: 900px) { .fan { height: auto; display: flex; flex-direction: column; gap: 16px; } }
+  .deal {
+    position: absolute; width: 320px; border-radius: 16px; background: var(--card); color: var(--ink);
+    box-shadow: 0 30px 60px -20px rgba(0,0,0,.55);
+    overflow: hidden;
+  }
+  @media (max-width: 900px) { .deal { position: static; width: 100%; max-width: 400px; margin: 0 auto; transform: none !important; } }
+  .deal .band { height: 84px; position: relative; }
+  .deal .band .glyph {
+    position: absolute; right: 14px; top: -14px;
+    font-family: 'Bricolage Grotesque'; font-weight: 800; font-size: 96px; line-height: 1;
+    color: rgba(255,255,255,.22);
+  }
+  .deal .band .insp { position: absolute; left: 18px; bottom: 12px; font-family: 'IBM Plex Mono'; font-size: 10.5px; letter-spacing: .1em; color: rgba(255,255,255,.9); font-weight: 700; }
+  .deal .bd { padding: 16px 18px 18px; }
+  .deal h3 { font-family: 'Bricolage Grotesque'; font-weight: 700; font-size: 21px; }
+  .deal .what { color: var(--ink-2); font-size: 13.5px; margin-top: 2px; }
+  .deal ul { list-style: none; margin-top: 10px; }
+  .deal li { font-size: 13px; color: var(--ink-2); padding: 3.5px 0 3.5px 16px; position: relative; }
+  .deal li::before { content: ""; position: absolute; left: 0; top: 10px; width: 6px; height: 6px; border-radius: 50%; }
+  .deal .live-tag { display: inline-block; margin-top: 10px; font-family: 'IBM Plex Mono'; font-size: 10.5px; font-weight: 700; color: var(--pitch); }
+  .live-tag::before { content: "●"; margin-right: 5px; }
+  .d1 { transform: rotate(-6deg); left: 0; top: 52px; z-index: 3; }
+  .d2 { transform: rotate(2deg); left: 128px; top: 0; z-index: 2; }
+  .d3 { transform: rotate(7deg); left: 252px; top: 96px; z-index: 1; }
+  @media (max-width: 1120px) { .d3 { left: 208px; } .d2 { left: 104px; } }
+  .d1 .band { background: linear-gradient(120deg, var(--pitch), var(--pitch-2)); }
+  .d1 li::before { background: var(--pitch); }
+  .d2 .band { background: linear-gradient(120deg, var(--valley), var(--valley-2)); }
+  .d2 li::before { background: var(--valley); }
+  .d3 .band { background: linear-gradient(120deg, var(--firmc), var(--firmc-2)); }
+  .d3 li::before { background: var(--firmc); }
+
+  /* marquee divider */
+  .marquee {
+    border-top: 1px solid rgba(227,169,60,.4); border-bottom: 1px solid rgba(227,169,60,.4);
+    background: rgba(227,169,60,.07);
+    padding: 13px 0;
+  }
+  .marquee .row { display: flex; gap: 34px; justify-content: center; flex-wrap: wrap; }
+  .marquee .m { font-family: 'IBM Plex Mono'; font-size: 12.5px; color: #D8C79E; letter-spacing: .06em; white-space: nowrap; }
+  .marquee .m b { color: var(--gold); }
+
+  /* ================= sections ================= */
+  section { padding: 84px 0; }
+  .kicker2 { font-family: 'IBM Plex Mono'; font-size: 12px; letter-spacing: .22em; color: var(--gold-deep); font-weight: 700; }
+  h2 { font-family: 'Bricolage Grotesque'; font-weight: 800; font-size: clamp(30px, 4.6vw, 46px); line-height: 1.1; margin-top: 10px; }
+  h2 .fancy { font-family: 'Instrument Serif', serif; font-style: italic; font-weight: 400; }
+  .secsub { color: var(--ink-2); font-size: 18px; margin-top: 14px; max-width: 62ch; }
+
+  /* themes catalog */
+  .themes { display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 20px; margin-top: 40px; }
+  .theme {
+    background: var(--card); border-radius: 16px; overflow: hidden;
+    border: 1px solid var(--hair);
+    box-shadow: 0 14px 34px -26px rgba(23,30,46,.4);
+    display: flex; flex-direction: column;
+    transition: transform .18s ease, box-shadow .18s ease;
+  }
+  .theme:hover { transform: translateY(-4px); box-shadow: 0 24px 44px -24px rgba(23,30,46,.5); }
+  .theme .band { height: 92px; position: relative; }
+  .theme .band .glyph { position: absolute; right: 12px; top: -18px; font-family: 'Bricolage Grotesque'; font-weight: 800; font-size: 110px; line-height: 1; color: rgba(255,255,255,.2); }
+  .theme .band .insp { position: absolute; left: 18px; bottom: 12px; font-family: 'IBM Plex Mono'; font-size: 10.5px; letter-spacing: .1em; color: rgba(255,255,255,.92); font-weight: 700; }
+  .theme .bd { padding: 18px 20px 20px; display: flex; flex-direction: column; flex: 1; }
+  .theme h3 { font-family: 'Bricolage Grotesque'; font-weight: 700; font-size: 22px; }
+  .theme .what { color: var(--ink-2); font-size: 14px; margin-top: 3px; font-weight: 500; }
+  .theme ul { list-style: none; margin-top: 12px; flex: 1; }
+  .theme li { font-size: 13.5px; color: var(--ink-2); padding: 4px 0 4px 17px; position: relative; }
+  .theme li::before { content: ""; position: absolute; left: 0; top: 11px; width: 6px; height: 6px; border-radius: 50%; background: var(--accent, var(--gold-deep)); }
+  .theme .foot { margin-top: 12px; font-family: 'IBM Plex Mono'; font-size: 10.5px; font-weight: 700; color: var(--accent, var(--gold-deep)); letter-spacing: .04em; }
+  .t-club    { --accent: var(--pitch); }   .t-club .band    { background: linear-gradient(120deg, var(--pitch), var(--pitch-2)); }
+  .t-startup { --accent: var(--valley); }  .t-startup .band { background: linear-gradient(120deg, var(--valley), var(--valley-2)); }
+  .t-firm    { --accent: var(--firmc); }   .t-firm .band    { background: linear-gradient(120deg, var(--firmc), var(--firmc-2)); }
+  .t-war     { --accent: var(--crimson); } .t-war .band     { background: linear-gradient(120deg, var(--crimson), var(--crimson-2)); }
+  .t-press   { --accent: var(--press); }   .t-press .band   { background: linear-gradient(120deg, var(--press), var(--press-2)); }
+  .t-brigade { --accent: var(--brigade); } .t-brigade .band { background: linear-gradient(120deg, var(--brigade), var(--brigade-2)); }
+  .t-bridge  { --accent: var(--bridge); }  .t-bridge .band  { background: linear-gradient(120deg, var(--bridge), var(--bridge-2)); }
+  .t-heist   { --accent: var(--heist); }   .t-heist .band   { background: linear-gradient(120deg, var(--heist), var(--heist-2)); }
+  .theme.custom { border: 2px dashed var(--gold-deep); background: transparent; box-shadow: none; justify-content: center; text-align: center; padding: 30px 22px; }
+  .theme.custom:hover { transform: none; }
+  .theme.custom .plus { font-family: 'Bricolage Grotesque'; font-weight: 800; font-size: 44px; color: var(--gold-deep); line-height: 1; }
+  .theme.custom h3 { margin-top: 10px; }
+  .theme.custom p { color: var(--ink-2); font-size: 14px; margin-top: 6px; }
+
+  /* proof strip (dark) */
+  .proof { background: var(--night); color: var(--chalk); }
+  .proof h2 { color: #FDFAF2; }
+  .proof .secsub { color: #A8B0C4; }
+  .proofstats { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 16px; margin-top: 40px; }
+  .pstat { background: var(--night-2); border: 1px solid #232B42; border-radius: 14px; padding: 20px 22px; }
+  .pstat .n { font-family: 'Bricolage Grotesque'; font-weight: 800; font-size: 36px; color: var(--gold); }
+  .pstat .l { font-family: 'IBM Plex Mono'; font-size: 12px; color: #A8B0C4; margin-top: 4px; line-height: 1.5; }
+  .prooflink { margin-top: 30px; font-size: 16.5px; color: #B7BFCF; }
+  .prooflink a { color: var(--gold); font-weight: 700; }
+
+  /* principles */
+  .prin { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 20px; margin-top: 40px; }
+  .p-card { background: var(--card); border: 1px solid var(--hair); border-radius: 14px; padding: 24px; box-shadow: 0 14px 34px -28px rgba(23,30,46,.35); }
+  .p-card .k { font-family: 'IBM Plex Mono'; font-size: 11.5px; color: var(--gold-deep); font-weight: 700; letter-spacing: .1em; }
+  .p-card h3 { font-family: 'Bricolage Grotesque'; font-weight: 700; font-size: 20px; margin-top: 8px; }
+  .p-card p { color: var(--ink-2); font-size: 14.5px; margin-top: 8px; }
+
+  /* acts */
+  .acts { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 20px; margin-top: 40px; }
+  .act { border-top: 3px solid var(--gold-deep); padding-top: 16px; }
+  .act .an { font-family: 'Instrument Serif', serif; font-style: italic; font-size: 22px; color: var(--gold-deep); }
+  .act h3 { font-family: 'Bricolage Grotesque'; font-weight: 700; font-size: 20px; margin-top: 6px; }
+  .act p { color: var(--ink-2); font-size: 14.5px; margin-top: 6px; }
+  .clock { margin-top: 30px; font-family: 'IBM Plex Mono'; font-size: 13px; color: var(--pitch-2); font-weight: 700; letter-spacing: .04em; }
+
+  /* finale */
+  .finale-sec { padding-bottom: 96px; }
+  .finale {
+    background:
+      radial-gradient(ellipse 80% 90% at 50% 120%, rgba(227,169,60,.25), transparent 60%),
+      var(--night);
+    color: var(--chalk); border-radius: 22px; padding: clamp(36px, 6vw, 68px); text-align: center;
+  }
+  .finale h2 { color: #FDFAF2; }
+  .finale p { color: #B7BFCF; font-size: 18px; margin: 14px auto 0; max-width: 54ch; }
+  .finale .cta-row { justify-content: center; margin-top: 32px; }
+  .finale .mini { font-family: 'IBM Plex Mono'; font-size: 12.5px; color: #6E7689; margin-top: 20px; }
+  .finale .mini a { color: #A8B0C4; }
+
+  footer { padding: 44px 0 64px; color: var(--ink-3); font-size: 13.5px; }
+  footer a { color: var(--ink-2); }
+  footer .mono { font-size: 12px; line-height: 1.7; margin-top: 10px; }
+</style>
+</head>
+<body>
+
+<!-- ================= STAGE ================= -->
+<div class="stage">
+  <div class="wrap">
+    <div class="topline">
+      <div class="brand">ensemble<span class="dot">.</span></div>
+      <div class="by">by <a href="https://sanketgautam.dev">sanket gautam</a>, who runs one every day</div>
+    </div>
+    <div class="hero">
+      <div>
+        <div class="kicker">OPEN SOURCE · EARLY ACCESS · 5-MINUTE HELLO</div>
+        <h1 class="headline">Hire the cast you love, as your <span class="fancy">personal AI staff.</span></h1>
+        <p class="herosub">Pick a show. Get a working team of AI agents on <b>WhatsApp and Slack</b>: characters you already trust, doing jobs you actually need done. Real delegation, real approvals, and a coach who checks in before you have to ask.</p>
+        <div class="cta-row">
+          <a class="btn gold" href="mailto:sk2gautam@gmail.com?subject=Ensemble%20early%20access&body=Tell%20me%20a%20little%20about%20you%20and%20the%20team%20you%20want%20to%20run%3A">Get early access</a>
+          <a class="btn line" href="#themes">Browse the casts</a>
+          <div class="cta-note">repo goes public soon · early users get help wiring their first team</div>
+        </div>
+      </div>
+      <div class="fan" aria-label="Example team cards">
+        <div class="deal d1">
+          <div class="band"><span class="glyph">C</span><span class="insp">INSPIRED BY TED LASSO</span></div>
+          <div class="bd">
+            <h3>The Club</h3>
+            <div class="what">a life-ops staff for one busy human</div>
+            <ul>
+              <li>coach for goals and accountability</li>
+              <li>comms desk that drafts, never sends alone</li>
+              <li>finance owner with an approval gate</li>
+            </ul>
+            <div class="live-tag">LIVE IN PRODUCTION SINCE FEB 2026</div>
+          </div>
+        </div>
+        <div class="deal d2">
+          <div class="band"><span class="glyph">S</span><span class="insp">INSPIRED BY SILICON VALLEY</span></div>
+          <div class="bd">
+            <h3>The Startup</h3>
+            <div class="what">your personal engineering team</div>
+            <ul>
+              <li>tech lead who reviews and pushes back</li>
+              <li>researcher for deep dives</li>
+              <li>junior engineer on a free local model</li>
+            </ul>
+          </div>
+        </div>
+        <div class="deal d3">
+          <div class="band"><span class="glyph">F</span><span class="insp">INSPIRED BY SUITS</span></div>
+          <div class="bd">
+            <h3>The Firm</h3>
+            <div class="what">your contracts and negotiation desk</div>
+            <ul>
+              <li>closer who preps every negotiation</li>
+              <li>associate for research and summaries</li>
+              <li>every letter is draft-gated</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="marquee">
+    <div class="wrap"><div class="row">
+      <span class="m"><b>11</b> agents on one mac studio</span>
+      <span class="m"><b>6 months</b> of continuous daily use</span>
+      <span class="m"><b>878</b> live sessions at last audit</span>
+      <span class="m"><b>$0</b> marginal cost on local seats</span>
+      <span class="m"><b>top-10</b> poster · acm data conclave 2026</span>
+    </div></div>
+  </div>
+</div>
+
+<!-- ================= THEMES ================= -->
+<section id="themes">
+  <div class="wrap">
+    <div class="kicker2">TONIGHT'S PROGRAMS</div>
+    <h2>Choose your <span class="fancy">ensemble</span></h2>
+    <p class="secsub">Every theme is a staffing preset: real roles, real tool wiring, personalities you already know how to talk to. Start from one, then recast, add, or bench characters as you like.</p>
+    <div class="themes">
+      <div class="theme t-club">
+        <div class="band"><span class="glyph">C</span><span class="insp">INSPIRED BY TED LASSO</span></div>
+        <div class="bd">
+          <h3>The Club</h3>
+          <div class="what">life-ops staff for one busy human</div>
+          <ul>
+            <li>coach for goals and accountability</li>
+            <li>comms desk, drafts before sending</li>
+            <li>finance owner with approval gate</li>
+            <li>health, research, and admin seats</li>
+          </ul>
+          <div class="foot">RUNNING IN PRODUCTION TODAY</div>
+        </div>
+      </div>
+      <div class="theme t-startup">
+        <div class="band"><span class="glyph">S</span><span class="insp">INSPIRED BY SILICON VALLEY</span></div>
+        <div class="bd">
+          <h3>The Startup</h3>
+          <div class="what">your personal engineering team</div>
+          <ul>
+            <li>tech lead who reviews and pushes back</li>
+            <li>researcher for deep dives and prior art</li>
+            <li>junior engineer on a free local model</li>
+            <li>ops seat for infra and deploys</li>
+          </ul>
+          <div class="foot">SHIPS WITH CODE-REVIEW GATES</div>
+        </div>
+      </div>
+      <div class="theme t-firm">
+        <div class="band"><span class="glyph">F</span><span class="insp">INSPIRED BY SUITS</span></div>
+        <div class="bd">
+          <h3>The Firm</h3>
+          <div class="what">your contracts and negotiation desk</div>
+          <ul>
+            <li>closer who preps every negotiation</li>
+            <li>associate for research and summaries</li>
+            <li>paralegal seat for documents and filing</li>
+            <li>every outbound letter is draft-gated</li>
+          </ul>
+          <div class="foot">DRAFT-FIRST BY DEFAULT</div>
+        </div>
+      </div>
+      <div class="theme t-war">
+        <div class="band"><span class="glyph">W</span><span class="insp">INSPIRED BY POLITICAL DRAMA</span></div>
+        <div class="bd">
+          <h3>The War Room</h3>
+          <div class="what">your strategy and communications office</div>
+          <ul>
+            <li>strategist who war-games your week</li>
+            <li>press office for public writing</li>
+            <li>whip who tracks every open promise</li>
+            <li>nothing ships without your sign-off</li>
+          </ul>
+          <div class="foot">PROMISE LEDGER INCLUDED</div>
+        </div>
+      </div>
+      <div class="theme t-press">
+        <div class="band"><span class="glyph">N</span><span class="insp">INSPIRED BY THE NEWSROOM</span></div>
+        <div class="bd">
+          <h3>The Newsroom</h3>
+          <div class="what">your research and publishing desk</div>
+          <ul>
+            <li>editor-in-chief with taste and standards</li>
+            <li>beat reporters for your topics</li>
+            <li>fact-checker with freshness contracts</li>
+            <li>publisher for newsletters and posts</li>
+          </ul>
+          <div class="foot">TIMESTAMPS ON EVERY CLAIM</div>
+        </div>
+      </div>
+      <div class="theme t-brigade">
+        <div class="band"><span class="glyph">B</span><span class="insp">INSPIRED BY THE BEAR</span></div>
+        <div class="bd">
+          <h3>The Brigade</h3>
+          <div class="what">household and health operations</div>
+          <ul>
+            <li>chef de cuisine for meals and groceries</li>
+            <li>sous chef for routines and prep</li>
+            <li>expeditor for errands and reminders</li>
+            <li>wellness seat that reads your wearables</li>
+          </ul>
+          <div class="foot">YES, CHEF</div>
+        </div>
+      </div>
+      <div class="theme t-bridge">
+        <div class="band"><span class="glyph">B</span><span class="insp">INSPIRED BY SCI-FI COMMAND</span></div>
+        <div class="bd">
+          <h3>The Bridge</h3>
+          <div class="what">your data and infrastructure crew</div>
+          <ul>
+            <li>captain who sets course and priorities</li>
+            <li>science officer for analysis</li>
+            <li>engineer who keeps systems humming</li>
+            <li>comms officer for status reports</li>
+          </ul>
+          <div class="foot">WATCHDOGS ON EVERY DECK</div>
+        </div>
+      </div>
+      <div class="theme t-heist">
+        <div class="band"><span class="glyph">H</span><span class="insp">INSPIRED BY HEIST CREWS</span></div>
+        <div class="bd">
+          <h3>The Crew</h3>
+          <div class="what">your growth and marketing squad</div>
+          <ul>
+            <li>mastermind for campaign planning</li>
+            <li>face for outreach, always draft-first</li>
+            <li>tech specialist for landing pages</li>
+            <li>lookout who watches the metrics</li>
+          </ul>
+          <div class="foot">ONE LAST JOB, EVERY WEEK</div>
+        </div>
+      </div>
+      <div class="theme custom">
+        <div class="plus">+</div>
+        <h3>Build your own</h3>
+        <p>Any cast, any show, any job description. Themes are presets, not limits. Bring your favorite characters and we will wire the seats.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= PROOF ================= -->
+<section class="proof">
+  <div class="wrap">
+    <div class="kicker" style="letter-spacing:.22em">NOT A DEMO</div>
+    <h2>Proven in <span class="fancy" style="color:var(--gold)">production</span></h2>
+    <p class="secsub">Ensemble is the packaged version of a system one person has depended on daily since February 2026. These numbers come from its July 2026 audit and live configuration, and they are on the wall at ACM Data Conclave, Seattle Tech Week.</p>
+    <div class="proofstats">
+      <div class="pstat"><div class="n">11</div><div class="l">agents on one mac studio, hub-and-spoke</div></div>
+      <div class="pstat"><div class="n">6 mo</div><div class="l">continuous daily use by its builder</div></div>
+      <div class="pstat"><div class="n">878</div><div class="l">live sessions at the last audit</div></div>
+      <div class="pstat"><div class="n">$0</div><div class="l">marginal cost on local mlx model seats</div></div>
+    </div>
+    <p class="prooflink">Selected as a top-10 poster at the ACM Data Conclave 2026. <a href="https://sanketgautam.dev">Read the full poster and write-ups</a>.</p>
+  </div>
+</section>
+
+<!-- ================= PRINCIPLES ================= -->
+<section>
+  <div class="wrap">
+    <div class="kicker2">HOUSE RULES</div>
+    <h2>Reliability is <span class="fancy">the product</span></h2>
+    <p class="secsub">Six months of operating a real fleet taught hard lessons. They ship as defaults, not documentation.</p>
+    <div class="prin">
+      <div class="p-card"><div class="k">DRAFT-FIRST</div><h3>Nothing leaves without you</h3><p>Messages to real humans ship as drafts for your approval. Money moves only after an explicit yes. Your agents propose; you dispose.</p></div>
+      <div class="p-card"><div class="k">FRESHNESS</div><h3>Never stale as fresh</h3><p>Claims carry timestamps. Old data must declare its age. Health and finance answers re-fetch the source before speaking.</p></div>
+      <div class="p-card"><div class="k">SUPERVISION</div><h3>Watchdogs all the way down</h3><p>Health checks, resource alert bands, and supervised restarts keep the fleet alive without you babysitting a terminal.</p></div>
+      <div class="p-card"><div class="k">ONE COORDINATOR</div><h3>A staff, not a swarm</h3><p>One coordinator delegates in public and rolls results up to you. Enforced in configuration, so the org chart cannot drift.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= ACTS ================= -->
+<section style="padding-top: 20px">
+  <div class="wrap">
+    <div class="kicker2">RUN OF SHOW</div>
+    <h2>Up and running before <span class="fancy">your coffee cools</span></h2>
+    <div class="acts">
+      <div class="act"><div class="an">Act I</div><h3>Pick your cast</h3><p>Choose a theme and the seats you want. Frontier models for judgment, free local models for the grunt work.</p></div>
+      <div class="act"><div class="an">Act II</div><h3>Connect your channels</h3><p>WhatsApp for you and your coordinator, Slack for watching the team work. Bring your own keys.</p></div>
+      <div class="act"><div class="an">Act III</div><h3>Meet the team</h3><p>Your coordinator introduces the staff, learns your world, and starts taking work off your plate.</p></div>
+    </div>
+    <div class="clock">TARGET: FIRST HELLO IN UNDER 5 MINUTES</div>
+  </div>
+</section>
+
+<!-- ================= FINALE ================= -->
+<section class="finale-sec" style="padding-top: 10px">
+  <div class="wrap">
+    <div class="finale">
+      <div class="kicker">OPENING NIGHT</div>
+      <h2 style="margin-top:14px">Be in the <span class="fancy" style="color:var(--gold)">first cohort</span></h2>
+      <p>The repo goes public soon. Early access means you get it first, and your dream-team idea shapes what gets built. Tell me who you want on your staff.</p>
+      <div class="cta-row">
+        <a class="btn gold" href="mailto:sk2gautam@gmail.com?subject=Ensemble%20early%20access&body=Tell%20me%20a%20little%20about%20you%20and%20the%20team%20you%20want%20to%20run%3A">Request early access</a>
+      </div>
+      <div class="mini">or just say hi: <a href="mailto:sk2gautam@gmail.com">sk2gautam@gmail.com</a></div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div>Built by <a href="https://sanketgautam.dev">Sanket Gautam</a>. Open source, built on the OpenClaw agent runtime and Apple MLX.</div>
+    <div class="mono">themes are fan-inspired naming presets · not affiliated with any show, network, or studio · figures from the july 2026 system audit</div>
+  </div>
+</footer>
+
+</body>
+</html>
