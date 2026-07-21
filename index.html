@@ -266,6 +266,15 @@
   .job li b { color: #E8EDF1; font-weight: 700; }
 
   /* about */
+  .aboutbanner { margin: 30px 0 8px; }
+  .aboutbanner img {
+    width: 100%; height: auto; display: block; border-radius: 16px;
+    border: 1px solid var(--hair); box-shadow: 0 26px 54px -26px rgba(11,21,32,.5);
+  }
+  .aboutbanner figcaption {
+    font-family: 'Spline Sans Mono', monospace; font-size: 11.5px; letter-spacing: .05em;
+    color: var(--slate); margin-top: 12px;
+  }
   .aboutgrid { display: grid; grid-template-columns: 1.05fr .95fr; gap: 56px; margin-top: 40px; align-items: start; }
   .aboutgrid .story p { font-size: 16.5px; color: #37475A; margin-top: 14px; max-width: 58ch; }
   .aboutgrid .story p:first-child { margin-top: 0; }
@@ -664,6 +673,14 @@
   <div class="wrap">
     <div class="kicker reveal mask">ABOUT</div>
     <h2 class="reveal mask">The longer view</h2>
+
+    <figure class="aboutbanner reveal">
+      <img src="assets2/portrait-1000.jpg"
+           srcset="assets2/portrait-1000.jpg 1000w, assets2/portrait-1600.jpg 1600w"
+           sizes="(max-width: 1100px) 100vw, 1052px"
+           alt="Sanket Gautam at dusk, with the skyline and Lake Washington behind him" decoding="async">
+      <figcaption>Seattle, June 2026 · the evening I finished at the UW Allen School</figcaption>
+    </figure>
 
     <div class="aboutgrid">
       <div class="story">
