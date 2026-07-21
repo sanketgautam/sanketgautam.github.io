@@ -10,7 +10,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@600;700;800&family=Schibsted+Grotesk:ital,wght@0,400;0,500;0,700;1,400&family=Spline+Sans+Mono:wght@400;600&display=swap" rel="stylesheet">
-<link rel="preload" as="image" href="assets2/skyline-rainier-1280.jpg" imagesrcset="assets2/skyline-rainier-1280.jpg 1280w, assets2/skyline-rainier-1920.jpg 1920w" imagesizes="100vw">
+<link rel="preload" as="image" href="assets2/kerry-park-1280.jpg" imagesrcset="assets2/kerry-park-1280.jpg 1280w, assets2/kerry-park-1920.jpg 1920w" imagesizes="100vw">
 <style>
   :root {
     --dusk: #1B2836;        /* soft evening blue, warmed */
@@ -53,10 +53,8 @@
   }
   .kb .view img { animation: kb 30s ease-in-out infinite alternate; }
   /* per-photo framing: keep the landmark in the open air, keep text off busy ground */
-  .view:nth-child(1) img { object-position: 50% 50%; }
-  .view:nth-child(2) img { object-position: 50% 50%; animation-delay: -7.5s; }
-  .view:nth-child(3) img { object-position: 50% 50%; animation-delay: -15s; }
-  .view:nth-child(4) img { object-position: 45% 50%; animation-delay: -22.5s; }
+  /* single hero: Kerry Park, skyline sits low so pull the frame down to fill with city, not empty sky */
+  .view:nth-child(1) img { object-position: 50% 62%; }
   @keyframes kb {
     from { transform: scale(1.0); }
     to   { transform: scale(1.09); }
@@ -380,10 +378,8 @@
     :root { --bu: 38ms; }
     html.boot .deck { translate: 0 16px; }
     /* a portrait viewport crops hard, so re-aim each frame at its landmark */
-    .view:nth-child(1) img { object-position: 12% 50%; }
-    .view:nth-child(2) img { object-position: 26% 50%; }
-    .view:nth-child(3) img { object-position: 37% 50%; }
-    .view:nth-child(4) img { object-position: 62% 50%; }
+    /* portrait crop favors the Space Needle side while keeping the skyline band */
+    .view:nth-child(1) img { object-position: 32% 58%; }
     /* four full-size images all panning at once overwhelm phone GPUs and
        leave the hero half-painted; the crossfade alone is plenty on mobile */
     .kb .view img { animation: none; transform: none; }
@@ -447,18 +443,9 @@
 
 <!-- ================= HERO ================= -->
 <header class="hero" id="top">
-  <div class="sky kb" id="sky" role="img" aria-label="Rotating photographs of Seattle: the Space Needle with Mount Rainier at blue hour, downtown and Mount Rainier from Kerry Park, the Great Wheel on Elliott Bay at sunset, and the skyline at golden hour from Gas Works Park.">
-    <div class="view on" data-caption="VIEW 1/4 · Space Needle and Mount Rainier · <b>Jeremy Mowery, Unsplash</b>">
-      <img src="assets2/skyline-rainier-1280.jpg" srcset="assets2/skyline-rainier-1280.jpg 1280w, assets2/skyline-rainier-1920.jpg 1920w" sizes="100vw" alt="" decoding="async">
-    </div>
-    <div class="view" data-caption="VIEW 2/4 · Downtown and Mount Rainier from Kerry Park · <b>Bryan Dickerson, Pexels</b>">
-      <img src="assets2/kerry-park-1280.jpg" srcset="assets2/kerry-park-1280.jpg 1280w, assets2/kerry-park-1920.jpg 1920w" sizes="100vw" alt="" loading="lazy" decoding="async">
-    </div>
-    <div class="view" data-caption="VIEW 3/4 · The Great Wheel on Elliott Bay · <b>Willian Justen de Vasconcellos, Pexels</b>">
-      <img src="assets2/elliott-bay-1280.jpg" srcset="assets2/elliott-bay-1280.jpg 1280w, assets2/elliott-bay-1920.jpg 1920w" sizes="100vw" alt="" loading="lazy" decoding="async">
-    </div>
-    <div class="view" data-caption="VIEW 4/4 · Seattle from Gas Works Park · <b>WikiPedant, CC BY-SA 4.0</b>">
-      <img src="assets2/gasworks-1280.jpg" srcset="assets2/gasworks-1280.jpg 1280w, assets2/gasworks-1920.jpg 1920w" sizes="100vw" alt="" loading="lazy" decoding="async">
+  <div class="sky kb" id="sky" role="img" aria-label="Downtown Seattle and Mount Rainier at golden hour, from Kerry Park.">
+    <div class="view on" data-caption="Kerry Park, Seattle · <b>Bryan Dickerson, Pexels</b>">
+      <img src="assets2/kerry-park-1280.jpg" srcset="assets2/kerry-park-1280.jpg 1280w, assets2/kerry-park-1920.jpg 1920w" sizes="100vw" alt="" decoding="async">
     </div>
   </div>
   <div class="scrim"></div>
@@ -468,12 +455,6 @@
     <div>
       <div class="coords">47.6062° N · 122.3321° W<br>SEATTLE, WASHINGTON</div>
       <div class="caption" id="caption" aria-hidden="true"></div>
-      <div class="frames" id="frames" role="group" aria-label="Hero photograph">
-        <button type="button" aria-label="Show photograph 1 of 4"><span class="rail"></span></button>
-        <button type="button" aria-label="Show photograph 2 of 4"><span class="rail"></span></button>
-        <button type="button" aria-label="Show photograph 3 of 4"><span class="rail"></span></button>
-        <button type="button" aria-label="Show photograph 4 of 4"><span class="rail"></span></button>
-      </div>
     </div>
   </div>
 
@@ -750,16 +731,8 @@
 
     <div class="smallprint">
       <span>SANKET GAUTAM · SEATTLE, WA</span>
-      <span class="credits">Photography: Seattle from Gas Works Park by
-        <a href="https://commons.wikimedia.org/wiki/File:Seattle_from_Gas_Works_Park2013.jpg">WikiPedant</a>,
-        via Wikimedia Commons, licensed
-        <a href="https://creativecommons.org/licenses/by-sa/4.0">CC BY-SA 4.0</a> ·
-        Space Needle and Mount Rainier by
-        <a href="https://unsplash.com/photos/seattle-skyline-with-space-needle-and-mount-rainier-in-background-blBCmVn__6s">Jeremy Mowery</a>
-        on Unsplash · Kerry Park at sunset by
+      <span class="credits">Photography: downtown Seattle and Mount Rainier from Kerry Park by
         <a href="https://www.pexels.com/photo/seattle-skyline-at-sunset-with-mount-rainier-28495686/">Bryan Dickerson</a>
-        on Pexels · The Great Wheel on Elliott Bay by
-        <a href="https://www.pexels.com/photo/the-seattle-great-wheel-elliott-bay-in-seattle-washington-usa-18631996/">Willian Justen de Vasconcellos</a>
         on Pexels · UW Drumheller Fountain by
         <a href="https://commons.wikimedia.org/wiki/File:Drumhellerfountain.jpg">Keng Susumpow</a>,
         via Wikimedia Commons, licensed
