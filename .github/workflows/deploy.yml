@@ -30,6 +30,22 @@ jobs:
           cp -r public/. _site/
           ls -R _site | head -40
 
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: blog/package-lock.json
+
+      - name: Build blog
+        working-directory: blog
+        run: |
+          npm ci
+          npm run build
+
+      - name: Add blog to site
+        run: cp -r blog/dist _site/blog
+
       - name: Setup Pages
         uses: actions/configure-pages@v5
 
