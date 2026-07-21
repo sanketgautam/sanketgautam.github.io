@@ -262,6 +262,9 @@
   .mini h4 { font-size: 15.5px; font-weight: 700; }
   .mini h4 span { font-family: 'Spline Sans Mono', monospace; font-size: 10px; font-weight: 600; color: var(--gold-ink); letter-spacing: .08em; margin-left: 6px; }
   .mini p { color: var(--slate); font-size: 13.5px; margin-top: 4px; }
+  a.mini { display: block; text-decoration: none; transition: border-color .18s ease, transform .18s ease, box-shadow .18s ease; }
+  a.mini:hover { border-color: var(--gold); transform: translateY(-2px); box-shadow: 0 14px 30px -18px rgba(11,21,32,.4); }
+  .minigo { display: inline-block; margin-top: 10px; font-family: 'Spline Sans Mono', monospace; font-size: 11px; font-weight: 600; color: var(--gold-ink); letter-spacing: .04em; }
 
   /* experience timeline */
   .jobs { margin-top: 46px; }
@@ -578,11 +581,12 @@
 
     <div class="alsobar reveal">ALSO BUILT</div>
     <div class="also">
-      <div class="mini reveal">
+      <a class="mini reveal" href="https://www.geekwire.com/2025/college-students-get-a-taste-of-startup-life-inside-dynamic-uw-entrepreneurship-class/" target="_blank" rel="noopener">
         <h4>Lumora AI <span>UW · GEEKWIRE</span></h4>
         <p>AI CRM platform for wealth managers, built in UW's software entrepreneurship course.
         Pitched to 16 VCs at Pioneer Square Labs and featured in GeekWire.</p>
-      </div>
+        <span class="minigo">Read on GeekWire &#8599;</span>
+      </a>
       <div class="mini reveal d1">
         <h4>Project Panacea <span>PEOPLE'S CHOICE</span></h4>
         <p>Multi-agent AI system for partner lifecycle management on AWS Bedrock. People's
