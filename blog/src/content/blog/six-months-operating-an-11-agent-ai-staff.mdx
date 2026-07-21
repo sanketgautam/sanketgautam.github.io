@@ -1,0 +1,156 @@
+---
+title: "What six months of operating an 11-agent AI staff taught me"
+description: "Orchestration patterns, local models, and what broke: notes from running Ensemble in production since February."
+pubDate: 2026-07-14
+tags: [agents, operations]
+draft: true
+---
+
+Since February 2026 I have run Ensemble, a personal staff of eleven persona agents living on a single Mac Studio, each owning a narrow lane, all reachable from WhatsApp and Slack, all reporting to one coordinator. Six months is long enough for the novelty to wear off and the operations to start telling the truth. This post is the operating manual I wish I had in February: the patterns that survived production, and the ones that did not.
+
+<Figure caption="Figure 1. One coordinator, eleven personas, local models underneath, and a human gate on anything irreversible.">
+  <svg viewBox="0 0 680 380" role="img" aria-label="Diagram of Ensemble's topology: WhatsApp and Slack flow into a coordinator, which fans out to eleven persona agents running on local models, with a human approval gate guarding real-world actions.">
+    <defs>
+      <marker id="arr" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+        <path d="M0 0 L8 4 L0 8 Z" fill="#61707F" />
+      </marker>
+    </defs>
+    {/* inbound channels */}
+    <rect x="95" y="20" width="140" height="42" rx="6" fill="#FFFDF9" stroke="rgba(35,48,60,.35)" />
+    <text x="165" y="46" class="dg-mono" font-size="11" fill="#23303C" letter-spacing="2" text-anchor="middle">WHATSAPP</text>
+    <rect x="265" y="20" width="140" height="42" rx="6" fill="#FFFDF9" stroke="rgba(35,48,60,.35)" />
+    <text x="335" y="46" class="dg-mono" font-size="11" fill="#23303C" letter-spacing="2" text-anchor="middle">SLACK</text>
+    <line x1="165" y1="66" x2="215" y2="106" stroke="#61707F" stroke-width="1.3" marker-end="url(#arr)" />
+    <line x1="335" y1="66" x2="285" y2="106" stroke="#61707F" stroke-width="1.3" marker-end="url(#arr)" />
+    {/* coordinator */}
+    <rect x="130" y="112" width="240" height="58" rx="6" fill="#1B2836" />
+    <rect x="133" y="113" width="234" height="3" rx="1.5" fill="#E8B96B" />
+    <text x="250" y="143" class="dg-head" font-size="20" font-weight="800" fill="#F6F8FA" letter-spacing="1" text-anchor="middle">COORDINATOR</text>
+    <text x="250" y="159" class="dg-mono" font-size="8" fill="#E8B96B" letter-spacing="2" text-anchor="middle">STRUCTURALLY ENFORCED</text>
+    <line x1="250" y1="170" x2="150" y2="206" stroke="#61707F" stroke-width="1.3" marker-end="url(#arr)" />
+    <line x1="250" y1="170" x2="250" y2="206" stroke="#61707F" stroke-width="1.3" marker-end="url(#arr)" />
+    <line x1="250" y1="170" x2="350" y2="206" stroke="#61707F" stroke-width="1.3" marker-end="url(#arr)" />
+    {/* persona agents */}
+    <rect x="70" y="210" width="360" height="76" rx="10" fill="rgba(224,168,63,.06)" stroke="rgba(35,48,60,.35)" stroke-dasharray="5 5" />
+    <text x="250" y="236" class="dg-mono" font-size="10" fill="#96702A" letter-spacing="2" text-anchor="middle">11 PERSONA AGENTS</text>
+    <g fill="#E8B96B">
+      <rect x="134" y="248" width="12" height="12" /><rect x="156" y="248" width="12" height="12" /><rect x="178" y="248" width="12" height="12" /><rect x="200" y="248" width="12" height="12" /><rect x="222" y="248" width="12" height="12" /><rect x="244" y="248" width="12" height="12" /><rect x="266" y="248" width="12" height="12" /><rect x="288" y="248" width="12" height="12" /><rect x="310" y="248" width="12" height="12" /><rect x="332" y="248" width="12" height="12" /><rect x="354" y="248" width="12" height="12" />
+    </g>
+    {/* base layer */}
+    <line x1="170" y1="286" x2="170" y2="314" stroke="rgba(35,48,60,.3)" />
+    <line x1="330" y1="286" x2="330" y2="314" stroke="rgba(35,48,60,.3)" />
+    <rect x="70" y="316" width="360" height="40" rx="6" fill="#22303F" stroke="#35485B" />
+    <text x="250" y="340" class="dg-mono" font-size="9.5" fill="#BFCBD6" letter-spacing="1.2" text-anchor="middle">LOCAL MODELS · APPLE MLX · ONE MAC STUDIO</text>
+    {/* human gate on the action path */}
+    <line x1="430" y1="248" x2="524" y2="248" stroke="#61707F" stroke-width="1.3" marker-end="url(#arr)" />
+    <rect x="464" y="232" width="4" height="32" fill="#E8B96B" />
+    <rect x="474" y="232" width="4" height="32" fill="#E8B96B" />
+    <text x="471" y="284" class="dg-mono" font-size="8.5" fill="#96702A" letter-spacing="1.5" text-anchor="middle">HUMAN APPROVAL GATE</text>
+    <rect x="528" y="222" width="124" height="52" rx="6" fill="#FFFDF9" stroke="rgba(35,48,60,.35)" />
+    <text x="590" y="244" class="dg-mono" font-size="10" fill="#23303C" letter-spacing="1.5" text-anchor="middle">REAL-WORLD</text>
+    <text x="590" y="260" class="dg-mono" font-size="10" fill="#23303C" letter-spacing="1.5" text-anchor="middle">ACTIONS</text>
+  </svg>
+</Figure>
+
+## A coordinator that cannot be talked out of its job
+
+The first coordinator was a prompt that asked the other agents nicely. It worked until the first busy week, when two personas quietly picked up the same task and a third dropped one on the floor. The version that works is structural: the coordinator is the only agent that can assign work, every delegation is a public contract with an owner and a deadline, and the contract lives in a shared log that any agent, or I, can read.
+
+```yaml
+# delegation contract: coordinator -> researcher
+task: weekly-agent-safety-digest
+owner: researcher
+due: 2026-07-12T18:00-07:00
+freshness: 24h        # older than this = stale, reassign
+handback: digest.md   # an artifact, not a chat message
+approval: none        # read-only work skips the human gate
+```
+
+Almost nothing that failed in six months failed for lack of intelligence. It failed for lack of accountability: work that had no owner, artifacts that had no deadline, agents that went quiet without anyone noticing. The contracts are boring on purpose. Boring is what lets me sleep.
+
+Three kinds of contract hold the system together:
+
+<div class="tablewrap">
+
+| Contract   | What it promises                                 | On violation                              |
+| ---------- | ------------------------------------------------ | ----------------------------------------- |
+| Delegation | Every task has one owner and a deadline          | Task reassigned by the coordinator        |
+| Freshness  | An agent's artifacts never silently go stale     | Work reassigned, agent flagged in the log |
+| Approval   | Nothing irreversible happens without a human ack | Action held, human paged                  |
+
+</div>
+
+> An agent that is wrong is a bug you can fix. An agent that is silent is an outage you have to notice.
+
+## The numbers that mattered
+
+<div class="statrow">
+  <div class="stat"><b>11</b><span>AGENTS</span></div>
+  <div class="stat"><b>878</b><span>LIVE SESSIONS</span></div>
+  <div class="stat"><b>1</b><span>MAC STUDIO</span></div>
+  <div class="stat"><b>$0</b><span>MARGINAL TOKEN COST</span></div>
+</div>
+
+{/* placeholder monthly split for design purposes; replace with real audit numbers before publishing */}
+
+<Figure caption="Figure 2. Live sessions per month since the February launch.">
+  <svg viewBox="0 0 640 260" role="img" aria-label="Bar chart of live sessions per month from February through July 2026, rising steadily from 62 to 227.">
+    {/* gridlines */}
+    <g stroke="#E6E0D6" stroke-width="1">
+      <line x1="60" y1="58" x2="580" y2="58" />
+      <line x1="60" y1="108" x2="580" y2="108" />
+      <line x1="60" y1="158" x2="580" y2="158" />
+    </g>
+    <line x1="60" y1="208" x2="580" y2="208" stroke="rgba(35,48,60,.3)" stroke-width="1" />
+    {/* y axis labels */}
+    <g class="dg-mono" font-size="10" fill="#61707F" text-anchor="end">
+      <text x="52" y="61">240</text>
+      <text x="52" y="111">160</text>
+      <text x="52" y="161">80</text>
+      <text x="52" y="211">0</text>
+    </g>
+    {/* bars: one hue, thin, rounded tops, 2px gap */}
+    <g fill="#E8B96B">
+      <path d="M213 208 V172.3 Q213 169.3 216 169.3 H244 Q247 169.3 247 172.3 V208 Z"><title>Feb 2026: 62 live sessions</title></path>
+      <path d="M249 208 V146 Q249 143 252 143 H280 Q283 143 283 146 V208 Z"><title>Mar 2026: 104 live sessions</title></path>
+      <path d="M285 208 V129.1 Q285 126.1 288 126.1 H316 Q319 126.1 319 129.1 V208 Z"><title>Apr 2026: 131 live sessions</title></path>
+      <path d="M321 208 V112.3 Q321 109.3 324 109.3 H352 Q355 109.3 355 112.3 V208 Z"><title>May 2026: 158 live sessions</title></path>
+      <path d="M357 208 V88.5 Q357 85.5 360 85.5 H388 Q391 85.5 391 88.5 V208 Z"><title>Jun 2026: 196 live sessions</title></path>
+      <path d="M393 208 V69.1 Q393 66.1 396 66.1 H424 Q427 66.1 427 69.1 V208 Z"><title>Jul 2026: 227 live sessions</title></path>
+    </g>
+    {/* value labels, text colors only */}
+    <g class="dg-mono" font-size="10" fill="#61707F" text-anchor="middle">
+      <text x="230" y="162.3">62</text>
+      <text x="266" y="136">104</text>
+      <text x="302" y="119.1">131</text>
+      <text x="338" y="102.3">158</text>
+      <text x="374" y="78.5">196</text>
+      <text x="410" y="59.1" fill="#23303C" font-weight="700">227</text>
+    </g>
+    {/* month labels */}
+    <g class="dg-mono" font-size="10" fill="#61707F" letter-spacing="1" text-anchor="middle">
+      <text x="230" y="226">FEB</text>
+      <text x="266" y="226">MAR</text>
+      <text x="302" y="226">APR</text>
+      <text x="338" y="226">MAY</text>
+      <text x="374" y="226">JUN</text>
+      <text x="410" y="226">JUL</text>
+    </g>
+  </svg>
+</Figure>
+
+The zero in that last stat is the one that changed my behavior. When a marginal session costs nothing, you stop rationing the system and start actually living inside it, and only a system you live inside ever shows you its real failure modes. Local models are not free, you pay in tokens per second and in quantization tradeoffs, but they move the cost of curiosity to zero, and curiosity is where the operating lessons come from.
+
+## What I would keep
+
+Three rules I would keep even if I rebuilt everything tomorrow:
+
+- Make delegation public: contracts in a shared log, never private messages between agents.
+- Put the human gate on irreversibility, not on importance.
+- Watch freshness, not liveness: a heartbeat proves the process is up, a fresh artifact proves the agent is working.
+
+<Bookmark href="https://sanketgautam.dev/ensemble/" title="Ensemble, live" description="The system this post is about, running continuously since February 2026." source="sanketgautam.dev" />
+
+<Figure src="/assets2/kerry-park-1280.jpg" alt="Downtown Seattle and Mount Rainier at golden hour, seen from Kerry Park" caption="Seattle from Kerry Park. Everything in this post runs on one desk somewhere down there." />
+
+Six months in, the staff is still eleven. I have been asked why I do not add a twelfth, and the honest answer is that every agent is another party to the contracts, and the contracts are the product. A personal AI staff should be trustworthy before it is impressive. The day-to-day version of that principle is small: the coordinator holds the contracts, the gate holds the actions, and `freshness: 24h` does more supervision than any dashboard I ever built.

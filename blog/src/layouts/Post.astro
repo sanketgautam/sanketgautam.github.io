@@ -1,0 +1,68 @@
+---
+import type { CollectionEntry } from 'astro:content';
+import Base from './Base.astro';
+
+interface Props {
+  post: CollectionEntry<'blog'>;
+}
+
+const { post } = Astro.props;
+const { title, description, pubDate, updatedDate, tags, ogImage } = post.data;
+
+const words = (post.body ?? '').trim().split(/\s+/).filter(Boolean).length;
+const readingTime = Math.max(1, Math.round(words / 220));
+
+const dateFmt = new Intl.DateTimeFormat('en-US', {
+  month: 'short', day: 'numeric', year: 'numeric', timeZone: 'UTC',
+});
+const kickerDate = dateFmt.format(pubDate).toUpperCase();
+
+const url = `https://sanketgautam.dev/blog/${post.id}/`;
+const person = {
+  '@type': 'Person',
+  '@id': 'https://sanketgautam.dev/#person',
+  name: 'Sanket Gautam',
+  url: 'https://sanketgautam.dev/',
+};
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'BlogPosting',
+  headline: title,
+  description,
+  datePublished: pubDate.toISOString(),
+  dateModified: (updatedDate ?? pubDate).toISOString(),
+  url,
+  author: person,
+  publisher: person,
+};
+---
+<Base
+  title={`${title} · Sanket Gautam`}
+  description={description}
+  canonicalPath={`/blog/${post.id}/`}
+  ogImage={ogImage}
+  jsonLd={jsonLd}
+>
+  <article>
+    <header class="posthead">
+      <div class="wrap">
+        <a class="backlink" href="/blog/">&#8592; ALL POSTS</a>
+        <div class="eyebrow reveal">{kickerDate} · {readingTime} MIN READ</div>
+        <h1 class="ptitle reveal d1">{title}</h1>
+        {tags.length > 0 && (
+          <div class="tags reveal d2">
+            {tags.map((tag) => <span class="chip">{tag.toUpperCase()}</span>)}
+          </div>
+        )}
+      </div>
+    </header>
+
+    <div class="postbody light">
+      <div class="wrap">
+        <div class="prose">
+          <slot />
+        </div>
+      </div>
+    </div>
+  </article>
+</Base>

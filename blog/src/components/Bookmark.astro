@@ -1,0 +1,18 @@
+---
+/* Bookmark: a rich link/embed card in the Skyline treatment
+   (mono gold source line, condensed uppercase title, slate description). */
+interface Props {
+  href: string;
+  title: string;
+  description: string;
+  source: string;
+}
+
+const { href, title, description, source } = Astro.props;
+---
+<a class="embed" href={href}>
+  <span class="route">{source.toUpperCase()}</span>
+  <h3>{title}</h3>
+  <p>{description}</p>
+  <span class="go">VISIT &#8594;</span>
+</a>

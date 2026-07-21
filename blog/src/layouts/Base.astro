@@ -1,0 +1,111 @@
+---
+import '../styles/skyline.css';
+
+interface Props {
+  title: string;
+  description: string;
+  canonicalPath: string;
+  ogImage?: string;
+  jsonLd?: Record<string, unknown>;
+}
+
+const { title, description, canonicalPath, ogImage, jsonLd } = Astro.props;
+
+const SITE = 'https://sanketgautam.dev';
+const canonical = SITE + canonicalPath;
+const ogImageUrl = ogImage
+  ? (ogImage.startsWith('http') ? ogImage : SITE + ogImage)
+  : SITE + '/assets2/og-image.jpg';
+const year = new Date().getFullYear();
+---
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>{title}</title>
+  <meta name="description" content={description} />
+  <link rel="canonical" href={canonical} />
+  <link rel="icon" type="image/svg+xml" href="/favicon-husky.svg" />
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Sanket Gautam" />
+  <meta property="og:url" content={canonical} />
+  <meta property="og:title" content={title} />
+  <meta property="og:description" content={description} />
+  <meta property="og:image" content={ogImageUrl} />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content={title} />
+  <meta name="twitter:description" content={description} />
+  <meta name="twitter:image" content={ogImageUrl} />
+  <link rel="alternate" type="application/rss+xml" title="Sanket Gautam / Blog" href="/blog/rss.xml" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@700;800&family=Schibsted+Grotesk:ital,wght@0,400;0,500;0,700;1,400&display=swap" rel="stylesheet" />
+  <!-- analytics slot: GoatCounter script goes here -->
+  {jsonLd && <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />}
+  <script is:inline>document.documentElement.classList.add('js');</script>
+</head>
+<body>
+
+<div class="progress" aria-hidden="true"><i></i></div>
+
+<header class="masthead">
+  <div class="wrap topbar">
+    <a class="brand" href="https://sanketgautam.dev/">Sanket Gautam<span>.</span></a>
+    <nav class="nav" aria-label="Site">
+      <a href="https://sanketgautam.dev/">HOME</a>
+      <a href="/blog/" aria-current="page">BLOG</a>
+      <a href="/blog/rss.xml">RSS</a>
+    </nav>
+  </div>
+  <slot name="masthead" />
+</header>
+
+<slot />
+
+<footer class="site-foot">
+  <div class="wrap smallprint">
+    <span>© {year} SANKET GAUTAM · SEATTLE, WA</span>
+    <span><a href="/blog/rss.xml">RSS</a> · <a href="https://sanketgautam.dev/">SANKETGAUTAM.DEV</a></span>
+  </div>
+</footer>
+
+<script is:inline>
+(function () {
+  var reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  /* ---------- scroll reveals ---------- */
+  var toReveal = document.querySelectorAll('.reveal');
+  if (reduced || !('IntersectionObserver' in window)) {
+    Array.prototype.forEach.call(toReveal, function (el) { el.classList.add('in'); });
+  } else {
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (en) {
+        if (en.isIntersecting) { en.target.classList.add('in'); io.unobserve(en.target); }
+      });
+    }, { threshold: 0.12, rootMargin: '0px 0px -6% 0px' });
+    Array.prototype.forEach.call(toReveal, function (el) { io.observe(el); });
+  }
+
+  /* ---------- scroll progress ---------- */
+  var bar = document.querySelector('.progress i');
+  if (bar && !reduced) {
+    var ticking = false;
+    var paint = function () {
+      ticking = false;
+      var h = document.documentElement.scrollHeight - window.innerHeight;
+      var p = h > 0 ? Math.min(Math.max(window.pageYOffset / h, 0), 1) : 0;
+      bar.style.transform = 'scaleX(' + p.toFixed(4) + ')';
+    };
+    var onScroll = function () {
+      if (!ticking) { ticking = true; requestAnimationFrame(paint); }
+    };
+    window.addEventListener('scroll', onScroll, { passive: true });
+    window.addEventListener('resize', onScroll);
+    paint();
+  }
+})();
+</script>
+
+</body>
+</html>

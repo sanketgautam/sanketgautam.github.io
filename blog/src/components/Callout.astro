@@ -1,0 +1,14 @@
+---
+/* Callout: a highlight panel in the Skyline gold-top-rule treatment. */
+interface Props {
+  title?: string;
+}
+
+const { title } = Astro.props;
+---
+<aside class="callout">
+  {title && <div class="callout-title">{title}</div>}
+  <div class="callout-body">
+    <slot />
+  </div>
+</aside>

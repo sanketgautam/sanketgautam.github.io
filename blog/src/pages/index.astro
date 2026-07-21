@@ -1,0 +1,67 @@
+---
+import { getCollection } from 'astro:content';
+import Base from '../layouts/Base.astro';
+
+const posts = (await getCollection('blog', ({ data }) => !data.draft))
+  .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
+
+const dateFmt = new Intl.DateTimeFormat('en-US', {
+  month: 'short', day: 'numeric', year: 'numeric', timeZone: 'UTC',
+});
+const readingTime = (body: string | undefined) =>
+  Math.max(1, Math.round((body ?? '').trim().split(/\s+/).filter(Boolean).length / 220));
+---
+<Base
+  title="Blog · Sanket Gautam"
+  description="Notes on agentic AI, distributed systems, and what breaks in production."
+  canonicalPath="/blog/"
+>
+  <div slot="masthead" class="wrap mast-body">
+    <div class="eyebrow reveal">FIELD NOTES · AGENTS · SYSTEMS · PRODUCTION</div>
+    <h1 class="reveal d1">Blog<span class="dot" aria-hidden="true"></span></h1>
+    <p class="tagline reveal d2">Notes on agentic AI, distributed systems, and <em>what breaks in production.</em></p>
+    <div class="coords reveal d3">47.6062° N · 122.3321° W · WRITTEN IN SEATTLE, WASHINGTON</div>
+  </div>
+
+  <div class="strip">
+    <div class="wrap row">
+      {posts.length > 0 && (
+        <span class="m"><b>{posts.length}</b> {posts.length === 1 ? 'POST' : 'POSTS'}</span>
+      )}
+      <span class="m"><b>RSS</b> <a href="/blog/rss.xml">/BLOG/RSS.XML</a></span>
+    </div>
+  </div>
+
+  <section class="light" id="index">
+    <div class="wrap">
+      <div class="kicker reveal">THE INDEX</div>
+      <h2 class="sec reveal">All posts</h2>
+      {posts.length === 0 ? (
+        <p class="secsub reveal d1">First post is in review.</p>
+      ) : (
+        <>
+          <p class="secsub reveal d1">Everything published so far, newest first.</p>
+          <div class="posts">
+            {posts.map((post) => (
+              <a class="post reveal" href={`/blog/${post.id}/`}>
+                <div class="pmeta">
+                  {dateFmt.format(post.data.pubDate).toUpperCase()}
+                  <span>{readingTime(post.body)} MIN READ</span>
+                </div>
+                <div>
+                  <h3>{post.data.title} <span class="arr">&#8594;</span></h3>
+                  <p>{post.data.description}</p>
+                  {post.data.tags.length > 0 && (
+                    <div class="tags">
+                      {post.data.tags.map((tag) => <span class="chip">{tag.toUpperCase()}</span>)}
+                    </div>
+                  )}
+                </div>
+              </a>
+            ))}
+          </div>
+        </>
+      )}
+    </div>
+  </section>
+</Base>

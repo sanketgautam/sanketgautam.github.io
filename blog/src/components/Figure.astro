@@ -1,0 +1,27 @@
+---
+/* Figure: an image figure (src) with the photo frame treatment, or a slot
+   figure (inline SVG diagrams/charts) on a paper panel with the gold top rule.
+   Slot figures scroll horizontally on narrow screens instead of shrinking. */
+interface Props {
+  src?: string;
+  alt?: string;
+  caption: string;
+}
+
+const { src, alt = '', caption } = Astro.props;
+---
+{src ? (
+  <figure class="photo">
+    <img src={src} alt={alt} loading="lazy" />
+    <figcaption>{caption}</figcaption>
+  </figure>
+) : (
+  <figure class="fig">
+    <div class="figpanel">
+      <div class="figscroll wide">
+        <slot />
+      </div>
+    </div>
+    <figcaption>{caption}</figcaption>
+  </figure>
+)}
