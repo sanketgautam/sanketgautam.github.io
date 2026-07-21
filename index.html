@@ -375,6 +375,26 @@
     .view:nth-child(2) img { object-position: 26% 50%; }
     .view:nth-child(3) img { object-position: 37% 50%; }
     .view:nth-child(4) img { object-position: 62% 50%; }
+    /* four full-size images all panning at once overwhelm phone GPUs and
+       leave the hero half-painted; the crossfade alone is plenty on mobile */
+    .kb .view img { animation: none; transform: none; }
+    /* decorative address rules only make sense behind short desktop text;
+       on full-width mobile cards they strike straight through the copy */
+    .pc::before { display: none; }
+    .pc p { max-width: 34ch; }
+    /* tighter, better-fitting hero type on small screens */
+    h1 { font-size: clamp(52px, 15.5vw, 76px); }
+    .tagline { font-size: 20px; margin-top: 14px; }
+    .lede { font-size: 15px; }
+    .eyebrow { letter-spacing: .18em; font-size: 11px; }
+    .hero-body { padding-top: 20px; padding-bottom: 56px; gap: 26px; }
+    .coords { font-size: 10.5px; }
+  }
+
+  @media (max-width: 420px) {
+    h1 { font-size: clamp(46px, 15vw, 60px); }
+    .btn { padding: 12px 18px; font-size: 14.5px; }
+    .cta-row { gap: 10px; }
   }
 
   /* ================= REDUCED MOTION ================= */
@@ -587,11 +607,13 @@
           <p class="org">Amazon · Selling Partner Services, Buy with Prime, Alexa AI</p>
           <ul>
             <li>Conceptualized and delivered the organization's <b>first production agentic AI
-            system</b>, from PRFAQ through security certification to launch, and ran an agentic
-            AI learning series with 160+ views across the org.</li>
-            <li>Led the <b>Seller Central Embedded Apps launch</b> across 4 teams and executed
-            a partner-qualification service migration across 3 stacks with zero incidents
-            (Leadership Principles Award, Q4 2023).</li>
+            system</b>, from PRFAQ through security certification to launch, and gave an org-wide
+            talk, "Agentic AI at Amazon," on an internal tool I built to automate CI/CD pipeline
+            freshness (40 live, 160+ views).</li>
+            <li>Executed a partner-qualification service migration across 3 stacks with zero
+            incidents, recognized with a <b>Leadership Principles Award</b> (Q4 2023) for the
+            project and overall performance.</li>
+            <li>Led the <b>Seller Central Embedded Apps launch</b> across 4 teams in 2024.</li>
             <li>Led the Operational Readiness Review for the <b>Buy with Prime Returns 1.0</b>
             launch: 3 teams, 12+ engineers, 15 systems, 120+ technical requirements.</li>
             <li>Cut new-customer onboarding for the Alexa data-labeling platform from
