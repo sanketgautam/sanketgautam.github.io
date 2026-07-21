@@ -1,17 +1,975 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/favicon-husky.svg" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="description" content="Sanket Gautam - Software Engineer at Amazon | MS CS @ University of Washington | Agentic AI" />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
-    <title>Sanket Gautam | Software Engineer & AI Enthusiast</title>
-  </head>
-  <body>
-    <div id="root"></div>
-    <script type="module" src="/src/main.jsx"></script>
-  </body>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sanket Gautam · Software Engineer, Seattle</title>
+<meta name="description" content="Software engineer in Seattle. Agentic AI and distributed systems, 8+ years building in production at Amazon. MS in Computer Science, University of Washington Allen School.">
+<link rel="icon" type="image/svg+xml" href="/favicon-husky.svg">
+<link rel="canonical" href="https://sanketgautam.dev/">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@600;700;800&family=Schibsted+Grotesk:ital,wght@0,400;0,500;0,700;1,400&family=Spline+Sans+Mono:wght@400;600&display=swap" rel="stylesheet">
+<link rel="preload" as="image" href="assets2/skyline-rainier-1280.jpg" imagesrcset="assets2/skyline-rainier-1280.jpg 1280w, assets2/skyline-rainier-1920.jpg 1920w" imagesizes="100vw">
+<style>
+  :root {
+    --dusk: #1B2836;        /* soft evening blue, warmed */
+    --harbor: #22303F;      /* panel dark */
+    --line: #35485B;        /* hairline on dark */
+    --overcast: #F7F4EE;    /* warm daylight, not cold gray */
+    --paper: #FFFDF9;       /* card */
+    --hair: #E6E0D6;        /* hairline on light */
+    --ink: #23303C;
+    --slate: #61707F;
+    --mist: #BFCBD6;        /* secondary on dark */
+    --gold: #E8B96B;        /* soft sunlight on glass */
+    --gold-ink: #96702A;    /* gold for light backgrounds */
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    background: var(--dusk); color: var(--ink);
+    font-family: 'Schibsted Grotesk', -apple-system, sans-serif;
+    line-height: 1.6; -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+  }
+  .mono { font-family: 'Spline Sans Mono', monospace; }
+  .wrap { max-width: 1100px; margin: 0 auto; padding: 0 24px; }
+  a { color: inherit; }
+  a:focus-visible, button:focus-visible { outline: 2px solid var(--gold); outline-offset: 3px; border-radius: 2px; }
+  img { max-width: 100%; }
+
+  /* ================= HERO ================= */
+  .hero {
+    position: relative; min-height: 100svh; overflow: hidden;
+    display: flex; flex-direction: column; color: #F3F6F8;
+  }
+  .sky { position: absolute; inset: 0; z-index: 0; }
+  .view { position: absolute; inset: -4%; opacity: 0; transition: opacity 2.4s ease; will-change: opacity; }
+  .view.on { opacity: 1; }
+  .view img {
+    width: 100%; height: 100%; object-fit: cover; display: block;
+    will-change: transform; transform-origin: center;
+  }
+  .kb .view img { animation: kb 30s ease-in-out infinite alternate; }
+  /* per-photo framing: keep the landmark in the open air, keep text off busy ground */
+  .view:nth-child(1) img { object-position: 50% 50%; }
+  .view:nth-child(2) img { object-position: 50% 50%; animation-delay: -7.5s; }
+  .view:nth-child(3) img { object-position: 50% 50%; animation-delay: -15s; }
+  .view:nth-child(4) img { object-position: 45% 50%; animation-delay: -22.5s; }
+  @keyframes kb {
+    from { transform: scale(1.0); }
+    to   { transform: scale(1.09); }
+  }
+  .scrim {
+    position: absolute; inset: 0; z-index: 1; pointer-events: none;
+    background:
+      linear-gradient(to top, rgba(27,40,54,.92) 0%, rgba(27,40,54,.55) 28%, rgba(27,40,54,.22) 56%, rgba(27,40,54,.44) 100%);
+  }
+
+  .topbar {
+    position: relative; z-index: 3; display: flex; justify-content: space-between;
+    align-items: baseline; gap: 16px; flex-wrap: wrap;
+    padding: 26px 0 0;
+  }
+  .brand { font-family: 'Big Shoulders Display', sans-serif; font-weight: 800; font-size: 21px; letter-spacing: .06em; text-transform: uppercase; }
+  .brand span { color: var(--gold); }
+  .coords { font-family: 'Spline Sans Mono', monospace; font-size: 11.5px; color: #C6D1DB; letter-spacing: .08em; text-align: right; }
+  .caption {
+    margin-top: 10px; text-align: right;
+    font-family: 'Spline Sans Mono', monospace; font-size: 10.5px; letter-spacing: .04em;
+    color: #9FB0BF; transition: opacity .8s ease;
+  }
+  .caption b { color: #D8C79E; font-weight: 600; }
+
+  /* frame rail: contact-sheet control for the hero carousel */
+  .frames { display: flex; gap: 7px; justify-content: flex-end; margin-top: 11px; }
+  .frames button {
+    appearance: none; -webkit-appearance: none; background: none; border: 0;
+    padding: 7px 0; width: 30px; cursor: pointer; display: block;
+  }
+  .frames .rail {
+    display: block; height: 2px; position: relative; overflow: hidden;
+    background: rgba(198,209,219,.30);
+  }
+  .frames .rail::after {
+    content: ""; position: absolute; inset: 0; background: var(--gold);
+    transform: scaleX(0); transform-origin: 0 50%;
+  }
+  .frames button:hover .rail { background: rgba(232,185,107,.45); }
+  /* the fill is the dwell timer: it reaches full just as the frame changes */
+  .frames button[aria-current="true"] .rail::after { transform: scaleX(1); transition: transform 7s linear; }
+
+  .hero-body {
+    position: relative; z-index: 2; flex: 1; width: 100%;
+    display: grid; grid-template-columns: 1.15fr .85fr; gap: 40px; align-items: end;
+    padding-bottom: 72px; padding-top: 40px;
+  }
+  .eyebrow {
+    font-family: 'Spline Sans Mono', monospace; font-size: 12px; font-weight: 600;
+    letter-spacing: .26em; color: var(--gold);
+  }
+  .hero .eyebrow {
+    /* the daylight photographs run bright behind this line */
+    color: #FBD79A;
+    text-shadow: 0 1px 10px rgba(14,22,32,.92), 0 0 26px rgba(14,22,32,.75);
+  }
+  .hero .lede, .hero .tagline { text-shadow: 0 1px 14px rgba(14,22,32,.5); }
+  h1 {
+    font-family: 'Big Shoulders Display', sans-serif; font-weight: 800;
+    font-size: clamp(64px, 11vw, 132px); line-height: .92; letter-spacing: .012em;
+    text-transform: uppercase; color: #FCFDFE; margin-top: 14px;
+    text-shadow: 0 2px 24px rgba(11,21,32,.55);
+  }
+  h1 .dot {
+    display: inline-block; width: .13em; height: .13em; background: var(--gold);
+    margin-left: .05em; transform: translateY(-.02em);
+  }
+  .tagline {
+    margin-top: 18px; font-size: clamp(19px, 2.3vw, 24px); font-weight: 700;
+    color: #EDF1F4; letter-spacing: -.005em;
+  }
+  .tagline em { font-style: normal; color: var(--gold); }
+  .lede { margin-top: 12px; max-width: 52ch; font-size: 16px; color: #C3CEDA; }
+  .cta-row { display: flex; gap: 14px; margin-top: 28px; flex-wrap: wrap; align-items: center; }
+  .btn {
+    display: inline-block; text-decoration: none; font-weight: 700; font-size: 15.5px;
+    padding: 13px 24px; border-radius: 6px; border: 1px solid transparent;
+    transition: transform .15s ease, background .15s ease, border-color .15s ease, color .15s ease;
+  }
+  .btn:hover { transform: translateY(-1px); }
+  .btn.gold { background: var(--gold); color: #221803; }
+  .btn.gold:hover { background: #EBBA58; }
+  .btn.ghost { border-color: rgba(243,246,248,.42); color: #F3F6F8; }
+  .btn.ghost:hover { border-color: var(--gold); color: var(--gold); }
+
+  /* postcard deck */
+  .deck { position: relative; height: 580px; justify-self: end; width: 360px; max-width: 100%; }
+  .pc {
+    position: absolute; right: 0; width: 330px; min-height: 178px;
+    background: linear-gradient(175deg, #FDFCF8, #F3EFE6);
+    color: var(--ink); border-radius: 6px; text-decoration: none; display: block;
+    padding: 16px 18px 14px; box-shadow: 0 26px 50px -20px rgba(2,8,14,.75);
+    border: 1px solid rgba(21,34,48,.08);
+    transition: transform .35s cubic-bezier(.2,.8,.25,1), box-shadow .35s ease;
+  }
+  .pc::before { /* address rules, right half */
+    content: ""; position: absolute; right: 18px; top: 74px; width: 108px; height: 66px;
+    background: repeating-linear-gradient(to bottom, transparent 0 20px, rgba(21,34,48,.18) 20px 21px);
+    pointer-events: none;
+  }
+  .pc .route { font-family: 'Spline Sans Mono', monospace; font-size: 9.5px; font-weight: 600; letter-spacing: .12em; color: var(--gold-ink); }
+  .pc h3 { font-family: 'Big Shoulders Display', sans-serif; font-weight: 700; font-size: 27px; letter-spacing: .02em; text-transform: uppercase; margin-top: 6px; }
+  .pc p { font-size: 13px; color: var(--slate); margin-top: 4px; max-width: 24ch; }
+  .pc .go { display: inline-block; font-family: 'Spline Sans Mono', monospace; font-size: 11px; font-weight: 600; color: var(--gold-ink); margin-top: 12px; }
+  .stamp {
+    position: absolute; top: 12px; right: 14px; width: 44px; height: 54px;
+    background: #FFF; border: 1px dashed rgba(21,34,48,.4); border-radius: 2px;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .stamp svg { width: 26px; height: 40px; fill: none; stroke: var(--gold-ink); stroke-width: 1.6; }
+  .postmark {
+    position: absolute; top: 26px; right: 44px; width: 58px; height: 58px; border-radius: 50%;
+    border: 1.5px solid rgba(21,34,48,.30); color: rgba(21,34,48,.42);
+    font-family: 'Spline Sans Mono', monospace; font-size: 7.5px; letter-spacing: .08em;
+    display: flex; align-items: center; justify-content: center; text-align: center;
+    transform: rotate(-12deg); pointer-events: none; line-height: 1.5;
+  }
+  .pc1 { transform: rotate(-4deg) translate(-30px, 0); z-index: 3; }
+  .pc2 { transform: rotate(2deg) translate(6px, 196px); z-index: 2; }
+  .pc3 { transform: rotate(-2.5deg) translate(-44px, 386px); z-index: 1; }
+  .deck:hover .pc1, .deck.spread .pc1 { transform: rotate(-5deg) translate(-46px, -12px); }
+  .deck:hover .pc2, .deck.spread .pc2 { transform: rotate(2.5deg) translate(18px, 198px); }
+  .deck:hover .pc3, .deck.spread .pc3 { transform: rotate(-3.5deg) translate(-58px, 402px); }
+  .deck .pc:hover { z-index: 6; box-shadow: 0 34px 60px -18px rgba(2,8,14,.85); }
+  .deck .pc1:hover { transform: rotate(0deg) translate(-46px, -14px) scale(1.03); }
+  .deck .pc2:hover { transform: rotate(0deg) translate(18px, 194px) scale(1.03); }
+  .deck .pc3:hover { transform: rotate(0deg) translate(-58px, 398px) scale(1.03); }
+  .deck-hint {
+    position: absolute; right: 6px; top: -26px;
+    font-family: 'Spline Sans Mono', monospace; font-size: 10px; letter-spacing: .18em;
+    color: #9FB0BF;
+  }
+
+  .scrollcue {
+    position: absolute; z-index: 2; left: 50%; bottom: 18px; transform: translateX(-50%);
+    font-family: 'Spline Sans Mono', monospace; font-size: 10px; letter-spacing: .3em; color: #8FA1B1;
+    animation: bob 2.6s ease-in-out infinite;
+  }
+  @keyframes bob { 0%,100% { transform: translate(-50%, 0); } 50% { transform: translate(-50%, 6px); } }
+
+  /* ================= STAT STRIP ================= */
+  .strip { background: var(--harbor); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); padding: 15px 0; }
+  .strip .row { display: flex; gap: 14px 36px; justify-content: center; flex-wrap: wrap; }
+  .strip .m { font-family: 'Spline Sans Mono', monospace; font-size: 12px; color: var(--mist); letter-spacing: .06em; white-space: nowrap; }
+  .strip .m b { color: var(--gold); font-weight: 600; }
+
+  /* ================= SECTIONS ================= */
+  section { padding: 88px 0; }
+  .kicker { font-family: 'Spline Sans Mono', monospace; font-size: 11.5px; font-weight: 600; letter-spacing: .26em; color: var(--gold-ink); }
+  h2 {
+    font-family: 'Big Shoulders Display', sans-serif; font-weight: 800; text-transform: uppercase;
+    font-size: clamp(38px, 5.4vw, 58px); line-height: 1; letter-spacing: .015em; margin-top: 10px;
+  }
+  .secsub { font-size: 17px; margin-top: 14px; max-width: 62ch; color: var(--slate); }
+
+  .light { background: var(--overcast); color: var(--ink); }
+  .dark { background: var(--dusk); color: #E8EDF1; }
+  .dark .kicker { color: var(--gold); }
+  .dark h2 { color: #F6F8FA; }
+  .dark .secsub { color: var(--mist); }
+
+  /* featured cards */
+  .featgrid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 22px; margin-top: 44px; perspective: 1200px; }
+  .feat {
+    background: var(--paper); border: 1px solid var(--hair); border-radius: 10px;
+    border-top: 3px solid var(--gold); padding: 24px 24px 22px;
+    display: flex; flex-direction: column; text-decoration: none; color: var(--ink);
+    box-shadow: 0 18px 34px -26px rgba(21,34,48,.4);
+    transition: box-shadow .2s ease; transform-style: preserve-3d;
+  }
+  .featgrid:hover .feat { will-change: transform; }
+  .feat:hover { box-shadow: 0 30px 48px -24px rgba(21,34,48,.5); }
+  .feat .chip {
+    align-self: flex-start; font-family: 'Spline Sans Mono', monospace; font-size: 10px; font-weight: 600;
+    letter-spacing: .14em; color: var(--gold-ink); background: rgba(224,168,63,.14);
+    border: 1px solid rgba(138,104,30,.25); border-radius: 999px; padding: 4px 10px;
+  }
+  .feat h3 { font-family: 'Big Shoulders Display', sans-serif; font-weight: 700; font-size: 30px; letter-spacing: .02em; text-transform: uppercase; margin-top: 14px; }
+  .feat .what { font-size: 14.5px; color: var(--slate); margin-top: 8px; flex: 1; }
+  .feat .stats { display: flex; flex-wrap: wrap; gap: 6px 16px; margin-top: 16px; padding-top: 12px; border-top: 1px solid var(--hair); }
+  .feat .stats span { font-family: 'Spline Sans Mono', monospace; font-size: 10.5px; font-weight: 600; color: var(--gold-ink); letter-spacing: .04em; }
+  .feat .foot { margin-top: 12px; font-family: 'Spline Sans Mono', monospace; font-size: 11px; font-weight: 600; color: var(--ink); }
+  .feat .foot .arr { color: var(--gold-ink); }
+
+  .alsobar { margin-top: 48px; font-family: 'Spline Sans Mono', monospace; font-size: 11px; letter-spacing: .22em; font-weight: 600; color: var(--slate); }
+  .also { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; margin-top: 16px; }
+  .mini { border: 1px solid var(--hair); background: rgba(251,252,253,.6); border-radius: 8px; padding: 16px 18px; }
+  .mini h4 { font-size: 15.5px; font-weight: 700; }
+  .mini h4 span { font-family: 'Spline Sans Mono', monospace; font-size: 10px; font-weight: 600; color: var(--gold-ink); letter-spacing: .08em; margin-left: 6px; }
+  .mini p { color: var(--slate); font-size: 13.5px; margin-top: 4px; }
+
+  /* experience timeline */
+  .jobs { margin-top: 46px; }
+  .job {
+    display: grid; grid-template-columns: 190px 1fr; gap: 28px;
+    padding: 30px 0; border-top: 1px solid var(--line); position: relative;
+  }
+  .job:last-child { border-bottom: 1px solid var(--line); }
+  .job .yr { font-family: 'Spline Sans Mono', monospace; font-size: 12.5px; color: var(--gold); letter-spacing: .06em; padding-top: 5px; }
+  .job .yr .place { display: block; color: #77899A; margin-top: 6px; font-size: 11px; }
+  .job h3 { font-family: 'Big Shoulders Display', sans-serif; font-weight: 700; font-size: 26px; letter-spacing: .02em; text-transform: uppercase; color: #F6F8FA; }
+  .job .org { color: var(--mist); font-size: 14px; margin-top: 2px; }
+  .job ul { list-style: none; margin-top: 12px; }
+  .job li { font-size: 14.5px; color: var(--mist); padding: 5px 0 5px 20px; position: relative; }
+  .job li::before { content: ""; position: absolute; left: 0; top: 13px; width: 7px; height: 7px; background: var(--gold); }
+  .job li b { color: #E8EDF1; font-weight: 700; }
+
+  /* about */
+  .aboutgrid { display: grid; grid-template-columns: 1.05fr .95fr; gap: 56px; margin-top: 40px; align-items: start; }
+  .aboutgrid .story p { font-size: 16.5px; color: #37475A; margin-top: 14px; max-width: 58ch; }
+  .aboutgrid .story p:first-child { margin-top: 0; }
+  .facts { display: grid; gap: 26px; }
+  .fact { border-top: 3px solid var(--gold); padding-top: 12px; }
+  .fact .fk { font-family: 'Spline Sans Mono', monospace; font-size: 10.5px; font-weight: 600; letter-spacing: .18em; color: var(--gold-ink); }
+  .fact ul { list-style: none; margin-top: 8px; }
+  .fact li { font-size: 14px; color: var(--slate); padding: 4px 0; border-bottom: 1px solid var(--hair); }
+  .fact li:last-child { border-bottom: none; }
+  .fact li b { color: var(--ink); font-weight: 700; }
+
+  /* contact */
+  .contact {
+    position: relative; overflow: hidden; text-align: center; padding: 110px 0 42px; color: #EFF3F6;
+  }
+  .contact .bgimg { position: absolute; inset: 0; z-index: 0; }
+  .contact .bgimg img { width: 100%; height: 100%; object-fit: cover; object-position: 50% 42%; display: block; }
+  .contact .veil { position: absolute; inset: 0; z-index: 1; background: linear-gradient(to bottom, rgba(11,21,32,.9), rgba(11,21,32,.74) 55%, rgba(11,21,32,.94)); }
+  .contact .wrap { position: relative; z-index: 2; }
+  .contact h2 { color: #F6F8FA; }
+  .contact p.sub { color: var(--mist); margin-top: 14px; font-size: 16.5px; }
+  .contact .cta-row { justify-content: center; margin-top: 30px; }
+  .smallprint {
+    margin-top: 84px; padding-top: 20px; border-top: 1px solid rgba(169,184,198,.25);
+    display: flex; justify-content: space-between; gap: 10px 20px; flex-wrap: wrap;
+    font-family: 'Spline Sans Mono', monospace; font-size: 10.5px; color: #8FA1B1; text-align: left;
+  }
+  .smallprint a { color: #B9C6D2; text-decoration: none; }
+  .smallprint a:hover { color: var(--gold); }
+  .credits { max-width: 620px; line-height: 1.8; }
+
+  /* ================= MOTION SYSTEM ================= */
+  /* --bu is the stagger unit for the page-open sequence; --s is each element's step */
+  :root { --bu: 66ms; --ez: cubic-bezier(.16,1,.3,1); }
+
+  /* scroll progress + intro sweep */
+  .progress { position: fixed; top: 0; left: 0; right: 0; height: 2px; z-index: 60; pointer-events: none; }
+  .progress i {
+    display: block; height: 100%; width: 100%;
+    transform: scaleX(0); transform-origin: 0 50%;
+    background: linear-gradient(90deg, rgba(232,185,107,.22), var(--gold));
+    will-change: transform;
+  }
+  .progress.sweep i { animation: sweep 1.2s var(--ez) both; }
+  @keyframes sweep {
+    0%   { transform: scaleX(0); opacity: 1; }
+    58%  { transform: scaleX(1); opacity: 1; }
+    100% { transform: scaleX(1); opacity: 0; }
+  }
+
+  /* page-open sequence */
+  .bi {
+    transition: opacity .6s ease, translate .72s var(--ez);
+    transition-delay: calc(var(--s, 0) * var(--bu));
+  }
+  html.boot .bi { opacity: 0; }
+  html.boot .topbar { translate: 0 -12px; }
+  html.boot .tagline, html.boot .lede, html.boot .cta-row, html.boot .eyebrow { translate: 0 14px; }
+  html.boot .deck { translate: 0 26px; }
+  .sky { transition: opacity 1s ease, scale 1.6s var(--ez); }
+  html.boot .sky { opacity: 0; scale: 1.06; }
+
+  /* masked line reveals */
+  h1 .ln { display: block; overflow: hidden; padding: .07em 0; margin: -.07em 0; }
+  h1 .ln > span { display: block; transition: translate .95s var(--ez); transition-delay: calc(var(--s, 0) * var(--bu)); }
+  html.boot h1 .ln > span { translate: 0 108%; }
+
+  .mo { display: block; overflow: hidden; padding: .16em 0; margin: -.16em 0; }
+  .mo > .mi { display: block; translate: 0 112%; transition: translate .85s var(--ez); }
+
+  /* reveal */
+  .reveal { opacity: 0; transform: translateY(18px); transition: opacity .7s ease, transform .8s var(--ez); }
+  .reveal.in { opacity: 1; transform: none; }
+  .reveal.d1 { transition-delay: .08s; } .reveal.d2 { transition-delay: .16s; } .reveal.d3 { transition-delay: .24s; }
+  .reveal.mask { opacity: 1; transform: none; transition: none; }
+  .reveal.mask.in > .mo > .mi { translate: 0 0; }
+  .reveal.mask.d1 > .mo > .mi { transition-delay: .08s; }
+  .reveal.mask.d2 > .mo > .mi { transition-delay: .16s; }
+
+  /* count-up figures hold their final width so nothing reflows mid-count */
+  .num { display: inline-block; text-align: right; font-variant-numeric: tabular-nums; }
+
+  /* ================= RESPONSIVE ================= */
+  @media (max-width: 960px) {
+    .hero-body { grid-template-columns: 1fr; align-items: start; padding-bottom: 96px; }
+    .deck { justify-self: start; margin-top: 26px; height: auto; width: 100%; display: flex; flex-direction: column; gap: 14px; }
+    .pc, .pc1, .pc2, .pc3 { position: relative; width: 100%; transform: rotate(0deg); }
+    .pc1 { transform: rotate(-.6deg); } .pc2 { transform: rotate(.5deg); } .pc3 { transform: rotate(-.4deg); }
+    .deck:hover .pc1, .deck:hover .pc2, .deck:hover .pc3,
+    .deck.spread .pc1, .deck.spread .pc2, .deck.spread .pc3 { transform: none; }
+    .deck .pc:hover { transform: translateY(-2px); }
+    .deck-hint { display: none; }
+    .pc p { max-width: none; }
+    .featgrid, .also { grid-template-columns: 1fr; }
+    .aboutgrid { grid-template-columns: 1fr; gap: 44px; }
+    .job { grid-template-columns: 1fr; gap: 10px; padding: 24px 0; }
+    .caption { display: none; }
+    section { padding: 68px 0; }
+  }
+
+  @media (max-width: 700px) {
+    /* shorter page-open stagger on small screens */
+    :root { --bu: 38ms; }
+    html.boot .deck { translate: 0 16px; }
+    /* a portrait viewport crops hard, so re-aim each frame at its landmark */
+    .view:nth-child(1) img { object-position: 12% 50%; }
+    .view:nth-child(2) img { object-position: 26% 50%; }
+    .view:nth-child(3) img { object-position: 37% 50%; }
+    .view:nth-child(4) img { object-position: 62% 50%; }
+  }
+
+  /* ================= REDUCED MOTION ================= */
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    * { animation: none !important; transition: none !important; }
+    .reveal, .reveal.mask { opacity: 1; transform: none; }
+    .view:not(.on) { opacity: 0; }
+    .view.on { opacity: 1; }
+    .scrollcue { display: none; }
+    /* every masked and staggered element renders in its final resting state */
+    .bi { opacity: 1; translate: none; }
+    .sky { opacity: 1; scale: 1; }
+    .mo { overflow: visible; padding: 0; margin: 0; }
+    .mo > .mi, h1 .ln > span { translate: none; }
+    h1 .ln { overflow: visible; }
+    .progress i { transition: none; }
+  }
+</style>
+<script>
+/* Sets the page-open state before first paint. Skipped for reduced motion,
+   for deep links with a hash, and for repeat views within the same session. */
+(function () {
+  try {
+    var d = document.documentElement;
+    var reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    var seen = false;
+    try { seen = sessionStorage.getItem('sg-intro') === '1'; } catch (e) {}
+    if (!reduced && !seen && !window.location.hash) {
+      d.className += ' boot';
+      /* failsafe: content is never left hidden if the main script does not run */
+      setTimeout(function () { d.classList.remove('boot'); }, 2600);
+    }
+  } catch (e) {}
+})();
+</script>
+</head>
+<body>
+
+<div class="progress" aria-hidden="true"><i></i></div>
+
+<!-- ================= HERO ================= -->
+<header class="hero" id="top">
+  <div class="sky kb" id="sky" role="img" aria-label="Rotating photographs of Seattle: the Space Needle with Mount Rainier at blue hour, downtown and Mount Rainier from Kerry Park, the Great Wheel on Elliott Bay at sunset, and the skyline at golden hour from Gas Works Park.">
+    <div class="view on" data-caption="VIEW 1/4 · Space Needle and Mount Rainier · <b>Jeremy Mowery, Unsplash</b>">
+      <img src="assets2/skyline-rainier-1280.jpg" srcset="assets2/skyline-rainier-1280.jpg 1280w, assets2/skyline-rainier-1920.jpg 1920w" sizes="100vw" alt="" decoding="async">
+    </div>
+    <div class="view" data-caption="VIEW 2/4 · Downtown and Mount Rainier from Kerry Park · <b>Bryan Dickerson, Pexels</b>">
+      <img src="assets2/kerry-park-1280.jpg" srcset="assets2/kerry-park-1280.jpg 1280w, assets2/kerry-park-1920.jpg 1920w" sizes="100vw" alt="" loading="lazy" decoding="async">
+    </div>
+    <div class="view" data-caption="VIEW 3/4 · The Great Wheel on Elliott Bay · <b>Willian Justen de Vasconcellos, Pexels</b>">
+      <img src="assets2/elliott-bay-1280.jpg" srcset="assets2/elliott-bay-1280.jpg 1280w, assets2/elliott-bay-1920.jpg 1920w" sizes="100vw" alt="" loading="lazy" decoding="async">
+    </div>
+    <div class="view" data-caption="VIEW 4/4 · Seattle from Gas Works Park · <b>WikiPedant, CC BY-SA 4.0</b>">
+      <img src="assets2/gasworks-1280.jpg" srcset="assets2/gasworks-1280.jpg 1280w, assets2/gasworks-1920.jpg 1920w" sizes="100vw" alt="" loading="lazy" decoding="async">
+    </div>
+  </div>
+  <div class="scrim"></div>
+
+  <div class="wrap topbar bi" style="--s:1">
+    <div class="brand">Sanket Gautam<span>.</span></div>
+    <div>
+      <div class="coords">47.6062° N · 122.3321° W<br>SEATTLE, WASHINGTON</div>
+      <div class="caption" id="caption" aria-hidden="true"></div>
+      <div class="frames" id="frames" role="group" aria-label="Hero photograph">
+        <button type="button" aria-label="Show photograph 1 of 4"><span class="rail"></span></button>
+        <button type="button" aria-label="Show photograph 2 of 4"><span class="rail"></span></button>
+        <button type="button" aria-label="Show photograph 3 of 4"><span class="rail"></span></button>
+        <button type="button" aria-label="Show photograph 4 of 4"><span class="rail"></span></button>
+      </div>
+    </div>
+  </div>
+
+  <div class="wrap hero-body">
+    <div>
+      <div class="eyebrow bi" style="--s:2">SOFTWARE ENGINEER · AMAZON · UW ALLEN SCHOOL</div>
+      <h1><span class="ln"><span style="--s:3">Sanket</span></span><span class="ln"><span style="--s:4">Gautam<span class="dot" aria-hidden="true"></span></span></span></h1>
+      <p class="tagline bi" style="--s:6">Agentic AI and distributed systems. <em>8+ years building in production.</em></p>
+      <p class="lede bi" style="--s:7">Software engineer at Amazon and a 2026 MS graduate of the University of
+      Washington's Allen School. I spent eight years learning how large distributed systems fail,
+      across Alexa AI, Buy with Prime, and Selling Partner Services. I now put that to work on
+      agentic AI, focused on what it takes to trust an agent with real actions: verification,
+      supervision, and recovery when it goes wrong.</p>
+      <div class="cta-row bi" style="--s:8">
+        <a class="btn gold" href="#work">See the work</a>
+        <a class="btn ghost" href="mailto:sanket@sanketgautam.dev">Get in touch</a>
+      </div>
+    </div>
+
+    <nav class="deck bi" id="deck" aria-label="Quick links" style="--s:9">
+      <span class="deck-hint">THREE POSTCARDS</span>
+      <a class="pc pc1" href="https://sanketgautam.dev/ensemble/">
+        <span class="stamp" aria-hidden="true">
+          <svg viewBox="0 0 24 40"><path d="M12 2 v5 M7.5 10.5 C7.5 7.8 9.5 6.4 12 6.4 C14.5 6.4 16.5 7.8 16.5 10.5 M4 11 h16 M6 13.5 h12 M10.6 13.5 L8.6 36 M13.4 13.5 L15.4 36 M12 13.5 v10 M4.5 38 h15 M8.6 30 h6.8"/></svg>
+        </span>
+        <span class="postmark" aria-hidden="true">SEATTLE WA<br>2026</span>
+        <span class="route">SANKETGAUTAM.DEV/ENSEMBLE</span>
+        <h3>Ensemble</h3>
+        <p>An agent orchestration system I designed, built, and have run in production since February 2026.</p>
+        <span class="go">VISIT &#8594;</span>
+      </a>
+      <a class="pc pc2" href="https://sanketgautam.dev/posters/acm-data-conclave-2026/">
+        <span class="stamp" aria-hidden="true">
+          <svg viewBox="0 0 24 40"><path d="M12 6 L2 34 h20 Z M12 6 v-4 M7 22 h10 M4.8 28 h14.4"/></svg>
+        </span>
+        <span class="postmark" aria-hidden="true">TECH WEEK<br>JUL 30</span>
+        <span class="route">ACM DATA CONCLAVE 2026</span>
+        <h3>The Poster</h3>
+        <p>Top-10 selection, exhibited at Seattle Tech Week 2026.</p>
+        <span class="go">READ &#8594;</span>
+      </a>
+      <a class="pc pc3" href="https://github.com/sanketgautam">
+        <span class="stamp" aria-hidden="true">
+          <svg viewBox="0 0 24 40"><path d="M5 8 h14 v24 H5 Z M5 14 h14 M9 8 v6 M14 8 v6 M8 19 h8 M8 24 h8 M8 29 h5"/></svg>
+        </span>
+        <span class="postmark" aria-hidden="true">SEATTLE WA<br>2026</span>
+        <span class="route">GITHUB.COM/SANKETGAUTAM</span>
+        <h3>The Code</h3>
+        <p>Repos, configs, and experiments in progress.</p>
+        <span class="go">BROWSE &#8594;</span>
+      </a>
+    </nav>
+  </div>
+
+  <div class="scrollcue bi" aria-hidden="true" style="--s:11">SCROLL</div>
+</header>
+
+<!-- ================= STAT STRIP ================= -->
+<div class="strip">
+  <div class="wrap row">
+    <span class="m"><b>MS CS</b> UW Allen School, <span class="num" data-to="3.9" data-dec="1">3.9</span> GPA</span>
+    <span class="m"><b><span class="num" data-to="8">8</span> yrs</b> distributed systems at Amazon</span>
+    <span class="m"><b>Agentic AI</b> shipped to production</span>
+    <span class="m"><b>Top <span class="num" data-to="10">10</span></b> poster, ACM Data Conclave 2026</span>
+  </div>
+</div>
+
+<!-- ================= FEATURED WORK ================= -->
+<section class="light" id="work">
+  <div class="wrap">
+    <div class="kicker reveal mask">FEATURED WORK</div>
+    <h2 class="reveal mask">Built and running</h2>
+    <p class="secsub reveal">Three things I point people to first. Two of them link to the real thing.</p>
+
+    <div class="featgrid">
+      <a class="feat tilt reveal" href="https://sanketgautam.dev/ensemble/">
+        <span class="chip">LIVE SINCE FEB 2026</span>
+        <h3>Ensemble</h3>
+        <p class="what">A multi-agent orchestration system running continuously since February 2026:
+        eleven specialized agents under one coordinator, with delegation contracts, human approval
+        gates, and local models served on-device. My working lab for agent reliability.</p>
+        <div class="stats"><span><span class="num" data-to="11">11</span> AGENTS</span><span><span class="num" data-to="878">878</span> LIVE SESSIONS</span><span>$0 MARGINAL TOKEN COST</span></div>
+        <div class="foot">sanketgautam.dev/ensemble <span class="arr">&#8594;</span></div>
+      </a>
+      <a class="feat tilt reveal d1" href="https://sanketgautam.dev/posters/acm-data-conclave-2026/">
+        <span class="chip">TOP-10 SELECTION</span>
+        <h3>ACM Poster</h3>
+        <p class="what">"Operating an 11-Agent Personal AI Staff," selected among the top 10
+        posters for the ACM Data Conclave poster exhibition at Seattle Tech Week 2026. What six
+        months of running Ensemble taught me, on one sheet.</p>
+        <div class="stats"><span>ACM DATA CONCLAVE</span><span>SEATTLE TECH WEEK 2026</span></div>
+        <div class="foot">Read the poster page <span class="arr">&#8594;</span></div>
+      </a>
+      <div class="feat tilt reveal d2">
+        <span class="chip">AT AMAZON</span>
+        <h3>Agentic AI in Production</h3>
+        <p class="what">I conceptualized and built my organization's first production agentic AI
+        system, partnering with product managers and stakeholders from the initial PRFAQ through
+        security certification and launch. It runs in production today on AWS AgentCore and the
+        MCP protocol.</p>
+        <div class="stats"><span>AWS AGENTCORE</span><span>MCP</span><span>IN PRODUCTION</span></div>
+        <div class="foot">Selling Partner Services, Amazon</div>
+      </div>
+    </div>
+
+    <div class="alsobar reveal">ALSO BUILT</div>
+    <div class="also">
+      <div class="mini reveal">
+        <h4>Lumora AI <span>UW · GEEKWIRE</span></h4>
+        <p>AI CRM platform for wealth managers, built in UW's software entrepreneurship course.
+        Pitched to 16 VCs at Pioneer Square Labs and featured in GeekWire.</p>
+      </div>
+      <div class="mini reveal d1">
+        <h4>Project Panacea <span>PEOPLE'S CHOICE</span></h4>
+        <p>Multi-agent AI system for partner lifecycle management on AWS Bedrock. People's
+        Choice Award at an Amazon hackathon, 2025.</p>
+      </div>
+      <div class="mini reveal d2">
+        <h4>Embedded Apps SDK <span>AMAZON</span></h4>
+        <p>Architected the Seller Central Embedded SDK and shipped the Intuit QuickBooks
+        integration with PKCE OAuth.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= EXPERIENCE ================= -->
+<section class="dark" id="experience">
+  <div class="wrap">
+    <div class="kicker reveal mask">EXPERIENCE</div>
+    <h2 class="reveal mask">Eight years of systems</h2>
+    <p class="secsub reveal">All at Amazon, from Hyderabad to Seattle, with earlier stops in
+    research and health tech.</p>
+
+    <div class="jobs">
+      <div class="job reveal">
+        <div class="yr">JUL 2020 - PRESENT<span class="place">SEATTLE · HYDERABAD</span></div>
+        <div>
+          <h3>Software Development Engineer II</h3>
+          <p class="org">Amazon · Selling Partner Services, Buy with Prime, Alexa AI</p>
+          <ul>
+            <li>Conceptualized and delivered the organization's <b>first production agentic AI
+            system</b>, from PRFAQ through security certification to launch, and ran an agentic
+            AI learning series with 160+ views across the org.</li>
+            <li>Led the <b>Seller Central Embedded Apps launch</b> across 4 teams and executed
+            a partner-qualification service migration across 3 stacks with zero incidents
+            (Leadership Principles Award, Q4 2023).</li>
+            <li>Led the Operational Readiness Review for the <b>Buy with Prime Returns 1.0</b>
+            launch: 3 teams, 12+ engineers, 15 systems, 120+ technical requirements.</li>
+            <li>Cut new-customer onboarding for the Alexa data-labeling platform from
+            <b>60 days to under 10</b> with a headless transformation layer.</li>
+            <li>Prevented dozens of potential high-severity incidents through proactive
+            investigation, and eliminated recurring monthly downtime in a legacy ML
+            task-routing system.</li>
+          </ul>
+        </div>
+      </div>
+      <div class="job reveal">
+        <div class="yr">JUL 2018 - JUL 2020<span class="place">HYDERABAD</span></div>
+        <div>
+          <h3>Software Development Engineer</h3>
+          <p class="org">Amazon · Global Selling, Selling Partner Network</p>
+          <ul>
+            <li>Built Elasticsearch-backed search for an international listings platform, serving
+            <b>1M+ product offers</b> from thousands of global sellers.</li>
+            <li>Shipped an SSO-like migration moving sellers to Seller Central, integrating
+            AuthN and AuthZ with marketplace authorization.</li>
+            <li>Developed configurable two-level distributed caching with exponential backoff
+            and jitter for currency conversion.</li>
+          </ul>
+        </div>
+      </div>
+      <div class="job reveal">
+        <div class="yr">2016 - 2017<span class="place">HYDERABAD · JODHPUR</span></div>
+        <div>
+          <h3>Earlier roles</h3>
+          <p class="org">Amazon · DRDO · elth.ai</p>
+          <ul>
+            <li>Amazon SDE intern: prototyped a seller-provider communication tool and
+            automated localization testing for Global Selling.</li>
+            <li>DRDO technical trainee: FFT optimizations for CT image reconstruction.</li>
+            <li>elth.ai chatbot developer: symptom assessment and appointment booking for a
+            medical chatbot serving 100+ hospitals.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= ABOUT ================= -->
+<section class="light" id="about">
+  <div class="wrap">
+    <div class="kicker reveal mask">ABOUT</div>
+    <h2 class="reveal mask">The longer view</h2>
+
+    <div class="aboutgrid">
+      <div class="story">
+        <p class="reveal">I grew up in India, studied computer science at NIT Bhopal, and joined
+        Amazon in 2018. Eight years later I am still drawn to the same problem: systems that
+        stay up, and the quiet engineering that keeps them that way.</p>
+        <p class="reveal d1">In 2023 I started a master's at the University of Washington's
+        Paul G. Allen School while working full time, finishing in June 2026 with a 3.9 GPA.
+        That stretch pushed my work toward agentic AI: the first production agentic system at
+        my organization, and
+        Ensemble, an independent multi-agent system I have kept in continuous production so I
+        learn the operational failure modes firsthand rather than from a paper.</p>
+        <p class="reveal d2">I was the first in my family to go into this field, so I spend
+        real time mentoring: first-generation CS students at UW through GEN1, hackathon teams
+        at DubHacks and LA Hacks, and young women across Asia through a UNESCO Technovation
+        lab. Seattle is home; the skyline above is the view I picked it for.</p>
+      </div>
+      <div class="facts">
+        <div class="fact reveal">
+          <div class="fk">EDUCATION</div>
+          <ul>
+            <li><b>MS, Computer Science</b> · University of Washington, Paul G. Allen School ·
+            3.9 GPA · 2023 to 2026</li>
+            <li><b>BTech, Computer Science</b> · Maulana Azad NIT Bhopal · 2014 to 2018</li>
+          </ul>
+        </div>
+        <div class="fact reveal d1">
+          <div class="fk">RECOGNITION</div>
+          <ul>
+            <li><b>Top-10 poster</b>, ACM Data Conclave, Seattle Tech Week 2026</li>
+            <li><b>People's Choice Award</b>, Amazon hackathon 2025, for Project Panacea</li>
+            <li><b>Leadership Principles Award</b>, Amazon, Q4 2023</li>
+            <li><b>UW Allen School feature</b>, first-generation student spotlight, Nov 2025</li>
+          </ul>
+        </div>
+        <div class="fact reveal d2">
+          <div class="fk">COMMUNITY</div>
+          <ul>
+            <li><b>Judge</b>, LA Hacks 2026 · <b>Mentor and judge</b>, DubHacks '25</li>
+            <li><b>Mentor</b>, GEN1 CSE Community, UW, 2024 to present</li>
+            <li><b>Security certifier</b>, Amazon Information Security, 2020 to present</li>
+            <li><b>Mentor</b>, UNESCO Technovation Idea Innovation Lab</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= CONTACT ================= -->
+<footer class="contact" id="contact">
+  <div class="bgimg" aria-hidden="true">
+    <img src="assets2/uw-drumheller-1280.jpg" srcset="assets2/uw-drumheller-1280.jpg 1280w, assets2/uw-drumheller-1920.jpg 1920w" sizes="100vw" alt="" loading="lazy" decoding="async">
+  </div>
+  <div class="veil" aria-hidden="true"></div>
+  <div class="wrap">
+    <div class="kicker reveal mask" style="color: var(--gold);">CONTACT</div>
+    <h2 class="reveal mask">Say hello</h2>
+    <p class="sub reveal">Open to conversations about distributed systems, agent
+    infrastructure, and what to build next.</p>
+    <div class="cta-row reveal d1">
+      <a class="btn gold" href="mailto:sanket@sanketgautam.dev">sanket@sanketgautam.dev</a>
+      <a class="btn ghost" href="/Sanket_Gautam_Resume.pdf">Résumé</a>
+      <a class="btn ghost" href="https://github.com/sanketgautam">GitHub</a>
+      <a class="btn ghost" href="https://linkedin.com/in/sanketgautam">LinkedIn</a>
+    </div>
+
+    <div class="smallprint">
+      <span>SANKET GAUTAM · SEATTLE, WA</span>
+      <span class="credits">Photography: Seattle from Gas Works Park by
+        <a href="https://commons.wikimedia.org/wiki/File:Seattle_from_Gas_Works_Park2013.jpg">WikiPedant</a>,
+        via Wikimedia Commons, licensed
+        <a href="https://creativecommons.org/licenses/by-sa/4.0">CC BY-SA 4.0</a> ·
+        Space Needle and Mount Rainier by
+        <a href="https://unsplash.com/photos/seattle-skyline-with-space-needle-and-mount-rainier-in-background-blBCmVn__6s">Jeremy Mowery</a>
+        on Unsplash · Kerry Park at sunset by
+        <a href="https://www.pexels.com/photo/seattle-skyline-at-sunset-with-mount-rainier-28495686/">Bryan Dickerson</a>
+        on Pexels · The Great Wheel on Elliott Bay by
+        <a href="https://www.pexels.com/photo/the-seattle-great-wheel-elliott-bay-in-seattle-washington-usa-18631996/">Willian Justen de Vasconcellos</a>
+        on Pexels · UW Drumheller Fountain by
+        <a href="https://commons.wikimedia.org/wiki/File:Drumhellerfountain.jpg">Keng Susumpow</a>,
+        via Wikimedia Commons, licensed
+        <a href="https://creativecommons.org/licenses/by/2.0">CC BY 2.0</a>.</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function () {
+  var docEl = document.documentElement;
+  var reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var fine = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
+  var booting = docEl.classList.contains('boot');
+  var introDone = !booting;
+
+  /* ---------- page-open sequence ---------- */
+  if (booting) {
+    try { sessionStorage.setItem('sg-intro', '1'); } catch (e) {}
+    var started = false;
+    var startIntro = function () {
+      if (started) return;
+      started = true;
+      requestAnimationFrame(function () {
+        requestAnimationFrame(function () {
+          docEl.classList.remove('boot');
+          var pg = document.querySelector('.progress');
+          if (pg) {
+            pg.classList.add('sweep');
+            setTimeout(function () { pg.classList.remove('sweep'); }, 1300);
+          }
+          /* once the sequence has landed, drop the intro transition entirely:
+             leaving it on .deck would apply its delay to the pointer parallax */
+          setTimeout(function () {
+            introDone = true;
+            Array.prototype.forEach.call(document.querySelectorAll('.bi'), function (el) {
+              el.classList.remove('bi');
+              el.style.removeProperty('--s');
+            });
+          }, 1700);
+        });
+      });
+    };
+    /* wait briefly for webfonts so masked lines do not reflow mid-reveal, but never stall */
+    if (document.fonts && document.fonts.ready) { document.fonts.ready.then(startIntro); }
+    setTimeout(startIntro, 350);
+  }
+
+  /* ---------- hero: crossfade cycle, caption, frame rail ---------- */
+  var sky = document.getElementById('sky');
+  var views = sky ? Array.prototype.slice.call(sky.querySelectorAll('.view')) : [];
+  var cap = document.getElementById('caption');
+  var frames = document.getElementById('frames');
+  var buttons = frames ? Array.prototype.slice.call(frames.querySelectorAll('button')) : [];
+  var DWELL = 7000;
+  var cur = 0;
+  var timer = null;
+
+  function setCaption(i) {
+    if (!cap) return;
+    cap.style.opacity = 0;
+    setTimeout(function () {
+      cap.innerHTML = views[i].getAttribute('data-caption');
+      cap.style.opacity = 1;
+    }, reduced ? 0 : 600);
+  }
+
+  /* re-setting aria-current restarts the CSS dwell fill on the active rail */
+  function syncFrames() {
+    buttons.forEach(function (b, i) {
+      if (i === cur) {
+        b.removeAttribute('aria-current');
+        void b.offsetWidth;
+        b.setAttribute('aria-current', 'true');
+      } else {
+        b.removeAttribute('aria-current');
+      }
+    });
+  }
+
+  function schedule() {
+    clearTimeout(timer);
+    if (reduced || views.length < 2) return;
+    timer = setTimeout(function () { go((cur + 1) % views.length); }, DWELL);
+  }
+
+  function go(i) {
+    if (i === cur || !views[i]) { schedule(); return; }
+    views[cur].classList.remove('on');
+    cur = i;
+    views[cur].classList.add('on');
+    setCaption(cur);
+    syncFrames();
+    schedule();
+  }
+
+  if (views.length) {
+    setCaption(0);
+    syncFrames();
+    schedule();
+    buttons.forEach(function (b, i) {
+      b.addEventListener('click', function () { go(i); });
+    });
+    document.addEventListener('visibilitychange', function () {
+      if (document.hidden) { clearTimeout(timer); }
+      else { syncFrames(); schedule(); }
+    });
+  }
+
+  /* ---------- hero: pointer depth (photo and postcards drift apart) ---------- */
+  if (!reduced && fine && sky) {
+    var hero = document.getElementById('top');
+    var deckEl = document.getElementById('deck');
+    var tx = 0, ty = 0, cx = 0, cy = 0, raf = null;
+    /* peak-to-peak travel in px; the photo and the postcards drift opposite each other */
+    var SKY_X = 18, SKY_Y = 12, DECK_X = -10, DECK_Y = -7;
+
+    hero.addEventListener('mousemove', function (e) {
+      if (!introDone) return;
+      var r = hero.getBoundingClientRect();
+      tx = ((e.clientX - r.left) / r.width - 0.5) * -1;
+      ty = ((e.clientY - r.top) / r.height - 0.5) * -1;
+      if (!raf) tick();
+    });
+    hero.addEventListener('mouseleave', function () {
+      tx = 0; ty = 0;
+      if (!raf) tick();
+    });
+
+    function tick() {
+      raf = requestAnimationFrame(function () {
+        cx += (tx - cx) * 0.075;
+        cy += (ty - cy) * 0.075;
+        sky.style.translate = (cx * SKY_X).toFixed(2) + 'px ' + (cy * SKY_Y).toFixed(2) + 'px';
+        if (deckEl) {
+          deckEl.style.translate = (cx * DECK_X).toFixed(2) + 'px ' + (cy * DECK_Y).toFixed(2) + 'px';
+        }
+        if (Math.abs(tx - cx) > 0.002 || Math.abs(ty - cy) > 0.002) { tick(); } else { raf = null; }
+      });
+    }
+  }
+
+  /* ---------- postcard deck: tap to spread on touch ---------- */
+  var deck = document.getElementById('deck');
+  if (deck && !fine) {
+    deck.addEventListener('click', function (e) {
+      var wide = window.matchMedia('(min-width: 961px)').matches;
+      if (wide && !deck.classList.contains('spread')) {
+        e.preventDefault();
+        deck.classList.add('spread');
+      }
+    });
+  }
+
+  /* ---------- featured cards: 3D tilt ---------- */
+  if (!reduced && fine) {
+    Array.prototype.forEach.call(document.querySelectorAll('.tilt'), function (card) {
+      card.addEventListener('mousemove', function (e) {
+        if (!card.classList.contains('in')) return;
+        var r = card.getBoundingClientRect();
+        var px = (e.clientX - r.left) / r.width - 0.5;
+        var py = (e.clientY - r.top) / r.height - 0.5;
+        card.style.transition = 'box-shadow .2s ease';
+        card.style.transform = 'rotateY(' + (px * 7).toFixed(2) + 'deg) rotateX(' + (py * -7).toFixed(2) + 'deg) translateY(-3px)';
+      });
+      card.addEventListener('mouseleave', function () {
+        card.style.transition = 'box-shadow .2s ease, transform .4s ease';
+        card.style.transform = 'none';
+      });
+    });
+  }
+
+  /* ---------- masked heading reveals ---------- */
+  Array.prototype.forEach.call(document.querySelectorAll('.reveal.mask'), function (el) {
+    var outer = document.createElement('span');
+    outer.className = 'mo';
+    var inner = document.createElement('span');
+    inner.className = 'mi';
+    while (el.firstChild) { inner.appendChild(el.firstChild); }
+    outer.appendChild(inner);
+    el.appendChild(outer);
+  });
+
+  /* ---------- scroll reveals ---------- */
+  var toReveal = document.querySelectorAll('.reveal');
+  if (reduced || !('IntersectionObserver' in window)) {
+    Array.prototype.forEach.call(toReveal, function (el) { el.classList.add('in'); });
+  } else {
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (en) {
+        if (en.isIntersecting) { en.target.classList.add('in'); io.unobserve(en.target); }
+      });
+    }, { threshold: 0.12, rootMargin: '0px 0px -6% 0px' });
+    Array.prototype.forEach.call(toReveal, function (el) { io.observe(el); });
+  }
+
+  /* ---------- count-up figures ---------- */
+  var nums = document.querySelectorAll('.num');
+  Array.prototype.forEach.call(nums, function (el) {
+    /* reserve the final width up front so the count never reflows its row */
+    el.setAttribute('data-final', el.textContent);
+    el.style.minWidth = el.textContent.trim().length + 'ch';
+  });
+
+  function countUp(el) {
+    var to = parseFloat(el.getAttribute('data-to'));
+    var dec = parseInt(el.getAttribute('data-dec') || '0', 10);
+    var final = el.getAttribute('data-final');
+    var DUR = 1200, t0 = null;
+    function frame(ts) {
+      if (t0 === null) t0 = ts;
+      var p = Math.min((ts - t0) / DUR, 1);
+      if (p < 1) {
+        var e = 1 - Math.pow(1 - p, 4);
+        el.textContent = (to * e).toFixed(dec);
+        requestAnimationFrame(frame);
+      } else {
+        el.textContent = final; /* always land on the exact source value */
+      }
+    }
+    requestAnimationFrame(frame);
+  }
+
+  if (!reduced && nums.length && 'IntersectionObserver' in window) {
+    var nio = new IntersectionObserver(function (entries) {
+      entries.forEach(function (en) {
+        if (en.isIntersecting) { nio.unobserve(en.target); countUp(en.target); }
+      });
+    }, { threshold: 0.6 });
+    Array.prototype.forEach.call(nums, function (el) { nio.observe(el); });
+  }
+
+  /* ---------- scroll progress ---------- */
+  var bar = document.querySelector('.progress i');
+  if (bar) {
+    var ticking = false;
+    var paint = function () {
+      ticking = false;
+      var h = document.documentElement.scrollHeight - window.innerHeight;
+      var p = h > 0 ? Math.min(Math.max(window.pageYOffset / h, 0), 1) : 0;
+      bar.style.transform = 'scaleX(' + p.toFixed(4) + ')';
+    };
+    var onScroll = function () {
+      if (!ticking) { ticking = true; requestAnimationFrame(paint); }
+    };
+    window.addEventListener('scroll', onScroll, { passive: true });
+    window.addEventListener('resize', onScroll);
+    paint();
+  }
+})();
+</script>
+
+</body>
 </html>
