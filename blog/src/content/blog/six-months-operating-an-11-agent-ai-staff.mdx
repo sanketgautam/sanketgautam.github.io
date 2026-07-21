@@ -3,7 +3,7 @@ title: "What six months of operating an 11-agent AI staff taught me"
 description: "Orchestration patterns, local models, and what broke: notes from running Ensemble in production since February."
 pubDate: 2026-07-14
 tags: [agents, operations]
-draft: true
+draft: false
 ---
 
 Since February 2026 I have run Ensemble, a personal staff of eleven persona agents living on a single Mac Studio, each owning a narrow lane, all reachable from WhatsApp and Slack, all reporting to one coordinator. Six months is long enough for the novelty to wear off and the operations to start telling the truth. This post is the operating manual I wish I had in February: the patterns that survived production, and the ones that did not.
@@ -86,55 +86,48 @@ Three kinds of contract hold the system together:
 
 <div class="statrow">
   <div class="stat"><b>11</b><span>AGENTS</span></div>
-  <div class="stat"><b>878</b><span>LIVE SESSIONS</span></div>
+  <div class="stat"><b>2,255</b><span>RECORDED SESSIONS</span></div>
   <div class="stat"><b>1</b><span>MAC STUDIO</span></div>
   <div class="stat"><b>$0</b><span>MARGINAL TOKEN COST</span></div>
 </div>
 
-{/* placeholder monthly split for design purposes; replace with real audit numbers before publishing */}
-
-<Figure caption="Figure 2. Live sessions per month since the February launch.">
-  <svg viewBox="0 0 640 260" role="img" aria-label="Bar chart of live sessions per month from February through July 2026, rising steadily from 62 to 227.">
+<Figure caption="Figure 2. Interactive sessions per month across the staff, automated runs excluded (March through July 21, 2026).">
+  <svg viewBox="0 0 640 260" role="img" aria-label="Bar chart of interactive sessions per month, March through July 2026: 82, 88, 105, 70, and 123.">
     {/* gridlines */}
     <g stroke="#E6E0D6" stroke-width="1">
       <line x1="60" y1="58" x2="580" y2="58" />
-      <line x1="60" y1="108" x2="580" y2="108" />
-      <line x1="60" y1="158" x2="580" y2="158" />
+      <line x1="60" y1="133" x2="580" y2="133" />
     </g>
     <line x1="60" y1="208" x2="580" y2="208" stroke="rgba(35,48,60,.3)" stroke-width="1" />
     {/* y axis labels */}
     <g class="dg-mono" font-size="10" fill="#61707F" text-anchor="end">
-      <text x="52" y="61">240</text>
-      <text x="52" y="111">160</text>
-      <text x="52" y="161">80</text>
+      <text x="52" y="61">120</text>
+      <text x="52" y="136">60</text>
       <text x="52" y="211">0</text>
     </g>
     {/* bars: one hue, thin, rounded tops, 2px gap */}
     <g fill="#E8B96B">
-      <path d="M213 208 V172.3 Q213 169.3 216 169.3 H244 Q247 169.3 247 172.3 V208 Z"><title>Feb 2026: 62 live sessions</title></path>
-      <path d="M249 208 V146 Q249 143 252 143 H280 Q283 143 283 146 V208 Z"><title>Mar 2026: 104 live sessions</title></path>
-      <path d="M285 208 V129.1 Q285 126.1 288 126.1 H316 Q319 126.1 319 129.1 V208 Z"><title>Apr 2026: 131 live sessions</title></path>
-      <path d="M321 208 V112.3 Q321 109.3 324 109.3 H352 Q355 109.3 355 112.3 V208 Z"><title>May 2026: 158 live sessions</title></path>
-      <path d="M357 208 V88.5 Q357 85.5 360 85.5 H388 Q391 85.5 391 88.5 V208 Z"><title>Jun 2026: 196 live sessions</title></path>
-      <path d="M393 208 V69.1 Q393 66.1 396 66.1 H424 Q427 66.1 427 69.1 V208 Z"><title>Jul 2026: 227 live sessions</title></path>
+      <path d="M231 208 V108.5 Q231 105.5 234 105.5 H262 Q265 105.5 265 108.5 V208 Z"><title>Mar 2026: 82 interactive sessions</title></path>
+      <path d="M267 208 V101 Q267 98 270 98 H298 Q301 98 301 101 V208 Z"><title>Apr 2026: 88 interactive sessions</title></path>
+      <path d="M303 208 V79.8 Q303 76.8 306 76.8 H334 Q337 76.8 337 79.8 V208 Z"><title>May 2026: 105 interactive sessions</title></path>
+      <path d="M339 208 V123.5 Q339 120.5 342 120.5 H370 Q373 120.5 373 123.5 V208 Z"><title>Jun 2026: 70 interactive sessions</title></path>
+      <path d="M375 208 V57.3 Q375 54.3 378 54.3 H406 Q409 54.3 409 57.3 V208 Z"><title>Jul 2026: 123 interactive sessions, through July 21</title></path>
     </g>
     {/* value labels, text colors only */}
     <g class="dg-mono" font-size="10" fill="#61707F" text-anchor="middle">
-      <text x="230" y="162.3">62</text>
-      <text x="266" y="136">104</text>
-      <text x="302" y="119.1">131</text>
-      <text x="338" y="102.3">158</text>
-      <text x="374" y="78.5">196</text>
-      <text x="410" y="59.1" fill="#23303C" font-weight="700">227</text>
+      <text x="248" y="98.5">82</text>
+      <text x="284" y="91">88</text>
+      <text x="320" y="69.8">105</text>
+      <text x="356" y="113.5">70</text>
+      <text x="392" y="47.3" fill="#23303C" font-weight="700">123</text>
     </g>
     {/* month labels */}
     <g class="dg-mono" font-size="10" fill="#61707F" letter-spacing="1" text-anchor="middle">
-      <text x="230" y="226">FEB</text>
-      <text x="266" y="226">MAR</text>
-      <text x="302" y="226">APR</text>
-      <text x="338" y="226">MAY</text>
-      <text x="374" y="226">JUN</text>
-      <text x="410" y="226">JUL</text>
+      <text x="248" y="226">MAR</text>
+      <text x="284" y="226">APR</text>
+      <text x="320" y="226">MAY</text>
+      <text x="356" y="226">JUN</text>
+      <text x="392" y="226">JUL</text>
     </g>
   </svg>
 </Figure>
