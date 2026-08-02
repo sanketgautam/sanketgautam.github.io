@@ -1,0 +1,178 @@
+---
+title: "Three reliability primitives for long-running agent systems"
+description: "Freshness contracts, draft-first approval gates, and supervised execution: specs, measurements, and how to adopt each one on its own."
+pubDate: 2026-08-02
+tags: [agents, reliability, primitives]
+draft: false
+---
+
+The [field notes from six months of running an eleven-agent staff](/blog/six-months-operating-an-11-agent-ai-staff/) were a story. This is the specification.
+
+Long-running agent systems fail differently from single-turn ones. A chat model that hallucinates is wrong once, in front of you, and you correct it. An agent that has been running for six months accumulates state, acts without being watched, and shares a machine with ten other agents. The failure modes that dominate are not reasoning failures at all. They are operational ones, and they show up on a timescale no benchmark covers.
+
+Three of them accounted for nearly every real incident in my fleet between February and July 2026. Each one produced a primitive. This post is what each primitive guarantees, how to specify it, how to tell whether it is working, and how to adopt it without adopting anything else.
+
+<Figure caption="Figure 1. Each failure mode is answered by exactly one primitive. The mapping is deliberate: a primitive that answers two failure modes is usually two primitives wearing one name.">
+  <svg viewBox="0 0 680 300" role="img" aria-label="Diagram mapping three failure modes (memory staleness, unverified action, and resource exhaustion) onto three primitives: freshness contracts, draft-first approval gates, and supervised execution.">
+    <defs>
+      <marker id="ar2" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+        <path d="M0 0 L8 4 L0 8 Z" fill="#61707F" />
+      </marker>
+    </defs>
+
+    <text x="140" y="26" class="dg-mono" font-size="10" fill="#96702A" letter-spacing="2" text-anchor="middle">FAILURE MODE</text>
+    <text x="540" y="26" class="dg-mono" font-size="10" fill="#96702A" letter-spacing="2" text-anchor="middle">PRIMITIVE</text>
+
+    <rect x="30" y="50" width="220" height="52" rx="6" fill="#FFFDF9" stroke="rgba(35,48,60,.35)" />
+    <text x="140" y="73" class="dg-mono" font-size="11" fill="#23303C" text-anchor="middle">memory staleness</text>
+    <text x="140" y="90" font-size="10" fill="#61707F" text-anchor="middle">stored state beats primary source</text>
+
+    <rect x="30" y="124" width="220" height="52" rx="6" fill="#FFFDF9" stroke="rgba(35,48,60,.35)" />
+    <text x="140" y="147" class="dg-mono" font-size="11" fill="#23303C" text-anchor="middle">unverified action</text>
+    <text x="140" y="164" font-size="10" fill="#61707F" text-anchor="middle">decide and execute in one turn</text>
+
+    <rect x="30" y="198" width="220" height="52" rx="6" fill="#FFFDF9" stroke="rgba(35,48,60,.35)" />
+    <text x="140" y="221" class="dg-mono" font-size="11" fill="#23303C" text-anchor="middle">resource exhaustion</text>
+    <text x="140" y="238" font-size="10" fill="#61707F" text-anchor="middle">degrade quietly, stall everything</text>
+
+    <line x1="256" y1="76" x2="424" y2="76" stroke="#61707F" stroke-width="1.2" marker-end="url(#ar2)" />
+    <line x1="256" y1="150" x2="424" y2="150" stroke="#61707F" stroke-width="1.2" marker-end="url(#ar2)" />
+    <line x1="256" y1="224" x2="424" y2="224" stroke="#61707F" stroke-width="1.2" marker-end="url(#ar2)" />
+
+    <rect x="430" y="50" width="220" height="52" rx="6" fill="#FFFDF9" stroke="#96702A" stroke-width="1.4" />
+    <text x="540" y="80" class="dg-mono" font-size="11" fill="#23303C" text-anchor="middle">freshness contracts</text>
+
+    <rect x="430" y="124" width="220" height="52" rx="6" fill="#FFFDF9" stroke="#96702A" stroke-width="1.4" />
+    <text x="540" y="154" class="dg-mono" font-size="11" fill="#23303C" text-anchor="middle">draft-first approval gates</text>
+
+    <rect x="430" y="198" width="220" height="52" rx="6" fill="#FFFDF9" stroke="#96702A" stroke-width="1.4" />
+    <text x="540" y="228" class="dg-mono" font-size="11" fill="#23303C" text-anchor="middle">supervised execution</text>
+  </svg>
+</Figure>
+
+## 1. Freshness contracts
+
+**The failure.** An agent's own memory is the cheapest source it has and the least trustworthy. Twice in one week, mine answered a question about a return flight from its stored notes rather than the confirmation email sitting in the inbox, and gave the wrong date both times. Nothing was hallucinated. The retrieval was correct; the source was stale.
+
+This gets worse over time, not better. A six-month-old system has six months of notes, and every one of them looks equally authoritative to the agent reading them.
+
+**The contract.** Every claim carries the timestamp of the source it came from, and any data past its declared window must either be re-fetched or announce its own age. Silence about age is the bug.
+
+```yaml
+# per-domain freshness policy
+health:
+  freshness: 0h        # always re-fetch before speaking
+  primary: wearable_api
+finance:
+  freshness: 0h
+  primary: bank_sync
+travel:
+  freshness: 24h       # older than this → re-read the source
+  primary: inbox
+notes:
+  freshness: 168h
+  primary: null        # no authority; must be labelled as recollection
+```
+
+Two rules make it work. A domain with `primary: null` has no authoritative source, so the agent must present it as recollection rather than fact. And `freshness: 0h` is not a cache setting. It means the source is read on every request, regardless of what memory says.
+
+<Callout title="The rule that actually mattered">
+Stale data presented as current is a trust violation, not a staleness bug. Once I started treating it that way, the fix stopped being "refresh more often" and became "never state a fact without its provenance."
+</Callout>
+
+**How to verify it.** Plant a contradiction: change a value at the primary source without touching the agent's memory, then ask a question that depends on it. A system with working freshness contracts answers from the source. A system without one answers confidently and wrongly. Run this on every domain you have marked `0h`; it takes ten minutes and it is the only test that actually exercises the path.
+
+**Adopting it alone.** This primitive has no dependencies. It is a policy table plus a check at answer-generation time. If you take one thing from this post, take this one. It is the cheapest to implement and it caught the most incidents.
+
+## 2. Draft-first approval gates
+
+**The failure.** The dangerous pattern is not a bad decision. It is verification and execution collapsing into the same turn, where an agent concludes an action is correct and performs it before any human has seen it. The blast radius is small until the action touches someone else's inbox or your bank.
+
+**The contract.** Anything reaching a real human ships as a draft. Anything that moves money requires a separate, explicit instruction. Neither can be satisfied by the same turn that proposed the action.
+
+```yaml
+gates:
+  outbound_human:
+    mode: draft            # compose, never send
+    approver: operator
+  money:
+    mode: explicit_confirm # requires a fresh instruction, not a continuation
+    approver: operator
+  internal_note:
+    mode: auto             # no gate; reversible and private
+```
+
+The distinction that matters is `draft` versus `explicit_confirm`. A draft is reviewed and released. An explicit confirmation cannot be inferred from context: "yes, go ahead" in the same breath as the proposal does not count, because the model wrote the proposal and would happily write the approval too.
+
+The gate is worth its friction only where the action is irreversible or reaches another person. Gating everything trains you to approve without reading, which is worse than no gate at all.
+
+<Callout>
+The human in the loop is a coordination mechanism and the final consistency resolver, not a rubber stamp on work that has already happened.
+</Callout>
+
+**How to verify it.** Instrument the ratio of proposed to executed actions per gated class, and read the drafts you reject. If your rejection rate is zero, the gate is decorative and you are not actually reading. If it is very high, the agent is under-briefed and you are paying an attention tax for a fixable prompt problem.
+
+**Adopting it alone.** Needs a queue and a review surface: a channel, an inbox, anything a person actually checks. No dependency on the other two primitives.
+
+## 3. Supervised execution
+
+**The failure.** Long-running fleets do not crash; they degrade. Pressure builds until a gateway stops responding, and every agent behind it stalls silently. A single audit window on my machine logged more than 200 gateway memory-pressure warnings before any supervision existed. Nothing alerted, because nothing had failed. It had only slowed down.
+
+**The contract.** Health is asserted continuously and independently of the thing being watched, and recovery is layered: alert, then restart, then revive the supervisor itself.
+
+```yaml
+supervision:
+  resource_monitor:
+    ram_bands: [70, 80]    # warn, then act
+    interval: 60s
+  process:
+    manager: launchd       # restarts on exit
+  watchdog:
+    interval: 120s         # revives the gateway itself
+topology:
+  max_spawn_depth: 1
+  max_children: 3
+  completion: push         # never poll
+  delegation: written_contract
+```
+
+The topology half is not decoration. Capping spawn depth at one and children at three is what keeps a bad prompt from turning into an exponential fan-out at three in the morning, and it is enforced in configuration rather than by asking agents nicely. Only the coordinator holds a delegation allowlist; every other allowlist is empty, so the hub shape cannot drift.
+
+Push completion over polling matters for the same reason: a polling loop that loses its parent runs forever.
+
+**How to verify it.** Kill the gateway and time the recovery. Then kill the watchdog and check that something still notices. A supervision stack you have never deliberately broken is a hypothesis, not a control.
+
+**Adopting it alone.** The resource monitor and process supervision are independent of everything else here and are worth adopting first if you run anything continuously. The topology constraints only apply if you have agents that can spawn other agents.
+
+## Measuring whether any of this works
+
+The honest measurement problem is that these primitives prevent incidents, and prevented incidents are invisible. Three things I found worth tracking, none of them perfect:
+
+- **Contradiction tests passed**, per freshness domain, the only direct measurement in the set, because you manufacture the failure yourself.
+- **Draft rejection rate**, per gated class, a proxy for whether the gate is load-bearing or theatre.
+- **Time-to-recovery**, measured by deliberately breaking things rather than waiting for them to break.
+
+What I would not track: uptime. A fleet that is up but answering from six-week-old notes looks perfect on that metric.
+
+## Adopting one without the others
+
+These are deliberately separable, because most people do not want somebody else's agent fleet. They want the one piece that fixes the problem they currently have.
+
+| You are seeing | Start with | Depends on |
+|---|---|---|
+| Confidently wrong answers about things that changed | Freshness contracts | nothing |
+| Anxiety about what it might send or spend | Draft-first gates | a review surface |
+| Silent stalls, creeping slowness | Supervised execution | a process manager |
+
+Specs and reference implementations are being packaged for release, along with the scaffolding to stand up your own staff rather than adopt mine. That repository goes public soon.
+
+<Bookmark
+  href="/posters/acm-data-conclave-2026/"
+  title="Operating an 11-Agent Personal AI Staff"
+  description="The poster version: orchestration patterns, local models, and the measured figures behind these primitives. Presented at Data Conclave, Seattle Tech Week 2026."
+  source="sanketgautam.dev"
+/>
+
+If you run something like this and your failure modes look different from mine, I would genuinely like to hear about it. The sample size here is one machine, eleven seats, and six months. That is enough to find the patterns and nowhere near enough to be sure they generalise.
+
+*All figures from a July 2026 audit of the system described in the [companion post](/blog/six-months-operating-an-11-agent-ai-staff/).*

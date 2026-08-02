@@ -47,7 +47,7 @@ const jsonLd = {
     <header class="posthead">
       <div class="wrap">
         <a class="backlink" href="/blog/">&#8592; ALL POSTS</a>
-        <div class="eyebrow reveal">{kickerDate} · {readingTime} MIN READ</div>
+        <div class="eyebrow reveal"><time datetime={pubDate.toISOString()}>{kickerDate}</time>{updatedDate && <> · UPDATED <time datetime={updatedDate.toISOString()}>{dateFmt.format(updatedDate).toUpperCase()}</time></>} · {readingTime} MIN READ</div>
         <h1 class="ptitle reveal d1">{title}</h1>
         {tags.length > 0 && (
           <div class="tags reveal d2">
