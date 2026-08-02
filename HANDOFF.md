@@ -46,7 +46,7 @@ Software Engineer at Amazon (Seattle) with 7+ years of experience across Alexa, 
    - Tools: React, Node.js, Docker, Kubernetes
 
 #### Projects to Highlight
-1. **OpenClaw AI Assistant** - Multi-agent personal AI system running on Mac Studio M4 Max. Voice synthesis, browser automation, proactive scheduling. Open source contributor.
+1. **OpenClaw AI Assistant** - Multi-agent personal AI system running on Mac Studio M4 Max. Voice synthesis, browser automation, proactive scheduling.
 2. **Personal Automation Platform** - WhatsApp/Slack/Telegram integrated assistant with 10+ custom skills, phone call capability, local LLM inference
 3. **Multi-Agent Orchestration** - Sub-agent spawning system with parallel task execution, cross-session communication
 4. **Local AI Stack** - Qwen 72B inference, Qwen3-TTS/ASR, vector embeddings - all running locally on Apple Silicon
