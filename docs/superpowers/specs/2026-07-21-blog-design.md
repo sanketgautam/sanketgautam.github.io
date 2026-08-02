@@ -63,7 +63,7 @@ After the existing copy steps: setup-node (Node 22, npm cache on `blog/package-l
 
 ## Verification checklist (before merge to master)
 
-Local `npm run build` + assembled `_site` served locally: `/` byte-identical to master's index.html; `/blog/` lists posts; post page renders MDX components (figure, chart SVG, table, callout, bookmark, code); `/blog/rss.xml` parses; `/blog/sitemap-index.xml` exists; robots.txt has two Sitemap lines; `/ensemble/`, `/posters/...`, `/acm-poster/`, resume PDF unaffected; 390px no overflow; JSON-LD validates.
+Local `npm run build` + assembled `_site` served locally: `/` byte-identical to master's index.html; `/blog/` lists posts; post page renders MDX components (figure, chart SVG, table, callout, bookmark, code); `/blog/rss.xml` parses; `/blog/sitemap-index.xml` exists; robots.txt has two Sitemap lines; `/ensemble/`, `/posters/...`, resume PDF unaffected; 390px no overflow; JSON-LD validates.
 
 ## User actions (not blocking build)
 

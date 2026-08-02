@@ -1,14 +1,15 @@
-# Poster archive — as exhibited, 30 July 2026
+# Poster archive, as exhibited 30 July 2026
 
-These are the original files exhibited at Data Conclave, Seattle Tech Week 2026.
-They are kept for the record and are **deliberately outside `public/`**, so the
-deploy workflow does not publish them.
+The original files exhibited at Data Conclave, Seattle Tech Week 2026. Kept for
+the record and deliberately outside `public/`, so the deploy workflow does not
+publish them.
 
-They still contain the pre-correction text:
+They still carry the pre-correction text:
 
-- an "ACM DATA CONCLAVE" header (the event is not ACM-sponsored)
-- "built on openclaw (open source)" (the repo is not public yet)
+- a sponsor attribution in the header that was incorrect; the event has no
+  sponsoring organisation of that kind
+- an "(open source)" claim in the footer, made before the repository was public
 - trademarked character names on the org-chart nodes
 
 The corrected Editorial poster and its editable source live in
-`public/posters/acm-data-conclave-2026/`.
+`public/posters/data-conclave-2026/`.
