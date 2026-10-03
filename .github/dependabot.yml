@@ -1,0 +1,22 @@
+version: 2
+updates:
+  - package-ecosystem: "github-actions"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+    open-pull-requests-limit: 0   # version updates off; this file only groups SECURITY updates into one PR per ecosystem
+    groups:
+      security:
+        applies-to: security-updates
+        patterns:
+          - "*"
+  - package-ecosystem: "npm"
+    directory: "/blog"
+    schedule:
+      interval: "weekly"
+    open-pull-requests-limit: 0   # version updates off; this file only groups SECURITY updates into one PR per ecosystem
+    groups:
+      security:
+        applies-to: security-updates
+        patterns:
+          - "*"
